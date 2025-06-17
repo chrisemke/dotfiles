@@ -7,11 +7,7 @@
 	(package-install 'use-package)
 )
 
-(use-package editorconfig
-	:ensure t
-	:config
-	(editorconfig-mode 1)
-)
+(editorconfig-mode t)
 
 (use-package projectile
 	:ensure t
@@ -19,10 +15,6 @@
 	(setq projectile-project-search-path '("~/"))
 	:config
 	(projectile-mode t)
-)
-
-(use-package toml-mode
-  :ensure t
 )
 
 (use-package yaml-mode
