@@ -41,9 +41,14 @@
 	:ensure t
 )
 
+(use-package diff-hl
+	:ensure t
+	:init
+	(global-diff-hl-mode)
+)
+
 (use-package blamer
 	:ensure t
-	:defer t
 	:config
 	(setq blamer-type 'visual
 			blamer-max-commit-message-length 50
