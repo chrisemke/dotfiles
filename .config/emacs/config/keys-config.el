@@ -1,10 +1,13 @@
 (cua-mode t)
 
 (use-package dtrt-indent
-	:ensure t
-	:hook (prog-mode . dtrt-indent-mode)
+	:custom
+	(dtrt-indent-run-after-smie t)
 	:config
-	(setq dtrt-indent-run-after-smie t)
+	(dtrt-indent-global-mode)
+	:ensure t
+	:hook
+	(prog-mode . dtrt-indent-mode)
 )
 
 (setq-default indent-tabs-mode t

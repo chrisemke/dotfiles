@@ -3,11 +3,11 @@
 (package-initialize)
 
 (use-package projectile
-	:ensure t
-	:init
-	(setq projectile-project-search-path '("~/"))
 	:config
 	(projectile-mode t)
+	:custom
+	(projectile-project-search-path '("~/"))
+	:ensure t
 )
 
 (use-package yaml-mode
