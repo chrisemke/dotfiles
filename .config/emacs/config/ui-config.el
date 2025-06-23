@@ -44,7 +44,15 @@
 )
 
 (use-package diff-hl
+	:after magit
+	:config
+	(diff-hl-flydiff-mode)
 	:ensure t
+	:hook
+	((magit-pre-refresh . diff-hl-magit-pre-refresh)
+	 (magit-post-refresh . diff-hl-magit-post-refresh)
+	 (vc-checkin         . diff-hl-update)
+	)
 	:init
 	(global-diff-hl-mode)
 )
