@@ -28,6 +28,6 @@
 	)
 )
 
-(add-hook 'python-mode-hook #'my/python-tab-setup)
+(add-hook 'python-ts-mode-hook #'my/python-tab-setup)
 
 (provide 'keys-config)
