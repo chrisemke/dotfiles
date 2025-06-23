@@ -2,8 +2,9 @@
 	(tool-bar-mode 0)
 	(scroll-bar-mode 0)
 	(set-face-attribute 'default nil
-								:font "OpenDyslexicM Nerd Font Mono"
-								:height 100)
+											:font "OpenDyslexicM Nerd Font Mono"
+											:height 120
+	)
 	(setq centaur-tabs-icon-type 'all-the-icons)
 )
 
