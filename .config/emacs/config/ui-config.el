@@ -12,7 +12,9 @@
 	frame-resize-pixelwise t
 )
 
-(setq-default cursor-type 'bar)
+(setq-default cursor-type 'bar
+	tab-width 2
+)
 
 (global-display-line-numbers-mode t)
 (column-number-mode t)
