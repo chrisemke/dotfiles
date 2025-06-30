@@ -24,22 +24,35 @@
 (global-display-line-numbers-mode t)
 (column-number-mode t)
 
+(fset 'yes-or-no-p 'y-or-n-p)
+
+(use-package whitespace
+	:custom
+	(whitespace-style '(face tabs spaces trailing space-mark tab-mark))
+	(whitespace-display-mappings '((space-mark ?\  [?·])
+			(tab-mark ?\t [?→ ?\t])
+		)
+	)
+	:ensure nil
+	:hook
+	(prog-mode . global-whitespace-mode)
+)
+
 (use-package treemacs
 	:bind
-	("C-\\" . treemacs)
+	("C-b" . treemacs)
 	:config
 	(treemacs-follow-mode t)
 	(treemacs-git-mode 'deferred)
 	(treemacs-indent-guide-mode t)
+	(treemacs-filewatch-mode t)
 	:ensure t
-	:hook
-	(treemacs-mode . (lambda () (display-line-numbers-mode 0)))
+	:hook (treemacs-mode . (lambda () (display-line-numbers-mode 0)))
 )
 
 (use-package treemacs-projectile
 	:after (treemacs projectile)
-	:config
-	(treemacs-project-follow-mode t)
+	:config (treemacs-project-follow-mode t)
 	:ensure t
 )
 
@@ -50,26 +63,13 @@
 
 (use-package diff-hl
 	:after magit
-	:config
-	(diff-hl-flydiff-mode)
+	:config (diff-hl-flydiff-mode)
 	:ensure t
-	:hook
-	((magit-pre-refresh . diff-hl-magit-pre-refresh)
-	 (magit-post-refresh . diff-hl-magit-post-refresh)
-	 (vc-checkin         . diff-hl-update)
-	)
-	:init
-	(global-diff-hl-mode)
-)
-
-(use-package blamer
-	:config
-	(global-blamer-mode t)
-	:custom
-	(blamer-type 'visual)
-	(blamer-max-commit-message-length 50)
-	(blamer-uncommitted-changes-message "Uncommitted changes")
-	:ensure t
+	:hook ((magit-pre-refresh . diff-hl-magit-pre-refresh)
+				 (magit-post-refresh . diff-hl-magit-post-refresh)
+				 (vc-checkin         . diff-hl-update)
+				)
+	:init (global-diff-hl-mode)
 )
 
 (use-package centaur-tabs
