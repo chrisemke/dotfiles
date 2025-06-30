@@ -1,9 +1,11 @@
-(add-to-list 'load-path (expand-file-name "config" user-emacs-directory))
+(add-to-list 'load-path (locate-user-emacs-file "config/"))
+(setq custom-file (locate-user-emacs-file "custom.el"))
 
-(require 'packages)
+(require 'packages-config)
 (require 'behaviour-config)
+(require 'code-config)
 (require 'git-config)
 (require 'keys-config)
 (require 'ui-config)
-(require 'ui-gui-config)
-(require 'ui-tui-config)
+
+(provide 'init)
