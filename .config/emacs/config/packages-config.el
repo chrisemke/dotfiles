@@ -20,4 +20,4 @@
 	)
 )
 
-(provide 'packages)
+(provide 'packages-config)
