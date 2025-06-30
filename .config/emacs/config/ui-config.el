@@ -1,3 +1,8 @@
+(add-to-list 'load-path (locate-user-emacs-file "config/ui/"))
+
+(require 'ui-gui-config)
+(require 'ui-tui-config)
+
 (use-package catppuccin-theme
 	:config
 	(load-theme 'catppuccin t)

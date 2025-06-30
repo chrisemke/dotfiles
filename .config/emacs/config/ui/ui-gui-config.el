@@ -8,18 +8,6 @@
 	(setq centaur-tabs-icon-type 'all-the-icons)
 )
 
-(use-package demap
-	:commands demap-toggle
-	:custom
-	(demap-minimap-window-side 'right)
-	(demap-minimap-window-width 5)
-	:defer t
-	:ensure t
-	:init
-	(demap-open)
-	:when (display-graphic-p)
-)
-
 (use-package all-the-icons
 	:ensure t
 	:when (display-graphic-p)
