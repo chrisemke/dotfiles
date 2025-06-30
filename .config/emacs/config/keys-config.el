@@ -14,20 +14,4 @@
 	standard-indent 2
 )
 
-(defun my/python-tab-setup ()
-	"Ensure Python uses literal tabs and proper visual width."
-	(dtrt-indent-mode t)
-	(setq-local tab-width 2)
-
-	(when indent-tabs-mode
-		(setq-local indent-line-function #'tab-to-tab-stop)
-	)
-
-	(unless indent-tabs-mode
-		(setq-local python-indent-offset standard-indent)
-	)
-)
-
-(add-hook 'python-ts-mode-hook #'my/python-tab-setup)
-
 (provide 'keys-config)
