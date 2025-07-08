@@ -12,4 +12,6 @@
 	:ensure t
 )
 
+(setq create-lockfiles nil)
+
 (provide 'behaviour-config)
