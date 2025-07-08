@@ -5,7 +5,6 @@
 											:font "OpenDyslexicM Nerd Font Mono"
 											:height 120
 	)
-	(setq centaur-tabs-icon-type 'all-the-icons)
 )
 
 (use-package all-the-icons
@@ -13,11 +12,21 @@
 	:when (display-graphic-p)
 )
 
+(use-package centaur-tabs
+	:custom
+	(centaur-tabs-icon-type 'all-the-icons)
+	:when (display-graphic-p)
+)
+
 (use-package treemacs-all-the-icons
 	:after (treemacs all-the-icons)
-	:config
-	(treemacs-load-theme "all-the-icons")
+	:config (treemacs-load-theme "all-the-icons")
 	:ensure t
+	:when (display-graphic-p)
+)
+
+(use-package lsp-treemacs
+	:custom (lsp-treemacs-theme "all-the-icons")
 	:when (display-graphic-p)
 )
 
