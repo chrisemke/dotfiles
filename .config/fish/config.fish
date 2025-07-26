@@ -9,6 +9,11 @@ if status is-interactive
 
 end
 
+function emacs
+    set emacspath (which emacs)
+    $emacspath $argv &
+end
+
 alias git-tree='git log --oneline --graph --decorate --all'
 alias cat=bat
 alias venv='source .venv/bin/activate.fish'
