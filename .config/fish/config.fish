@@ -11,7 +11,11 @@ end
 
 function emacs
     set emacspath (which emacs)
-    $emacspath $argv &
+    if contains -- --no-window-system $argv; or contains -- -nw $argv
+        $emacspath $argv
+    else
+        $emacspath $argv &
+    end
 end
 
 alias git-tree='git log --oneline --graph --decorate --all'
