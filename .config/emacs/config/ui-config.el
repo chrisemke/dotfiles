@@ -24,8 +24,6 @@
 (global-display-line-numbers-mode t)
 (column-number-mode t)
 
-(fset 'yes-or-no-p 'y-or-n-p)
-
 (use-package whitespace
 	:custom
 	(whitespace-style '(face tabs spaces trailing space-mark tab-mark))

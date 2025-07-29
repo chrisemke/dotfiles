@@ -12,6 +12,9 @@
 	:ensure t
 )
 
+
+(fset 'yes-or-no-p 'y-or-n-p)
+
 (setq create-lockfiles nil)
 
 (provide 'behaviour-config)
