@@ -1,14 +1,22 @@
-(add-to-list 'load-path (locate-user-emacs-file "config/ui/"))
-
-(require 'ui-gui-config)
-(require 'ui-tui-config)
-
 (use-package catppuccin-theme
 	:config
 	(load-theme 'catppuccin t)
 	:custom
 	(catppuccin-flavor 'mocha)
 	:ensure t
+)
+
+(when (display-graphic-p)
+	(tool-bar-mode 0)
+	(scroll-bar-mode 0)
+	(set-face-attribute 'default nil
+											:font "OpenDyslexicM Nerd Font Mono"
+											:height 120
+	)
+)
+
+(unless (display-graphic-p)
+	(xterm-mouse-mode t)
 )
 
 (setq inhibit-startup-screen t
@@ -23,22 +31,47 @@
 
 (global-display-line-numbers-mode t)
 (column-number-mode t)
+(blink-cursor-mode 0)
 
 (use-package whitespace
+	:config (global-whitespace-mode)
 	:custom
 	(whitespace-style '(face tabs spaces trailing space-mark tab-mark))
 	(whitespace-display-mappings '((space-mark ?\  [?·])
-			(tab-mark ?\t [?→ ?\t])
-		)
+																 (tab-mark ?\t [?→ ?\t])
+																)
 	)
 	:ensure nil
-	:hook
-	(prog-mode . global-whitespace-mode)
+	:hook (prog-mode . global-whitespace-mode)
+)
+
+(use-package doom-modeline
+	:custom (doom-modeline-indent-info t)
+	:ensure t
+	:init (doom-modeline-mode t)
+)
+
+(use-package dashboard
+	:config (dashboard-setup-startup-hook)
+	:custom
+	(dashboard-startupify-list '(dashboard-insert-banner
+															 dashboard-insert-newline
+															 dashboard-insert-init-info
+															 dashboard-insert-items
+															)
+	)
+	(dashboard-startup-banner (if (display-graphic-p) 'logo 2))
+	(dashboard-center-content t)
+	(dashboard-vertically-center-content t)
+	(dashboard-set-file-icons t)
+	(dashboard-display-icons-p t)
+	(dashboard-icon-type 'nerd-icons)
+	(dashboard-projects-backend 'projectile)
+	:ensure t
 )
 
 (use-package treemacs
-	:bind
-	("C-b" . treemacs)
+	:bind ("C-b" . treemacs)
 	:config
 	(treemacs-follow-mode t)
 	(treemacs-git-mode 'deferred)
@@ -46,6 +79,12 @@
 	(treemacs-filewatch-mode t)
 	:ensure t
 	:hook (treemacs-mode . (lambda () (display-line-numbers-mode 0)))
+)
+
+(use-package treemacs-nerd-icons
+	:after (treemacs)
+	:config (treemacs-load-theme "nerd-icons")
+	:ensure t
 )
 
 (use-package treemacs-projectile
@@ -61,7 +100,9 @@
 
 (use-package diff-hl
 	:after magit
-	:config (diff-hl-flydiff-mode)
+	:config
+	(diff-hl-flydiff-mode)
+	(diff-hl-margin-mode)
 	:ensure t
 	:hook ((magit-pre-refresh . diff-hl-magit-pre-refresh)
 				 (magit-post-refresh . diff-hl-magit-post-refresh)
@@ -83,11 +124,11 @@
 	(centaur-tabs-set-bar 'over)
 	(centaur-tabs-set-icons t)
 	(centaur-tabs-height 25)
+	(centaur-tabs-icon-type 'nerd-icons)
 	(centaur-tabs-show-new-tab-button nil)
 	:demand
 	:ensure t
-	:hook
-	(dashboard-mode . centaur-tabs-local-mode)
+	:hook (dashboard-mode . centaur-tabs-local-mode)
 )
 
 (use-package emojify
