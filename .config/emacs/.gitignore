@@ -1,4 +1,5 @@
 .cache
+.dap-breakpoints
 .lsp-session*
 auto-save-list
 custom.el
@@ -7,6 +8,7 @@ elpa
 emojis
 games
 projectile-bookmarks.eld
+recentf
 tramp
 transient
 tree-sitter
