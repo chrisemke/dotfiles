@@ -2,4 +2,4 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
-(provide 'packages-config)
+(provide 'additional-repositories-config)
