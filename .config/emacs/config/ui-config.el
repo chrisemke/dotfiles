@@ -6,6 +6,19 @@
 	:ensure t
 )
 
+(use-package nerd-icons-completion
+	:after marginalia
+	:ensure t
+	:hook (marginalia-mode . nerd-icons-completion-marginalia-setup)
+	:init (nerd-icons-completion-mode)
+)
+
+(use-package nerd-icons-corfu
+	:after corfu
+	:config (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)
+	:ensure t
+)
+
 (when (display-graphic-p)
 	(tool-bar-mode 0)
 	(scroll-bar-mode 0)
@@ -77,6 +90,9 @@
 	(treemacs-git-mode 'deferred)
 	(treemacs-indent-guide-mode t)
 	(treemacs-filewatch-mode t)
+	(with-eval-after-load 'treemacs
+		(define-key treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action)
+	)
 	:ensure t
 	:hook (treemacs-mode . (lambda () (display-line-numbers-mode 0)))
 )

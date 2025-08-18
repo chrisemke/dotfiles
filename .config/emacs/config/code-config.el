@@ -15,6 +15,7 @@
 
 (use-package lsp-ui
 	:commands lsp-ui-mode
+	:custom (lsp-ui-doc-show-with-cursor t)
 	:ensure t
 )
 
@@ -25,11 +26,6 @@
 	:init (setq lsp-treemacs-theme "nerd-icons")
 )
 
-(use-package lsp-ivy
-	:commands lsp-ivy-workspace-symbol
-	:ensure t
-)
-
 (use-package dap-mode
 	:after lsp-mode
 	:ensure t
@@ -38,15 +34,6 @@
 (use-package flycheck
 	:ensure t
 	:init (global-flycheck-mode)
-)
-
-(use-package company
-	:bind ("C-SPC" . company-complete)
-	:config (global-company-mode t)
-	:custom
-	(company-idle-delay 0)
-	(company-minimum-prefix-length 1)
-	:ensure t
 )
 
 (use-package dockerfile-mode
