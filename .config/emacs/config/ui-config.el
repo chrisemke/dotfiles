@@ -111,6 +111,7 @@
 
 (use-package treemacs-magit
 	:after (treemacs magit)
+	:config (treemacs-git-commit-diff-mode)
 	:ensure t
 )
 
