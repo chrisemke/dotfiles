@@ -57,10 +57,10 @@
 				 '((file (styles partial-completion))))
 )
 
- (use-package lsp-mode
-	 :commands lsp
-	 :config
-	 (add-to-list 'completion-at-point-functions #'cape-lsp)
+(use-package lsp-mode
+	:commands lsp
+	:config
+	(add-to-list 'completion-at-point-functions #'cape-lsp)
 )
 
 (use-package marginalia
