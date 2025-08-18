@@ -3,7 +3,7 @@
 	(lsp-ruff-server-command "")
 	(lsp-pylsp-plugins-ruff-enabled t)
 	(lsp-pylsp-plugins-mypy-enabled t)
-	(lsp-pylsp-plugins-mypy-dmypy t)
+	;; (lsp-pylsp-plugins-mypy-dmypy t)
 	(lsp-pylsp-plugins-mypy-report-progress t)
 	(lsp-pylsp-plugins-flake8-enabled nil)
 	(lsp-pylsp-plugins-pydocstyle-enabled nil)
