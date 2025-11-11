@@ -20,7 +20,6 @@
 )
 
 (when (display-graphic-p)
-	(tool-bar-mode 0)
 	(scroll-bar-mode 0)
 	(set-face-attribute 'default nil
 											:font "OpenDyslexicM Nerd Font Mono"
