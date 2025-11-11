@@ -45,6 +45,11 @@
 (column-number-mode t)
 (blink-cursor-mode 0)
 
+(use-package solaire-mode
+	:config (solaire-global-mode t)
+	:ensure t
+)
+
 (use-package whitespace
 	:config (global-whitespace-mode)
 	:custom
