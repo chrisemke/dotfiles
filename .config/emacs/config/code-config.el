@@ -59,7 +59,18 @@
 				 )
 	)
 
+;;; ============================================================================
+;;; ELISP
+;;; ============================================================================
 
+(defun my/indent-elisp-buffer ()
+  "Indent the entire Emacs Lisp buffer."
+  (when (eq major-mode 'emacs-lisp-mode)
+    (indent-region (point-min) (point-max))))
+
+(add-hook 'emacs-lisp-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook #'my/indent-elisp-buffer nil t)))
 
 ;;; ============================================================================
 ;;; PYTHON
