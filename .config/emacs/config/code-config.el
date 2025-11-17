@@ -6,40 +6,40 @@
 	(lsp-auto-configure t)
 	:ensure t
 	:hook (lsp-mode . lsp-enable-which-key-integration)
-)
+	)
 
 (use-package lsp-diagnostics
 	:after flycheck
 	:config (lsp-diagnostics-flycheck-enable)
-)
+	)
 
 (use-package lsp-ui
 	:commands lsp-ui-mode
 	:custom (lsp-ui-doc-show-with-cursor t)
 	:ensure t
-)
+	)
 
 (use-package lsp-treemacs
 	:commands lsp-treemacs-errors-list
 	:config (lsp-treemacs-sync-mode t)
 	:ensure t
 	:init (setq lsp-treemacs-theme "nerd-icons")
-)
+	)
 
 (use-package dap-mode
 	:after lsp-mode
 	:ensure t
-)
+	)
 
 (use-package flycheck
 	:ensure t
 	:init (global-flycheck-mode)
-)
+	)
 
 (use-package dockerfile-mode
 	:defer t
 	:ensure t
-)
+	)
 
 (use-package projectile
 	:config
@@ -47,7 +47,7 @@
 	(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 	:custom (projectile-project-search-path '("~/"))
 	:ensure t
-)
+	)
 
 (use-package yaml-mode
 	:defer t
@@ -55,11 +55,15 @@
 	:hook ((yaml-mode yaml-ts-mode) . (lambda ()
 																			(setq-local indent-tabs-mode nil)
 																			(setq-local yaml-indent-offset 2)
-																		)
-				)
-)
+																			)
+				 )
+	)
 
+
+
+;;; ============================================================================
 ;;; PYTHON
+;;; ============================================================================
 
 (use-package lsp-mode
 	:custom
@@ -71,15 +75,15 @@
 	(lsp-pylsp-plugins-flake8-enabled nil)
 	(lsp-pylsp-plugins-pydocstyle-enabled nil)
 	:hook ((python-mode python-ts-mode) . lsp-deferred)
-)
+	)
 
 (use-package dap-python
 	:config (dap-auto-configure-mode t)
 	:custom (dap-python-debugger 'debugpy)
 	:hook (((python-mode python-ts-mode) . dap-ui-mode)
 				 ((python-mode python-ts-mode) . dap-mode)
-				)
-)
+				 )
+	)
 
 (defun my/python-tab-setup ()
 	"Ensure Python uses literal tabs and proper visual width."
@@ -88,21 +92,23 @@
 
 	(when indent-tabs-mode
 		(setq-local indent-line-function #'tab-to-tab-stop)
-	)
+		)
 
 	(unless indent-tabs-mode
 		(setq-local python-indent-offset standard-indent)
+		)
 	)
-)
 
 (add-hook 'python-ts-mode-hook #'my/python-tab-setup)
 (add-hook 'python-mode-hook #'my/python-tab-setup)
 
 
+;;; ============================================================================
 ;;; GUILE
+;;; ============================================================================
 
 (use-package geiser-guile
 	:ensure t
-)
+	)
 
 (provide 'code-config)

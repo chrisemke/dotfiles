@@ -1,6 +1,6 @@
 (run-with-idle-timer 0.5 t
-	(lambda () (save-some-buffers t))
-)
+										 (lambda () (save-some-buffers t))
+										 )
 
 (setq gc-cons-threshold 100000000)
 
@@ -14,7 +14,7 @@
 	(vertico-mouse-mode)
 	:custom (vertico-cycle t)
 	:ensure t
-)
+	)
 
 (use-package corfu
 	:config (corfu-popupinfo-mode t)
@@ -35,7 +35,7 @@
 	:init
 	(completion-preview-mode nil)
 	(global-corfu-mode)
-)
+	)
 
 (use-package cape
 	:after corfu
@@ -46,7 +46,7 @@
 	(add-to-list 'completion-at-point-functions #'cape-keyword)
 	(add-to-list 'completion-at-point-functions #'cape-symbol)
 	(add-to-list 'completion-at-point-functions #'cape-tex)
-)
+	)
 
 (use-package orderless
 	:ensure t
@@ -54,34 +54,34 @@
 	(setq completion-styles '(orderless basic))
 	(setq completion-category-defaults nil)
 	(setq completion-category-overrides
-				 '((file (styles partial-completion))))
-)
+				'((file (styles partial-completion))))
+	)
 
 (use-package lsp-mode
 	:commands lsp
 	:config
 	(add-to-list 'completion-at-point-functions #'cape-lsp)
-)
+	)
 
 (use-package marginalia
 	:ensure t
 	:init (marginalia-mode)
-)
+	)
 
 (use-package swiper
 	:bind ("C-f" . swiper)
 	:ensure t
-)
+	)
 
 (use-package treesit-auto
 	:config (global-treesit-auto-mode)
 	:custom (treesit-auto-install t)
 	:ensure t
-)
+	)
 
 (use-package which-key
 	:config (which-key-mode)
-)
+	)
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
