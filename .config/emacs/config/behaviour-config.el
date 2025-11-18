@@ -75,7 +75,18 @@
 
 (use-package treesit-auto
 	:config (global-treesit-auto-mode)
-	:custom (treesit-auto-install t)
+	:custom (treesit-auto-install nil)
+	:init
+	(setq treesit-language-source-alist
+				'((bash       . ("https://github.com/tree-sitter/tree-sitter-bash.git" "v0.23.3"))
+					(c          . ("https://github.com/tree-sitter/tree-sitter-c.git" "v0.23.6"))
+					(cpp        . ("https://github.com/tree-sitter/tree-sitter-cpp.git" "v0.23.4"))
+					(css        . ("https://github.com/tree-sitter/tree-sitter-css.git" "v0.23.2"))
+					(html       . ("https://github.com/tree-sitter/tree-sitter-html.git" "v0.23.2"))
+					(json       . ("https://github.com/tree-sitter/tree-sitter-json.git" "v0.24.8"))
+					(python     . ("https://github.com/tree-sitter/tree-sitter-python.git" "v0.23.6"))
+					(rust       . ("https://github.com/tree-sitter/tree-sitter-rust.git" "v0.23.3"))
+					))
 	:ensure t
 	)
 
