@@ -25,6 +25,7 @@
 											:font "OpenDyslexicM Nerd Font Mono"
 											:height 120
 											)
+	(toggle-frame-maximized)
 	)
 
 (unless (display-graphic-p)
