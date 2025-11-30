@@ -4,7 +4,6 @@
 (require 'additional-repositories-config)
 (require 'behaviour-config)
 (require 'code-config)
-(require 'git-config)
 (require 'keys-config)
 (require 'ui-config)
 

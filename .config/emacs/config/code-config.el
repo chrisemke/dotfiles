@@ -1,3 +1,9 @@
+(use-package magit
+	:after (nerd-icons)
+	:custom (magit-format-file-function #'magit-format-file-nerd-icons)
+	:ensure t
+	)
+
 (use-package lsp-mode
 	:bind ("C-." . lsp-execute-code-action)
 	:commands (lsp lsp-deferred)
