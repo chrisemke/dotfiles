@@ -96,6 +96,10 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
+(setq auto-save-default nil)
+(setq backup-inhibited t)
 (setq create-lockfiles nil)
+(setq make-backup-files nil)
+(auto-save-mode nil)
 
 (provide 'behaviour-config)
