@@ -31,6 +31,7 @@
 											:height 120
 											)
 	(toggle-frame-maximized)
+	(set-frame-parameter nil 'internal-border-width 0) ;; MACOS ONLY
 	)
 
 (unless (display-graphic-p)
