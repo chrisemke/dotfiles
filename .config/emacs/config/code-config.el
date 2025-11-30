@@ -4,6 +4,12 @@
 	:ensure t
 	)
 
+(use-package magit-todos
+	:after magit
+	:config (magit-todos-mode t)
+	:ensure t
+	)
+
 (use-package lsp-mode
 	:bind ("C-." . lsp-execute-code-action)
 	:commands (lsp lsp-deferred)
