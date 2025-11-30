@@ -94,6 +94,10 @@
 	:config (which-key-mode)
 	)
 
+
+;; Hide the cursor in inactive windows.
+(setq-default cursor-in-non-selected-windows nil)
+
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (setq auto-save-default nil)
