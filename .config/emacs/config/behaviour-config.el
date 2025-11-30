@@ -1,4 +1,4 @@
-(run-with-idle-timer 0.5 t
+(run-with-idle-timer 1 t
 										 (lambda () (save-some-buffers t))
 										 )
 
