@@ -19,7 +19,7 @@ function emacs
 end
 
 alias git-tree='git log --oneline --graph --decorate --all'
-alias cat=bat
+alias ls=lsd
 alias venv='source .venv/bin/activate.fish'
 
 alias update-system='sudo pacman --noconfirm -Syu; yay --noconfirm -Syu; sudo pacman -Qtdq | sudo pacman --noconfirm -Rns -; sudo pacman --noconfirm -Sc; sudo fwupdmgr refresh && sudo fwupdmgr update; flatpak update -y'
