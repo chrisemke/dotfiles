@@ -94,6 +94,10 @@
 	:config (which-key-mode)
 	)
 
+(use-package elec-pair
+	:config
+	(electric-pair-mode t)
+	)
 
 ;; Hide the cursor in inactive windows.
 (setq-default cursor-in-non-selected-windows nil)
