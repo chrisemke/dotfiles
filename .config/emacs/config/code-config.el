@@ -34,6 +34,7 @@
 
 (use-package dap-mode
 	:after lsp-mode
+	:config (require 'dap-python)
 	:ensure t
 	)
 
@@ -74,6 +75,7 @@
 						(add-hook 'before-save-hook (lambda () (indent-region (point-min) (point-max))) nil t)
 						))
 
+
 ;;; ============================================================================
 ;;; PYTHON
 ;;; ============================================================================
@@ -87,14 +89,14 @@
 	(lsp-pylsp-plugins-mypy-report-progress t)
 	(lsp-pylsp-plugins-flake8-enabled nil)
 	(lsp-pylsp-plugins-pydocstyle-enabled nil)
-	:hook ((python-mode python-ts-mode) . lsp-deferred)
+	:hook (python-ts-mode . lsp-deferred)
 	)
 
 (use-package dap-python
 	:config (dap-auto-configure-mode t)
 	:custom (dap-python-debugger 'debugpy)
-	:hook (((python-mode python-ts-mode) . dap-ui-mode)
-				 ((python-mode python-ts-mode) . dap-mode)
+	:hook ((python-ts-mode . dap-ui-mode)
+				 (python-ts-mode . dap-mode)
 				 )
 	)
 
@@ -113,7 +115,6 @@
 	)
 
 (add-hook 'python-ts-mode-hook #'my/python-tab-setup)
-(add-hook 'python-mode-hook #'my/python-tab-setup)
 
 
 ;;; ============================================================================

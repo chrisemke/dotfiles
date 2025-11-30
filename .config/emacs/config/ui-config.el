@@ -53,7 +53,7 @@
 (blink-cursor-mode 0)
 
 (use-package solaire-mode
-	:config (solaire-global-mode t)
+	:config (solaire-global-mode)
 	:ensure t
 	)
 
