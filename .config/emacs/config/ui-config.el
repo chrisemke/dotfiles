@@ -152,10 +152,4 @@
 	:hook (dashboard-mode . centaur-tabs-local-mode)
 	)
 
-(use-package emojify
-	:defer t
-	:ensure t
-	:hook (after-init . global-emojify-mode)
-	)
-
 (provide 'ui-config)
