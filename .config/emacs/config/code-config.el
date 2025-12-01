@@ -16,6 +16,7 @@
 	:custom
 	(lsp-keymap-prefix "C-c l")
 	(lsp-auto-configure t)
+	(lsp-completion-provider :none) ;; We use corfu instead
 	:ensure t
 	:hook (lsp-mode . lsp-enable-which-key-integration)
 	)
