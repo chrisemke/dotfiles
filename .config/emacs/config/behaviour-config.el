@@ -16,6 +16,10 @@
 	:ensure t
 	)
 
+(use-package savehist
+	:config (savehist-mode)
+	)
+
 (use-package corfu
 	:config (corfu-popupinfo-mode t)
 	:custom
