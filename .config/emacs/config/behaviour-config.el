@@ -111,6 +111,9 @@
 ;; Type y/n to accept instead of yes/no
 (fset 'yes-or-no-p 'y-or-n-p)
 
+;; Always sync files to disk
+(global-auto-revert-mode t)
+
 ;; Remove anoying # and ~ files
 (setq auto-save-default nil)
 (setq backup-inhibited t)
