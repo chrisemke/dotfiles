@@ -1,5 +1,6 @@
 (add-to-list 'load-path (locate-user-emacs-file "config/"))
 (setq custom-file (locate-user-emacs-file "custom.el"))
+(load custom-file 'noerror)
 
 (require 'additional-repositories-config)
 (require 'behaviour-config)
