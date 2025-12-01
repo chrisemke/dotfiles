@@ -45,12 +45,11 @@
 (use-package cape
 	:after corfu
 	:bind ("C-SPC" . completion-at-point)
+	:ensure t
 	:init
 	(add-to-list 'completion-at-point-functions #'cape-dabbrev)
 	(add-to-list 'completion-at-point-functions #'cape-file)
 	(add-to-list 'completion-at-point-functions #'cape-keyword)
-	(add-to-list 'completion-at-point-functions #'cape-symbol)
-	(add-to-list 'completion-at-point-functions #'cape-tex)
 	)
 
 (use-package orderless
@@ -60,12 +59,6 @@
 	(setq completion-category-defaults nil)
 	(setq completion-category-overrides
 				'((file (styles partial-completion))))
-	)
-
-(use-package lsp-mode
-	:commands lsp
-	:config
-	(add-to-list 'completion-at-point-functions #'cape-lsp)
 	)
 
 (use-package marginalia
