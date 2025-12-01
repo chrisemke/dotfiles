@@ -99,6 +99,7 @@
 	:config (which-key-mode)
 	)
 
+;; Auto close parentesis
 (use-package elec-pair
 	:config
 	(electric-pair-mode t)
@@ -107,8 +108,10 @@
 ;; Hide the cursor in inactive windows.
 (setq-default cursor-in-non-selected-windows nil)
 
+;; Type y/n to accept instead of yes/no
 (fset 'yes-or-no-p 'y-or-n-p)
 
+;; Remove anoying # and ~ files
 (setq auto-save-default nil)
 (setq backup-inhibited t)
 (setq create-lockfiles nil)
