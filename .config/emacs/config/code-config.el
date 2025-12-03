@@ -107,6 +107,12 @@
 				 )
 	)
 
+(use-package auto-virtualenv
+	:ensure t
+	:config (auto-virtualenv-setup)
+	:custom (auto-virtualenv-reload-lsp t)
+	)
+
 (defun my/python-tab-setup ()
 	"Ensure Python uses literal tabs and proper visual width."
 	(dtrt-indent-mode t)
