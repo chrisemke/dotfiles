@@ -79,18 +79,25 @@
 
 (use-package treesit-auto
 	:config (global-treesit-auto-mode)
-	:custom (treesit-auto-install nil)
+	(dolist (lang '(bash c cpp css dockerfile elixir html json lua python rust yaml))
+    (unless (treesit-language-available-p lang)
+      (treesit-install-language-grammar lang)))
+	:custom (treesit-auto-install t)
+	(treesit-font-lock-level 4)
 	:init
 	(setq treesit-language-source-alist
 				'((bash   . ("https://github.com/tree-sitter/tree-sitter-bash.git" "v0.23.3"))
 					(c      . ("https://github.com/tree-sitter/tree-sitter-c.git" "v0.23.6"))
 					(cpp    . ("https://github.com/tree-sitter/tree-sitter-cpp.git" "v0.23.4"))
 					(css    . ("https://github.com/tree-sitter/tree-sitter-css.git" "v0.23.2"))
+					(dockerfile . ("https://github.com/camdencheek/tree-sitter-dockerfile.git" "v0.2.0"))
+					(elixir . ("https://github.com/elixir-lang/tree-sitter-elixir.git" "v0.3.4"))
 					(html   . ("https://github.com/tree-sitter/tree-sitter-html.git" "v0.23.2"))
 					(json   . ("https://github.com/tree-sitter/tree-sitter-json.git" "v0.24.8"))
+					(lua . ("https://github.com/tree-sitter-grammars/tree-sitter-lua.git" "v0.3.0"))
 					(python . ("https://github.com/tree-sitter/tree-sitter-python.git" "v0.23.6"))
 					(rust   . ("https://github.com/tree-sitter/tree-sitter-rust.git" "v0.23.3"))
-					(elixir . ("https://github.com/elixir-lang/tree-sitter-elixir" "v0.3.4"))
+					(yaml . ("https://github.com/tree-sitter-grammars/tree-sitter-yaml.git" "v0.7.2"))
 					))
 	:ensure t
 	)
