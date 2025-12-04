@@ -35,6 +35,7 @@
 	(corfu-popupinfo-max-height 14)
 	(corfu-popupinfo-resize t)
 	(corfu-popupinfo-direction '(right vertical left))
+	(corfu-history-mode t)
 	:ensure t
 	:init
 	(completion-preview-mode nil)
