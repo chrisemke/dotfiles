@@ -11,7 +11,8 @@
 	)
 
 (use-package lsp-mode
-	:bind ("C-." . lsp-execute-code-action)
+	:bind (("C-." . lsp-execute-code-action)
+				 ("M-F" . lsp-format-buffer))
 	:commands (lsp lsp-deferred)
 	:custom
 	(lsp-keymap-prefix "C-c l")
@@ -29,6 +30,7 @@
 (use-package lsp-ui
 	:commands lsp-ui-mode
 	:custom (lsp-ui-doc-show-with-cursor t)
+	(lsp-ui-doc-show-with-mouse nil)
 	:ensure t
 	)
 
