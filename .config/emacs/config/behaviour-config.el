@@ -68,7 +68,7 @@
 	)
 
 (use-package consult
-	:bind (("C-S-f" . consult-grep)
+	:bind (("C-S-f" . consult-ripgrep)
 				 ("C-f" . consult-line))
 	:ensure t
 	)
