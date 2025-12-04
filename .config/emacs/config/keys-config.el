@@ -11,7 +11,13 @@
 							standard-indent 2
 							)
 
+;; Comment/Uncomment lines better than comment-dwim
+(use-package evil-nerd-commenter
+	:bind ("C-/" . evilnc-comment-or-uncomment-lines)
+	:config (evilnc-default-hotkeys)
+	:ensure t
+	)
+
 (global-set-key (kbd "C-a") 'mark-whole-buffer)
-(global-set-key (kbd "C-/") 'comment-dwim)
 
 (provide 'keys-config)
