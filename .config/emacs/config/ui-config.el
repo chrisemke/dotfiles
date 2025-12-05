@@ -71,6 +71,7 @@
 
 (use-package doom-modeline
 	:custom (doom-modeline-indent-info t)
+	(auto-revert-check-vc-info t)
 	:ensure t
 	:init (doom-modeline-mode t)
 	)
