@@ -10,6 +10,11 @@
 	:ensure t
 	)
 
+(use-package mason
+	:ensure t
+	:hook (after-init-hook . mason-ensure)
+	)
+
 (use-package lsp-mode
 	:bind (("C-." . lsp-execute-code-action)
 				 ("M-F" . lsp-format-buffer))
