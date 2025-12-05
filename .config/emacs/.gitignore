@@ -1,7 +1,9 @@
 .cache
+.dap-breakpoints
 .lsp-session*
 auto-save-list
 custom.el
+dap-ui-repl*
 eln-cache
 elpa
 emojis

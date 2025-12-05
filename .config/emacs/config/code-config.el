@@ -17,7 +17,7 @@
 	:custom
 	(lsp-keymap-prefix "C-c l")
 	(lsp-auto-configure t)
-	(lsp-completion-provider :none) ;; We use corfu instead
+	(lsp-completion-provider :none) ;; Use corfu instead
 	:ensure t
 	:hook (lsp-mode . lsp-enable-which-key-integration)
 	)
@@ -39,6 +39,14 @@
 	:config (lsp-treemacs-sync-mode t)
 	:ensure t
 	:init (setq lsp-treemacs-theme "nerd-icons")
+	)
+
+(use-package dap-mode
+	:after lsp-mode
+	:bind (("<f5>" . dap-debug)
+				 ("S-<f5>" . dap-disconnect))
+	:config (require 'dap-python)
+	:ensure t
 	)
 
 (use-package flycheck
@@ -93,6 +101,14 @@
 	(lsp-pylsp-plugins-flake8-enabled nil)
 	(lsp-pylsp-plugins-pydocstyle-enabled nil)
 	:hook (python-ts-mode . lsp-deferred)
+	)
+
+(use-package dap-python
+	:config (dap-auto-configure-mode t)
+	:custom (dap-python-debugger 'debugpy)
+	:hook ((python-ts-mode . dap-ui-mode)
+				 (python-ts-mode . dap-mode)
+				 )
 	)
 
 (use-package auto-virtualenv
