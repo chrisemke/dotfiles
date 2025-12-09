@@ -91,6 +91,19 @@
 						(add-hook 'before-save-hook (lambda () (indent-region (point-min) (point-max))) nil t)
 						))
 
+;;; ============================================================================
+;;; ELIXIR
+;;; ============================================================================
+
+;; Not covered by treesit-auto
+(use-package elixir-ts
+	:mode ("\\.exs\\'" . elixir-ts-mode)
+	)
+
+(use-package lsp-mode
+	:custom (lsp-elixir-server-command '("elixir-ls" "language_server.sh"))
+	:hook (elixir-ts-mode . lsp-deferred)
+	)
 
 ;;; ============================================================================
 ;;; PYTHON
