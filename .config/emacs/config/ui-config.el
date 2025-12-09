@@ -85,9 +85,13 @@
 															 dashboard-insert-items
 															 )
 														 )
+	(dashboard-items '((recents   . 5)
+										 (bookmarks . 5)
+										 (projects  . 5)))
 	(dashboard-startup-banner (if (display-graphic-p) 'logo 2))
 	(dashboard-center-content t)
 	(dashboard-vertically-center-content t)
+	(dashboard-set-heading-icons t)
 	(dashboard-set-file-icons t)
 	(dashboard-display-icons-p t)
 	(dashboard-icon-type 'nerd-icons)
