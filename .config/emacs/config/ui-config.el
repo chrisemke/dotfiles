@@ -1,8 +1,6 @@
 (use-package catppuccin-theme
 	:config
 	(load-theme 'catppuccin t)
-	:custom
-	(catppuccin-flavor 'mocha)
 	:ensure t
 	)
 
