@@ -166,4 +166,10 @@
 	:hook (dashboard-mode . centaur-tabs-local-mode)
 	)
 
+(add-hook 'prog-mode-hook (lambda ()
+														(display-fill-column-indicator-mode t)
+														(setopt display-fill-column-indicator-column 80))
+					)
+
+
 (provide 'ui-config)
