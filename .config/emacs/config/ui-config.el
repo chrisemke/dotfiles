@@ -68,8 +68,13 @@
 	)
 
 (use-package doom-modeline
-	:custom (doom-modeline-indent-info t)
+	:custom
+	(doom-modeline-indent-info t)
 	(auto-revert-check-vc-info t)
+	(doom-modeline-height 15)
+	(doom-modeline-vcs-max-length 25)
+	(doom-modeline-major-mode-icon nil)
+	(doom-modeline-buffer-file-name-style 'file-name-with-project)
 	:ensure t
 	:init (doom-modeline-mode t)
 	)
