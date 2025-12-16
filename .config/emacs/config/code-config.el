@@ -22,6 +22,7 @@
 	:custom
 	(lsp-keymap-prefix "C-c l")
 	(lsp-auto-configure t)
+	(lsp-headerline-breadcrumb-icons-enable nil)
 	(lsp-completion-provider :none) ;; Use corfu instead
 	:ensure t
 	:hook (lsp-mode . lsp-enable-which-key-integration)
