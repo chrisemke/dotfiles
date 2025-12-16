@@ -3,9 +3,9 @@
 (load custom-file 'noerror)
 
 (require 'additional-repositories-config)
+(require 'ui-config)
 (require 'behaviour-config)
 (require 'code-config)
 (require 'keys-config)
-(require 'ui-config)
 
 (provide 'init)
