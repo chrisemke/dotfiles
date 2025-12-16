@@ -134,7 +134,7 @@
 	(dired-mouse-drag-files t)
 	(mouse-drag-and-drop-region-cross-program t)
 	(mouse-1-click-follows-link nil)
-	(dirvish-side-attributes '(vc-state subtree-state nerd-icons))
+	(dirvish-attributes '(vc-state subtree-state nerd-icons))
 	(dirvish-mode-line-format '(:left (vc-info) :right (yank index)))
 	:ensure t
 	:hook
