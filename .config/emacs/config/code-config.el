@@ -76,11 +76,11 @@
 (use-package yaml-mode
 	:defer t
 	:ensure t
-	:hook ((yaml-mode yaml-ts-mode) . (lambda ()
-																			(setq-local indent-tabs-mode nil)
-																			(setq-local yaml-indent-offset 2)
-																			)
-				 )
+	:hook (yaml-ts-mode . (lambda ()
+													(setq-local indent-tabs-mode nil)
+													(setq-local yaml-indent-offset 2)
+													)
+											)
 	)
 
 ;;; ============================================================================
