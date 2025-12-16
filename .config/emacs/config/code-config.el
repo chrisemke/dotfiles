@@ -40,13 +40,6 @@
 	:ensure t
 	)
 
-(use-package lsp-treemacs
-	:commands lsp-treemacs-errors-list
-	:config (lsp-treemacs-sync-mode t)
-	:ensure t
-	:init (setq lsp-treemacs-theme "nerd-icons")
-	)
-
 (use-package dap-mode
 	:after lsp-mode
 	:bind (("<f5>" . dap-debug)

@@ -101,36 +101,97 @@
 	:ensure t
 	)
 
-(use-package treemacs
-	:bind ("C-b" . treemacs)
+(use-package dired
+	:custom
+	(dired-use-ls-dired t)
+	(dired-listing-switches
+	 "-l --almost-all --group-directories-first --human-readable --no-group")
+	)
+
+(defun my/dirvish-subtree-toggle-or-open ()
+	"On Enter: expand/collapse directories or open files in dirvish."
+	(interactive)
+	(let ((file (dired-get-filename nil t)))
+		(if (and file (file-directory-p file))
+				(dirvish-subtree-toggle)
+			;; Otherwise open the file like normal `find-file`
+			(dired-find-file)))
+	)
+
+(use-package dirvish
+	:bind
+	(("C-c f" . dirvish)
+	 ("C-b" . dirvish-side)
+	 :map dirvish-mode-map
+	 ("<mouse-1>" . dirvish-subtree-toggle-or-open)
+	 ("?"   . dirvish-dispatch)          ; [?] a helpful cheatsheet
+	 ("v"   . dirvish-vc-menu)           ; [v]ersion control commands
+	 ("TAB" . dirvish-subtree-toggle)
+	 ("<RET>" . my/dirvish-subtree-toggle-or-open))
 	:config
-	(treemacs-follow-mode t)
-	(treemacs-git-mode 'deferred)
-	(treemacs-indent-guide-mode t)
-	(treemacs-filewatch-mode t)
-	(with-eval-after-load 'treemacs
-		(define-key treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action)
-		)
+	(dirvish-side-follow-mode t)
+	:custom
+	(dired-mouse-drag-files t)
+	(mouse-drag-and-drop-region-cross-program t)
+	(mouse-1-click-follows-link nil)
+	(dirvish-side-attributes '(vc-state subtree-state nerd-icons))
+	(dirvish-mode-line-format '(:left (vc-info) :right (yank index)))
 	:ensure t
-	:hook (treemacs-mode . (lambda () (display-line-numbers-mode 0)))
+	:hook
+	(dired-mode . (lambda ()
+									(display-line-numbers-mode 0)
+									(whitespace-mode 0)))
+	:init
+	(dirvish-override-dired-mode)
 	)
 
-(use-package treemacs-nerd-icons
-	:after (treemacs)
-	:config (treemacs-load-theme "nerd-icons")
-	:ensure t
+(with-eval-after-load 'vc-hooks
+  ;; Modified → orange
+  (set-face-attribute 'vc-edited-state nil
+                      :foreground "#e5a50a"
+                      :weight 'medium)
+
+  ;; Added → green
+  (set-face-attribute 'vc-locally-added-state nil
+                      :foreground "#40a02b"
+                      :weight 'medium)
+
+  ;; Removed → red
+  (set-face-attribute 'vc-removed-state nil
+                      :foreground "#d20f39")
+
+  ;; Needs update
+  (set-face-attribute 'vc-needs-update-state nil
+                      :foreground "#df8e1d")
 	)
 
-(use-package treemacs-projectile
-	:after (treemacs projectile)
-	:config (treemacs-project-follow-mode t)
-	:ensure t
-	)
 
-(use-package treemacs-magit
-	:after (treemacs magit)
-	:config (treemacs-git-commit-diff-mode)
-	:ensure t
+(with-eval-after-load 'dirvish
+	;; Ignored → very dark
+	(defface dirvish-vc-ignored-state
+		'((t (:inherit shadow)))
+		"Face for ignored files in Dirvish."
+		:group 'dirvish)
+
+	;; Untracked → subtle (no VC face exists!)
+	(defface dirvish-vc-untracked-state
+		'((t (:inherit vc-locally-added-state)))
+		"Face for untracked files in Dirvish."
+		:group 'dirvish)
+
+	;; VC → face mapping
+	(setq dirvish-vc-state-face-alist
+				'((up-to-date       . nil)
+					(edited           . dirvish-vc-edited-state)
+					(added            . vc-locally-added-state)
+					(removed          . vc-removed-state)
+					(missing          . vc-missing-state)
+					(needs-merge      . vc-conflict-state)
+					(conflict         . vc-conflict-state)
+					(unlocked-changes . vc-locked-state)
+					(needs-update     . vc-needs-update-state)
+					(ignored          . dirvish-vc-ignored-state)
+					(unregistered     . dirvish-vc-untracked-state)))
 	)
 
 (use-package diff-hl
