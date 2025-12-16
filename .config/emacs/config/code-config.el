@@ -125,9 +125,10 @@
 (use-package dap-python
 	:config (dap-auto-configure-mode t)
 	:custom (dap-python-debugger 'debugpy)
-	:hook ((python-ts-mode . dap-ui-mode)
-				 (python-ts-mode . dap-mode)
-				 )
+	:hook (python-ts-mode . (lambda ()
+														(dap-ui-mode t)
+														(dap-mode t)
+														))
 	)
 
 (use-package auto-virtualenv
