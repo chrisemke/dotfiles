@@ -136,8 +136,7 @@
 (use-package diff-hl
 	:after magit
 	:config
-	(diff-hl-flydiff-mode)
-	(diff-hl-margin-mode)
+	(diff-hl-flydiff-mode t)
 	:ensure t
 	:hook ((magit-pre-refresh . diff-hl-magit-pre-refresh)
 				 (magit-post-refresh . diff-hl-magit-post-refresh)
