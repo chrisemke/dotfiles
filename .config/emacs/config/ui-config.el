@@ -88,8 +88,7 @@
 															 dashboard-insert-items
 															 )
 														 )
-	(dashboard-items '((recents   . 5)
-										 (bookmarks . 5)
+	(dashboard-items '((recents   . 10)
 										 (projects  . 5)))
 	(dashboard-startup-banner (if (display-graphic-p) 'logo 2))
 	(dashboard-center-content t)
