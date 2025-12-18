@@ -114,6 +114,9 @@
 	(electric-pair-mode t)
 	)
 
+;; Set _ as a word for double click selection
+(add-hook 'after-change-major-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+
 ;; Hide the cursor in inactive windows.
 (setq-default cursor-in-non-selected-windows nil)
 
