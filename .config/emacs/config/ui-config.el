@@ -124,6 +124,7 @@
 	 ("C-b" . dirvish-side)
 	 :map dirvish-mode-map
 	 ("<mouse-1>" . dirvish-subtree-toggle-or-open)
+	 ("<mouse-2>" . nil)
 	 ("?"   . dirvish-dispatch)          ; [?] a helpful cheatsheet
 	 ("v"   . dirvish-vc-menu)           ; [v]ersion control commands
 	 ("TAB" . dirvish-subtree-toggle)
@@ -225,6 +226,30 @@
 	:demand
 	:ensure t
 	:hook (dashboard-mode . centaur-tabs-local-mode)
+	)
+
+(use-package breadcrumb
+	:ensure t
+	:config (breadcrumb-mode t)
+	:custom
+	(breadcrumb-imenu-crumb-separator
+	 (concat " "(nerd-icons-mdicon "nf-md-chevron_right") " "))
+	(breadcrumb-project-crumb-separator
+	 (concat " "(nerd-icons-mdicon "nf-md-chevron_right") " "))
+	:preface
+	;; Add icons to breadcrumb
+	(advice-add #'breadcrumb--format-project-node :around
+							(lambda (og p more &rest r)
+								"Icon For File"
+								(let ((string (apply og p more r)))
+									(if (not more)
+											(concat (nerd-icons-icon-for-file string)
+															" " string)
+										(concat (nerd-icons-faicon
+														 "nf-fa-folder_open"
+														 :face 'breadcrumb-project-crumbs-face)
+														" "
+														string)))))
 	)
 
 (add-hook 'prog-mode-hook (lambda ()
