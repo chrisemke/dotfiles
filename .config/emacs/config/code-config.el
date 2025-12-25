@@ -11,46 +11,35 @@
 	)
 
 (use-package mason
-	:ensure t
-	:hook (after-init-hook . mason-ensure)
-	)
-
-(use-package lsp-mode
-	:bind (("C-." . lsp-execute-code-action)
-				 ("M-F" . lsp-format-buffer))
-	:commands (lsp lsp-deferred)
-	:custom
-	(lsp-keymap-prefix "C-c l")
-	(lsp-auto-configure t)
-	(lsp-headerline-breadcrumb-icons-enable nil)
-	(lsp-completion-provider :none) ;; Use corfu instead
-	:ensure t
-	:hook (lsp-mode . lsp-enable-which-key-integration)
-	)
-
-(use-package lsp-diagnostics
-	:after flycheck
-	:config (lsp-diagnostics-flycheck-enable)
-	)
-
-(use-package lsp-ui
-	:commands lsp-ui-mode
-	:custom (lsp-ui-doc-show-with-cursor t)
-	(lsp-ui-doc-show-with-mouse nil)
+	:config
+	(mason-ensure
+	 (lambda ()
+		 (dolist (pkg '("zuban" "ruff" "elixir-ls"))
+			 (unless (mason-installed-p pkg)
+				 (ignore-errors (mason-install pkg))))))
 	:ensure t
 	)
 
+(use-package eglot
+	:bind (("C-." . eglot-code-actions))
+	:config
+	(define-key eglot-mode-map (kbd "M-F")
+							(lambda ()
+								(interactive)
+								(if (derived-mode-p 'python-base-mode)
+										(ruff-format-buffer)
+									(eglot-format-buffer))))
+	:custom (eglot-autoshutdown t)
+	:ensure nil
+	)
+
+;; TODO: Replace dap-mode with dape
 (use-package dap-mode
 	:after lsp-mode
 	:bind (("<f5>" . dap-debug)
 				 ("S-<f5>" . dap-disconnect))
 	:config (require 'dap-python)
 	:ensure t
-	)
-
-(use-package flycheck
-	:ensure t
-	:init (global-flycheck-mode)
 	)
 
 (use-package dockerfile-mode
@@ -94,25 +83,35 @@
 	:mode ("\\.exs\\'" . elixir-ts-mode)
 	)
 
-(use-package lsp-mode
-	:custom (lsp-elixir-server-command '("elixir-ls" "language_server.sh"))
-	:hook (elixir-ts-mode . lsp-deferred)
+(use-package eglot
+	:config (add-to-list 'eglot-server-programs
+											 '((elixir-mode elixir-ts-mode) . ("elixir-ls")))
+	:ensure nil
+	:hook (elixir-ts-mode . eglot-ensure)
 	)
 
 ;;; ============================================================================
 ;;; PYTHON
 ;;; ============================================================================
 
-(use-package lsp-mode
-	:custom
-	(lsp-ruff-server-command "")
-	(lsp-pylsp-plugins-ruff-enabled t)
-	(lsp-pylsp-plugins-mypy-enabled t)
-	;; (lsp-pylsp-plugins-mypy-dmypy t)
-	(lsp-pylsp-plugins-mypy-report-progress t)
-	(lsp-pylsp-plugins-flake8-enabled nil)
-	(lsp-pylsp-plugins-pydocstyle-enabled nil)
-	:hook (python-ts-mode . lsp-deferred)
+(use-package eglot
+	:config (add-to-list 'eglot-server-programs
+											 '(python-base-mode . ("zuban" "server"))
+											 )
+	:ensure nil
+	:hook (python-base-mode . (lambda ()
+															(eglot-ensure)))
+	)
+
+(use-package flymake-ruff
+	:ensure t
+	:custom (python-flymake-command nil)
+	:hook (eglot-managed-mode . flymake-ruff-load)
+	)
+
+(use-package ruff-format
+	:ensure t
+	:hook (python-base-mode . ruff-format-on-save-mode)
 	)
 
 (use-package dap-python
