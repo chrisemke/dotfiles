@@ -6,7 +6,10 @@
 
 (setq read-process-output-max 1048576)
 
-(editorconfig-mode t)
+(use-package editorconfig
+	:config (editorconfig-mode t)
+	:ensure nil
+	)
 
 (use-package vertico
 	:config
