@@ -56,7 +56,6 @@
 	)
 
 (use-package whitespace
-	:config (global-whitespace-mode)
 	:custom
 	(whitespace-style '(face tabs spaces trailing space-mark tab-mark))
 	(whitespace-display-mappings '((space-mark ?\  [?·])
@@ -64,7 +63,42 @@
 																 )
 															 )
 	:ensure nil
-	:hook (prog-mode . global-whitespace-mode)
+	;; :hook (prog-mode . whitespace-mode)
+	)
+
+(use-package indent-bars
+	:custom
+	(indent-bars-treesit-support t)
+	(indent-bars-treesit-wrap '((python argument_list parameters
+																			list list_comprehension
+																			dictionary dictionary_comprehension
+																			parenthesized_expression subscript)
+															(toml table array comment)
+															(yaml block_mapping_pair comment)
+															(rust arguments parameters)
+															(c argument_list parameter_list init_declarator parenthesized_expression)))
+	(indent-bars-treesit-scope '((rust trait_item impl_item 
+																		 macro_definition macro_invocation 
+																		 struct_item enum_item mod_item 
+																		 const_item let_declaration 
+																		 function_item for_expression 
+																		 if_expression loop_expression 
+																		 while_expression match_expression 
+																		 match_arm call_expression 
+																		 token_tree token_tree_pattern 
+																		 token_repetition)))
+	(indent-bars-treesit-ignore-blank-lines-types '("module"))
+	(indent-bars-color '(highlight :face-bg t :blend 0.15))
+	(indent-bars-pattern ".")
+  (indent-bars-width-frac 0.1)
+  (indent-bars-pad-frac 0.1)
+  (indent-bars-zigzag nil)
+  (indent-bars-color-by-depth '(:regexp "outline-\\([0-9]+\\)" :blend 1)) ; blend=1: blend with BG only
+  (indent-bars-highlight-current-depth '(:blend 0.5)) ; pump up the BG blend on current
+  (indent-bars-display-on-blank-lines t)
+	(indent-bars-starting-column 0)
+	:ensure t
+	:hook (prog-mode . indent-bars-mode)
 	)
 
 (use-package doom-modeline
@@ -147,23 +181,23 @@
 	)
 
 (with-eval-after-load 'vc-hooks
-  ;; Modified → orange
-  (set-face-attribute 'vc-edited-state nil
-                      :foreground "#e5a50a"
-                      :weight 'medium)
+	;; Modified → orange
+	(set-face-attribute 'vc-edited-state nil
+											:foreground "#e5a50a"
+											:weight 'medium)
 
-  ;; Added → green
-  (set-face-attribute 'vc-locally-added-state nil
-                      :foreground "#40a02b"
-                      :weight 'medium)
+	;; Added → green
+	(set-face-attribute 'vc-locally-added-state nil
+											:foreground "#40a02b"
+											:weight 'medium)
 
-  ;; Removed → red
-  (set-face-attribute 'vc-removed-state nil
-                      :foreground "#d20f39")
+	;; Removed → red
+	(set-face-attribute 'vc-removed-state nil
+											:foreground "#d20f39")
 
-  ;; Needs update
-  (set-face-attribute 'vc-needs-update-state nil
-                      :foreground "#df8e1d")
+	;; Needs update
+	(set-face-attribute 'vc-needs-update-state nil
+											:foreground "#df8e1d")
 	)
 
 
@@ -201,10 +235,8 @@
 	(diff-hl-flydiff-mode t)
 	(diff-hl-margin-mode t)
 	:ensure t
-	:hook ((magit-pre-refresh . diff-hl-magit-pre-refresh)
-				 (magit-post-refresh . diff-hl-magit-post-refresh)
-				 (vc-checkin         . diff-hl-update)
-				 )
+	:hook ((magit-post-refresh . diff-hl-magit-post-refresh)
+				 (vc-checkin         . diff-hl-update))
 	:init (global-diff-hl-mode)
 	)
 
