@@ -6,11 +6,11 @@
 							)
 
 (use-package dtrt-indent
-	:config (dtrt-indent-global-mode t)
 	:custom
 	(dtrt-indent-verbosity 0)
 	(dtrt-indent-run-after-smie t)
 	:ensure t
+	:hook (prog-mode . dtrt-indent-mode)
 	)
 
 ;; Comment/Uncomment lines better than comment-dwim
