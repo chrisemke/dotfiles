@@ -1,8 +1,10 @@
 (cua-mode t)
 
+;; Ajust tab defaults and tab character deletion
 (setq-default indent-tabs-mode t
 							standard-indent 2
 							tab-width 2
+							backward-delete-char-untabify-method nil
 							)
 
 (use-package dtrt-indent
