@@ -151,6 +151,8 @@
 											(setq-local python-indent-offset 2)
 											(python-indent-guess-indent-offset)
 											(setq-local tab-width python-indent-offset)
+											(dtrt-indent-mode 0)
+											(dtrt-indent-mode t)
 											))
 	)
 
