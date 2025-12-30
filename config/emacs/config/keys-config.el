@@ -1,15 +1,17 @@
 (cua-mode t)
 
-(use-package dtrt-indent
-	:custom (dtrt-indent-run-after-smie t)
-	:config (dtrt-indent-global-mode)
-	:ensure t
-	:hook (prog-mode . dtrt-indent-mode)
-	)
-
 (setq-default indent-tabs-mode t
 							standard-indent 2
+							tab-width 2
 							)
+
+(use-package dtrt-indent
+	:config (dtrt-indent-global-mode t)
+	:custom
+	(dtrt-indent-verbosity 0)
+	(dtrt-indent-run-after-smie t)
+	:ensure t
+	)
 
 ;; Comment/Uncomment lines better than comment-dwim
 (use-package evil-nerd-commenter
