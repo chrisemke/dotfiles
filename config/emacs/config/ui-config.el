@@ -26,7 +26,7 @@
 	(scroll-bar-mode 0)
 	(set-face-attribute 'default nil
 											:font "OpenDyslexicM Nerd Font Mono"
-											:height 120
+											:height 110
 											)
 	(toggle-frame-maximized)
 	(set-frame-parameter nil 'internal-border-width 0) ;; MACOS ONLY
@@ -78,15 +78,15 @@
 															(yaml block_mapping_pair comment)
 															(rust arguments parameters)
 															(c argument_list parameter_list init_declarator parenthesized_expression)))
-	(indent-bars-treesit-scope '((rust trait_item impl_item 
-																		 macro_definition macro_invocation 
-																		 struct_item enum_item mod_item 
-																		 const_item let_declaration 
-																		 function_item for_expression 
-																		 if_expression loop_expression 
-																		 while_expression match_expression 
-																		 match_arm call_expression 
-																		 token_tree token_tree_pattern 
+	(indent-bars-treesit-scope '((rust trait_item impl_item
+																		 macro_definition macro_invocation
+																		 struct_item enum_item mod_item
+																		 const_item let_declaration
+																		 function_item for_expression
+																		 if_expression loop_expression
+																		 while_expression match_expression
+																		 match_arm call_expression
+																		 token_tree token_tree_pattern
 																		 token_repetition)))
 	(indent-bars-treesit-ignore-blank-lines-types '("module"))
 	(indent-bars-color '(highlight :face-bg t :blend 0.15))
@@ -131,9 +131,47 @@
 	(dashboard-set-file-icons t)
 	(dashboard-display-icons-p t)
 	(dashboard-icon-type 'nerd-icons)
-	(dashboard-projects-backend 'projectile)
 	:ensure t
 	)
+
+;; (use-package nerd-icons-dired
+;; 	:commands (nerd-icons-dired-mode)
+;; 	:ensure t
+;; 	:hook (dired-mode . nerd-icons-dired-mode)
+;; 	)
+
+;; (defun my/dired-sidebar-subtree-toggle-or-open ()
+;; 	"On Enter: expand/collapse directories or open files in dirvish."
+;; 	(interactive)
+;; 	(let ((file (dired-get-filename nil t)))
+;; 		(if (and file (file-directory-p file))
+;; 				(dired-sidebar-subtree-toggle)
+;; 			;; Otherwise open the file like normal `find-file`
+;; 			(dired-sidebar-find-file)))
+;; 	)
+
+;; (use-package dired-sidebar
+;;   :bind (("C-b" . dired-sidebar-toggle-sidebar)
+;; 				 ("<return>" . my/dired-sidebar-subtree-toggle-or-open))
+;;   :ensure t
+;;   :commands (dired-sidebar-toggle-sidebar)
+;;   :config
+;; 	(push 'toggle-window-split dired-sidebar-toggle-hidden-commands)
+;; 	(push 'rotate-windows dired-sidebar-toggle-hidden-commands)
+;; 	:custom
+;; 	(dired-sidebar-subtree-line-prefix "  |")
+;; 	(dired-sidebar-theme 'nerd-icons)
+;; 	(dired-sidebar-use-custom-font t)
+;; 	(dired-sidebar-should-follow-file t)
+;; 	(dired-sidebar-display-remote-icons t)
+;; 	:hook
+;; 	(dired-sidebar-mode . (lambda ()
+;; 													(unless (file-remote-p default-directory)
+;; 														(auto-revert-mode))
+;; 													(whitespace-mode 0)
+;; 													(display-line-numbers-mode 0)))
+;; 	)
+
 
 (use-package dired
 	:custom
@@ -245,7 +283,7 @@
 	("C-x <prior>" . centaur-tabs-backward)
 	("C-x <next>" . centaur-tabs-forward)
 	:config
-	(centaur-tabs-change-fonts (face-attribute 'default :font) 130)
+	(centaur-tabs-change-fonts (face-attribute 'default :font) 120)
 	(centaur-tabs-headline-match)
 	(centaur-tabs-mode t)
 	:custom
