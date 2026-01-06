@@ -27,7 +27,7 @@
 							(lambda ()
 								(interactive)
 								(if (derived-mode-p 'python-base-mode)
-										(ruff-format-buffer)
+										(lazy-ruff-lint-format-dwim)
 									(eglot-format-buffer))))
 	:custom (eglot-autoshutdown t)
 	:ensure nil
@@ -122,9 +122,9 @@
 	:hook (eglot-managed-mode . flymake-ruff-load)
 	)
 
-(use-package ruff-format
-	:ensure t
-	:hook (python-base-mode . ruff-format-on-save-mode)
+(use-package lazy-ruff
+  :ensure t
+  :config (lazy-ruff-global-mode t)
 	)
 
 (use-package dap-python
