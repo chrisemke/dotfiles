@@ -19,6 +19,12 @@
 	:ensure t
 	)
 
+;; Left and right side windows occupy full frame height
+(use-package emacs
+	:custom
+	(window-sides-vertical t)
+	)
+
 (use-package savehist
 	:config (savehist-mode)
 	)

@@ -34,11 +34,17 @@
 	)
 
 ;; TODO: Replace dap-mode with dape
-(use-package dap-mode
-	:after lsp-mode
-	:bind (("<f5>" . dap-debug)
-				 ("S-<f5>" . dap-disconnect))
-	:config (require 'dap-python)
+;; (use-package dap-mode
+;; 	;; :after lsp-mode
+;; 	:bind (("<f5>" . dap-debug)
+;; 				 ("S-<f5>" . dap-disconnect))
+;; 	:config (require 'dap-python)
+;; 	:ensure t
+;; 	)
+
+(use-package dape
+	:custom (dape-buffer-window-arrangement 'right)
+	(dape-debug t)
 	:ensure t
 	)
 
@@ -120,17 +126,16 @@
 
 (use-package lazy-ruff
   :ensure t
-  :config (lazy-ruff-global-mode t)
 	)
 
-(use-package dap-python
-	:config (dap-auto-configure-mode t)
-	:custom (dap-python-debugger 'debugpy)
-	:hook (python-ts-mode . (lambda ()
-														(dap-ui-mode t)
-														(dap-mode t)
-														))
-	)
+;; (use-package dap-python
+;; 	:config (dap-auto-configure-mode t)
+;; 	:custom (dap-python-debugger 'debugpy)
+;; 	:hook (python-ts-mode . (lambda ()
+;; 														(dap-ui-mode t)
+;; 														(dap-mode t)
+;; 														))
+;; 	)
 
 (use-package auto-virtualenv
 	:ensure t
