@@ -35,7 +35,6 @@
 
 (use-package dape
 	:custom (dape-buffer-window-arrangement 'right)
-	(dape-debug t)
 	:ensure t
 	)
 
