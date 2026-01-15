@@ -52,10 +52,25 @@
 	(corfu-popupinfo-mode)
 	)
 
+(defun my/eglot-capf ()
+	(setq-local completion-at-point-functions
+							(list (cape-capf-super
+										 #'eglot-completion-at-point
+										 #'cape-dabbrev
+										 #'cape-file
+										 #'cape-keyword
+										 )))
+	)
+
 (use-package cape
 	:after corfu
 	:bind ("C-SPC" . completion-at-point)
+	:config (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
+	:custom
+	(completion-category-overrides '((eglot (styles orderless))
+                                   (eglot-capf (styles orderless))))
 	:ensure t
+	:hook (eglot-managed-mode . my/eglot-capf)
 	:init
 	(add-to-list 'completion-at-point-functions #'cape-dabbrev)
 	(add-to-list 'completion-at-point-functions #'cape-file)
