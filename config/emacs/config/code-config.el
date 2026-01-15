@@ -34,7 +34,9 @@
 	)
 
 (use-package dape
-	:custom (dape-buffer-window-arrangement 'right)
+	:custom
+	(dape-buffer-window-arrangement 'right)
+	(dape-request-timeout 60)
 	:ensure t
 	)
 
