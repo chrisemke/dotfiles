@@ -68,7 +68,7 @@
 	:config (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
 	:custom
 	(completion-category-overrides '((eglot (styles orderless))
-                                   (eglot-capf (styles orderless))))
+																	 (eglot-capf (styles orderless))))
 	:ensure t
 	:hook (eglot-managed-mode . my/eglot-capf)
 	:init
@@ -105,25 +105,25 @@
 (use-package treesit-auto
 	:config (global-treesit-auto-mode)
 	(dolist (lang '(bash c cpp css dockerfile elixir heex html json lua python rust yaml))
-    (unless (treesit-language-available-p lang)
-      (treesit-install-language-grammar lang)))
+		(unless (treesit-language-available-p lang)
+			(treesit-install-language-grammar lang)))
 	:custom (treesit-auto-install t)
 	(treesit-font-lock-level 4)
 	:init
 	(setq treesit-language-source-alist
-				'((bash       . ("https://github.com/tree-sitter/tree-sitter-bash" "v0.23.3"))
-					(c          . ("https://github.com/tree-sitter/tree-sitter-c" "v0.23.6"))
-					(cpp        . ("https://github.com/tree-sitter/tree-sitter-cpp" "v0.23.4"))
-					(css        . ("https://github.com/tree-sitter/tree-sitter-css" "v0.23.2"))
+				'((bash				. ("https://github.com/tree-sitter/tree-sitter-bash" "v0.23.3"))
+					(c					. ("https://github.com/tree-sitter/tree-sitter-c" "v0.23.6"))
+					(cpp				. ("https://github.com/tree-sitter/tree-sitter-cpp" "v0.23.4"))
+					(css				. ("https://github.com/tree-sitter/tree-sitter-css" "v0.23.2"))
 					(dockerfile . ("https://github.com/camdencheek/tree-sitter-dockerfile" "v0.2.0"))
-					(elixir     . ("https://github.com/elixir-lang/tree-sitter-elixir" "v0.3.4"))
-					(heex       . ("https://github.com/phoenixframework/tree-sitter-heex" "v0.8.0"))
-					(html       . ("https://github.com/tree-sitter/tree-sitter-html" "v0.23.2"))
-					(json       . ("https://github.com/tree-sitter/tree-sitter-json" "v0.24.8"))
-					(lua        . ("https://github.com/tree-sitter-grammars/tree-sitter-lua" "v0.3.0"))
-					(python     . ("https://github.com/tree-sitter/tree-sitter-python" "v0.23.6"))
-					(rust       . ("https://github.com/tree-sitter/tree-sitter-rust" "v0.23.3"))
-					(yaml       . ("https://github.com/tree-sitter-grammars/tree-sitter-yaml" "v0.7.2"))
+					(elixir			. ("https://github.com/elixir-lang/tree-sitter-elixir" "v0.3.4"))
+					(heex				. ("https://github.com/phoenixframework/tree-sitter-heex" "v0.8.0"))
+					(html				. ("https://github.com/tree-sitter/tree-sitter-html" "v0.23.2"))
+					(json				. ("https://github.com/tree-sitter/tree-sitter-json" "v0.24.8"))
+					(lua				. ("https://github.com/tree-sitter-grammars/tree-sitter-lua" "v0.3.0"))
+					(python			. ("https://github.com/tree-sitter/tree-sitter-python" "v0.23.6"))
+					(rust				. ("https://github.com/tree-sitter/tree-sitter-rust" "v0.23.3"))
+					(yaml				. ("https://github.com/tree-sitter-grammars/tree-sitter-yaml" "v0.7.2"))
 					))
 	:ensure t
 	)
