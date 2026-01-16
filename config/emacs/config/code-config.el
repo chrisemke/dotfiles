@@ -4,12 +4,6 @@
 	:ensure t
 	)
 
-(use-package magit-todos
-	:after magit
-	:config (magit-todos-mode t)
-	:ensure t
-	)
-
 (use-package mason
 	:config
 	(mason-ensure
