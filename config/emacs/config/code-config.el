@@ -27,6 +27,11 @@
 	:ensure nil
 	)
 
+(use-package flymake
+	:custom (flymake-fringe-indicator-position nil)
+	:ensure nil
+	)
+
 (use-package dape
 	:custom
 	(dape-buffer-window-arrangement 'right)
