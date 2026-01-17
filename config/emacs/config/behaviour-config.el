@@ -11,6 +11,10 @@
 	:ensure nil
 	)
 
+(use-package csv-mode
+	:ensure t
+	)
+
 (use-package vertico
 	:config
 	(vertico-mode)
