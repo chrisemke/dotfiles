@@ -269,9 +269,7 @@
 
 (use-package diff-hl
 	:after magit
-	:config
-	(diff-hl-flydiff-mode t)
-	(diff-hl-margin-mode t)
+	:config (diff-hl-flydiff-mode t)
 	:ensure t
 	:hook ((magit-post-refresh . diff-hl-magit-post-refresh)
 				 (vc-checkin         . diff-hl-update))

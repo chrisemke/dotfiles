@@ -11,6 +11,12 @@
 	:ensure nil
 	)
 
+(use-package outline-mode
+	:custom (outline-minor-mode-use-buttons 'in-margins)
+	:ensure nil
+	:hook (prog-mode . outline-minor-mode)
+	)
+
 (use-package csv-mode
 	:ensure t
 	)
