@@ -8,7 +8,7 @@
 	:config
 	(mason-ensure
 	 (lambda ()
-		 (dolist (pkg '("zuban" "ruff" "elixir-ls"))
+		 (dolist (pkg '("rassumfrassum" "zuban" "ruff" "elixir-ls"))
 			 (unless (mason-installed-p pkg)
 				 (ignore-errors (mason-install pkg))))))
 	:ensure t
@@ -17,12 +17,9 @@
 (use-package eglot
 	:bind (("C-." . eglot-code-actions))
 	:config
-	(define-key eglot-mode-map (kbd "M-F")
-							(lambda ()
-								(interactive)
-								(if (derived-mode-p 'python-base-mode)
-										(lazy-ruff-lint-format-dwim)
-									(eglot-format-buffer))))
+	(define-key eglot-mode-map (kbd "M-F") (lambda ()
+																					 (interactive)
+																					 (eglot-format-buffer)))
 	:custom (eglot-autoshutdown t)
 	:ensure nil
 	)
@@ -63,10 +60,10 @@
 ;;; ============================================================================
 
 (use-package json
-  :ensure nil
-  :hook
-  (json-ts-mode . (lambda ()
-                    (local-set-key (kbd "M-F") #'json-pretty-print-buffer)))
+	:ensure nil
+	:hook
+	(json-ts-mode . (lambda ()
+										(local-set-key (kbd "M-F") #'json-pretty-print-buffer)))
 	)
 
 ;;; ============================================================================
@@ -74,8 +71,8 @@
 ;;; ============================================================================
 
 (add-hook 'emacs-lisp-mode-hook
-          (lambda ()
-            (local-set-key (kbd "M-F") (lambda ()
+					(lambda ()
+						(local-set-key (kbd "M-F") (lambda ()
 																				 (interactive)
 																				 (indent-region (point-min) (point-max)))))
 					)
@@ -103,21 +100,10 @@
 
 (use-package eglot
 	:config (add-to-list 'eglot-server-programs
-											 '(python-base-mode . ("zuban" "server"))
+											 '(python-base-mode . ("rass" "--" "zuban" "server" "--" "ruff" "server"))
 											 )
 	:ensure nil
-	:hook (python-base-mode . (lambda ()
-															(eglot-ensure)))
-	)
-
-(use-package flymake-ruff
-	:ensure t
-	:custom (python-flymake-command nil)
-	:hook (eglot-managed-mode . flymake-ruff-load)
-	)
-
-(use-package lazy-ruff
-  :ensure t
+	:hook (python-base-mode . eglot-ensure)
 	)
 
 (use-package auto-virtualenv
