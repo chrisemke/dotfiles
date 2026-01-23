@@ -8,7 +8,7 @@
 	:config
 	(mason-ensure
 	 (lambda ()
-		 (dolist (pkg '("rassumfrassum" "zuban" "ruff" "elixir-ls"))
+		 (dolist (pkg '("rassumfrassum" "zuban" "ruff" "typos-lsp" "elixir-ls"))
 			 (unless (mason-installed-p pkg)
 				 (ignore-errors (mason-install pkg))))))
 	:ensure t
@@ -100,7 +100,7 @@
 
 (use-package eglot
 	:config (add-to-list 'eglot-server-programs
-											 '(python-base-mode . ("rass" "--" "zuban" "server" "--" "ruff" "server"))
+											 '(python-base-mode . ("rass" "--" "zuban" "server" "--" "ruff" "server" "--" "typos-lsp"))
 											 )
 	:ensure nil
 	:hook (python-base-mode . eglot-ensure)
