@@ -84,7 +84,7 @@
 
 ;; Not covered by treesit-auto
 (use-package elixir-ts
-	:mode ("\\.exs\\'" . elixir-ts-mode)
+	:mode ("\\.exs" . elixir-ts-mode)
 	)
 
 (use-package eglot
@@ -126,6 +126,11 @@
 											))
 	)
 
+
+;; Colors to uv.lock
+(use-package toml-ts
+	:mode ("uv\\.lock" . toml-ts-mode)
+	)
 
 ;;; ============================================================================
 ;;; GUILE
