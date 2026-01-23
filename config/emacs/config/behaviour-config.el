@@ -160,6 +160,9 @@
 ;; Always sync files to disk
 (global-auto-revert-mode t)
 
+;; Truncate long lines instead of breaking lines
+(setq-default truncate-lines t)
+
 ;; Remove anoying # and ~ files
 (setq auto-save-default nil)
 (setq backup-inhibited t)
