@@ -285,8 +285,7 @@
 	(centaur-tabs-headline-match)
 	(centaur-tabs-mode t)
 	:custom
-	(centaur-tabs-style "bar")
-	(centaur-tabs-set-bar 'over)
+	(centaur-tabs-style "chamfer")
 	(centaur-tabs-set-icons t)
 	(centaur-tabs-height 25)
 	(centaur-tabs-icon-type 'nerd-icons)
