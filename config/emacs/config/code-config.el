@@ -70,12 +70,13 @@
 ;;; ELISP
 ;;; ============================================================================
 
-(add-hook 'emacs-lisp-mode-hook
-					(lambda ()
-						(local-set-key (kbd "M-F") (lambda ()
-																				 (interactive)
-																				 (indent-region (point-min) (point-max)))))
-					)
+(use-package elisp-mode
+	:ensure nil
+	:hook (emacs-lisp-mode-hook . (lambda ()
+																	(local-set-key (kbd "M-F") (lambda ()
+																															 (interactive)
+																															 (indent-region (point-min) (point-max))))))
+	)
 
 
 ;;; ============================================================================
@@ -135,6 +136,14 @@
 ;;; ============================================================================
 ;;; GUILE
 ;;; ============================================================================
+
+(use-package scheme
+	:ensure nil
+	:hook (scheme-mode-hook . (lambda ()
+															(local-set-key (kbd "M-F") (lambda ()
+																													 (interactive)
+																													 (indent-region (point-min) (point-max))))))
+	)
 
 (use-package geiser-guile
 	:ensure t
