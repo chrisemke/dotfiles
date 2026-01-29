@@ -12,7 +12,9 @@
 	)
 
 (use-package outline-mode
-	:custom (outline-minor-mode-use-buttons 'in-margins)
+	:custom
+	(outline-minor-mode-use-buttons 'in-margins)
+	(outline-overlay-button-map nil)
 	:ensure nil
 	:hook (prog-mode . outline-minor-mode)
 	)
