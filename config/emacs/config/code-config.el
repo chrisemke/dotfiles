@@ -146,6 +146,7 @@
 	)
 
 (use-package geiser-guile
+	:custom (geiser-mode-start-repl-p t)
 	:ensure t
 	)
 
