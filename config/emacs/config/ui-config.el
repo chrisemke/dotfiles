@@ -26,7 +26,7 @@
 	(scroll-bar-mode 0)
 	(set-face-attribute 'default nil
 											:font "OpenDyslexicM Nerd Font Mono"
-											:height 110
+											:height 150
 											)
 	(toggle-frame-maximized)
 	(set-frame-parameter nil 'internal-border-width 0) ;; MACOS ONLY
@@ -281,7 +281,7 @@
 	("C-x <prior>" . centaur-tabs-backward)
 	("C-x <next>" . centaur-tabs-forward)
 	:config
-	(centaur-tabs-change-fonts (face-attribute 'default :font) 120)
+	(centaur-tabs-change-fonts (face-attribute 'default :font) 160)
 	(centaur-tabs-headline-match)
 	(centaur-tabs-mode t)
 	:custom
