@@ -64,7 +64,7 @@
 				fwupd-nonfree
 				gcc-toolchain
 				git
-				glib "bin"
+				(list glib "bin")
 				gnupg
 				helvum
 				inxi
@@ -115,7 +115,7 @@
 							(file-append pinentry "/bin/pinentry"))))
 	 (service home-pipewire-service-type
 						(home-pipewire-configuration
-						 (wireplumber-package wireplumber-minimal)))
+						 (wireplumber wireplumber-minimal)))
 	 (service home-ssh-agent-service-type)
 	 (let* ((socket-dir (string-append (getenv "XDG_RUNTIME_DIR") "/podman"))
 					(socket (string-append "unix://" socket-dir "/podman.sock"))
