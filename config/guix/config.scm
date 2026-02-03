@@ -1,16 +1,18 @@
-(use-modules (gnu)
-						 (gnu packages glib) ;; dbus
-						 (gnu packages linux) ;; wireplumber-minimal
-						 (gnu packages shells) ;; fish
-						 (gnu packages kde-internet) ;; kdeconnect
-						 (gnu packages kde-frameworks) ;; kde-frameworkintegration bluez-qt
-						 (gnu packages kde-plasma) ;; bluedevil kde-gtk-config
-						 (gnu packages kde-systemtools) ;; kwalletmanager
-						 (gnu system accounts)
-						 (nongnu packages linux)
-						 (nongnu system linux-initrd)
-						 (radix system monitoring) ;; ram-total
-						 )
+(use-modules
+ (gnu)
+ (gnu packages glib) ; dbus
+ (gnu packages kde-frameworks) ; bluez-qt kde-frameworkintegration
+ (gnu packages kde-internet) ; kdeconnect
+ (gnu packages kde-plasma) ; bluedevil kde-gtk-config
+ (gnu packages kde-systemtools) ; kwalletmanager
+ (gnu packages linux) ; wireplumber-minimal
+ (gnu packages shells) ; fish
+ (gnu system accounts)
+ (nongnu packages linux)
+ (nongnu system linux-initrd)
+ (radix system monitoring) ; ram-total
+ )
+
 (use-service-modules containers cups desktop linux networking pm sddm ssh xorg)
 
 (operating-system
@@ -28,15 +30,15 @@
 								(group "users")
 								(home-directory "/home/krisque")
 								(shell (file-append fish "/bin/fish"))
-								(supplementary-groups '("wheel" "netdev" "audio" "video")))
+								(supplementary-groups '("audio" "netdev" "video" "wheel")))
 							 %base-user-accounts))
 
  (packages (cons* bluedevil
 									bluez-qt
 									dbus
-									kdeconnect
 									kde-frameworkintegration
 									kde-gtk-config
+									kdeconnect
 									kwalletmanager
 									plasma
 									wireplumber-minimal
@@ -47,32 +49,29 @@
 									(service bluetooth-service-type)
 									(service zram-device-service-type
 													 (zram-device-configuration
-													 (priority 100)
-													(size (ram-total))
-													(compression-algorithm 'zstd)))
+														(priority 100)
+														(size (ram-total))
+														(compression-algorithm 'zstd)))
 									(service sddm-service-type
 													 (sddm-configuration (theme "breeze")))
 									(service iptables-service-type)
 									(service nftables-service-type)
 									(service rootless-podman-service-type
 													 (rootless-podman-configuration
-													 (subgids
-													 (list (subid-range (name "krisque"))))
-													(subuids
-													 (list (subid-range (name "krisque"))))))
-
+														(subgids
+														 (list (subid-range (name "krisque"))))
+														(subuids
+														 (list (subid-range (name "krisque"))))))
 									(modify-services %desktop-services
 																	 (delete gdm-service-type)
-										(guix-service-type config => (guix-configuration
-																									(inherit config)
-																									(substitute-urls
-																									 (append (list "https://substitutes.nonguix.org")
-																													 %default-substitute-urls))
-																									(authorized-keys
-																									 (append (list (local-file "./signing-key.pub"))
-																													 %default-authorized-guix-keys)))))))
-
-
+																	 (guix-service-type config => (guix-configuration
+																																 (inherit config)
+																																 (substitute-urls
+																																	(append (list "https://substitutes.nonguix.org")
+																																					%default-substitute-urls))
+																																 (authorized-keys
+																																	(append (list (local-file "./signing-key.pub"))
+																																					%default-authorized-guix-keys)))))))
 
  (bootloader (bootloader-configuration
 							(bootloader grub-efi-bootloader)
@@ -83,7 +82,6 @@
 																 "ac6943e6-5a0c-46fd-b6a1-7a322f3e54f6"))
 												(target "cryptroot")
 												(type luks-device-mapping))))
-
  (file-systems (cons* (file-system
 											 (mount-point "/")
 											 (device "/dev/mapper/cryptroot")
