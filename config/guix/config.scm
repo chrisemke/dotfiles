@@ -1,0 +1,97 @@
+(use-modules (gnu)
+						 (gnu packages glib) ;; dbus
+						 (gnu packages linux) ;; wireplumber-minimal
+						 (gnu packages shells) ;; fish
+						 (gnu packages kde-internet) ;; kdeconnect
+						 (gnu packages kde-frameworks) ;; kde-frameworkintegration bluez-qt
+						 (gnu packages kde-plasma) ;; bluedevil kde-gtk-config
+						 (gnu packages kde-systemtools) ;; kwalletmanager
+						 (gnu system accounts)
+						 (nongnu packages linux)
+						 (nongnu system linux-initrd)
+						 (radix system monitoring) ;; ram-total
+						 )
+(use-service-modules containers cups desktop linux networking pm sddm ssh xorg)
+
+(operating-system
+ (locale "pt_BR.utf8")
+ (timezone "America/Sao_Paulo")
+ (keyboard-layout (keyboard-layout "us" "colemak"))
+ (host-name "krisque")
+ (kernel linux-6.17)
+ (initrd microcode-initrd)
+ (firmware (list linux-firmware))
+
+ (users (cons* (user-account
+								(name "krisque")
+								(comment "Krisque")
+								(group "users")
+								(home-directory "/home/krisque")
+								(shell (file-append fish "/bin/fish"))
+								(supplementary-groups '("wheel" "netdev" "audio" "video")))
+							 %base-user-accounts))
+
+ (packages (cons* bluedevil
+									bluez-qt
+									dbus
+									kdeconnect
+									kde-frameworkintegration
+									kde-gtk-config
+									kwalletmanager
+									plasma
+									wireplumber-minimal
+									%base-packages))
+
+ (services (cons* (service plasma-desktop-service-type)
+									(service power-profiles-daemon-service-type)
+									(service bluetooth-service-type)
+									(service zram-device-service-type
+													 (zram-device-configuration
+													 (priority 100)
+													(size (ram-total))
+													(compression-algorithm 'zstd)))
+									(service sddm-service-type
+													 (sddm-configuration (theme "breeze")))
+									(service iptables-service-type)
+									(service nftables-service-type)
+									(service rootless-podman-service-type
+													 (rootless-podman-configuration
+													 (subgids
+													 (list (subid-range (name "krisque"))))
+													(subuids
+													 (list (subid-range (name "krisque"))))))
+
+									(modify-services %desktop-services
+																	 (delete gdm-service-type)
+										(guix-service-type config => (guix-configuration
+																									(inherit config)
+																									(substitute-urls
+																									 (append (list "https://substitutes.nonguix.org")
+																													 %default-substitute-urls))
+																									(authorized-keys
+																									 (append (list (local-file "./signing-key.pub"))
+																													 %default-authorized-guix-keys)))))))
+
+
+
+ (bootloader (bootloader-configuration
+							(bootloader grub-efi-bootloader)
+							(targets (list "/boot/efi"))
+							(keyboard-layout keyboard-layout)))
+ (mapped-devices (list (mapped-device
+												(source (uuid
+																 "ac6943e6-5a0c-46fd-b6a1-7a322f3e54f6"))
+												(target "cryptroot")
+												(type luks-device-mapping))))
+
+ (file-systems (cons* (file-system
+											 (mount-point "/")
+											 (device "/dev/mapper/cryptroot")
+											 (type "btrfs")
+											 (dependencies mapped-devices)
+											 (options "compress=zstd"))
+											(file-system
+											 (mount-point "/boot/efi")
+											 (device (uuid "6046-A74B"
+																		 'fat32))
+											 (type "vfat")) %base-file-systems)))
