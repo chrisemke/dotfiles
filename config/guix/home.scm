@@ -99,8 +99,7 @@
 	 (service home-bash-service-type
 						(home-bash-configuration
 						 (aliases '())
-						 (bashrc (list (local-file "/home/krisque/.bashrc"
-																			 "bashrc")))
+						 (bashrc (list (local-file "/home/krisque/.bashrc" "bashrc")))
 						 (bash-profile
 							(list (plain-file "profile"
 																(string-append
@@ -116,7 +115,7 @@
 							(file-append pinentry "/bin/pinentry"))))
 	 (service home-pipewire-service-type
 						(home-pipewire-configuration
-						 (wireplumber wireplumber-minimal)))
+						 (wireplumber-package wireplumber-minimal)))
 	 (service home-ssh-agent-service-type)
 	 (let* ((socket-dir (string-append (getenv "XDG_RUNTIME_DIR") "/podman"))
 					(socket (string-append "unix://" socket-dir "/podman.sock"))
@@ -159,9 +158,9 @@
 													 (make-channel-introduction
 														"f9130e11e35d2c147c6764ef85542dc58dc09c4f"
 														(openpgp-fingerprint
-														 "F164 709E 5FC7 B32B AEC7 9F37 1F2E 76AC E3F5 31C8")))))))
-	(simple-service 'home-shell-environment-variables
-									home-environment-variables-service-type
-									`(("PATH" . "$HOME/.local/bin:$PATH")
-										("XDG_DATA_DIRS" . "/var/lib/flatpak/exports/share:$XDG_DATA_DIRS")
-										("XDG_DATA_DIRS" . "$XDG_DATA_HOME/flatpak/exports/share:$XDG_DATA_DIRS"))))))
+														 "F164 709E 5FC7 B32B AEC7 9F37 1F2E 76AC E3F5 31C8"))))))
+	 (simple-service 'home-shell-environment-variables
+									 home-environment-variables-service-type
+									 `(("PATH" . "$HOME/.local/bin:$PATH")
+										 ("XDG_DATA_DIRS" . "/var/lib/flatpak/exports/share:$XDG_DATA_DIRS")
+										 ("XDG_DATA_DIRS" . "$XDG_DATA_HOME/flatpak/exports/share:$XDG_DATA_DIRS"))))))
