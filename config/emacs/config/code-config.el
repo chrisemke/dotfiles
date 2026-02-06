@@ -20,7 +20,9 @@
 	(define-key eglot-mode-map (kbd "M-F") (lambda ()
 																					 (interactive)
 																					 (eglot-format-buffer)))
-	:custom (eglot-autoshutdown t)
+	:custom
+	(eglot-autoshutdown t)
+	(eglot-code-action-indications '(eldoc-hint))
 	:ensure nil
 	)
 
