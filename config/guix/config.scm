@@ -13,7 +13,7 @@
  (radix system monitoring) ; ram-total
  )
 
-(use-service-modules containers cups desktop linux networking pm sddm ssh xorg)
+(use-service-modules containers cups desktop linux networking pm sddm ssh sysctl xorg)
 
 (operating-system
  (locale "pt_BR.utf8")
@@ -25,54 +25,54 @@
  (initrd microcode-initrd)
  (firmware (list linux-firmware))
 
- (users (cons* (user-account
-								(name "krisque")
-								(comment "Krisque")
-								(group "users")
-								(home-directory "/home/krisque")
-								(shell (file-append fish "/bin/fish"))
-								(supplementary-groups '("audio" "netdev" "video" "wheel")))
-							 %base-user-accounts))
+ (users (cons*
+				 (user-account
+					(name "krisque")
+					(comment "Krisque")
+					(group "users")
+					(home-directory "/home/krisque")
+					(shell (file-append fish "/bin/fish"))
+					(supplementary-groups '("audio" "netdev" "video" "wheel")))
+				 %base-user-accounts))
 
- (packages (cons* bluedevil
-									bluez-qt
-									dbus
-									kde-frameworkintegration
-									kde-gtk-config
-									kdeconnect
-									kwalletmanager
-									plasma
-									wireplumber-minimal
-									%base-packages))
+ (packages (cons* %base-packages))
 
- (services (cons* (service plasma-desktop-service-type)
-									(service power-profiles-daemon-service-type)
-									(service bluetooth-service-type)
-									(service zram-device-service-type
-													 (zram-device-configuration
-														(priority 100)
-														(size (ram-total))
-														(compression-algorithm 'zstd)))
-									(service sddm-service-type
-													 (sddm-configuration (theme "breeze")))
-									(service iptables-service-type)
-									(service nftables-service-type)
-									(service rootless-podman-service-type
-													 (rootless-podman-configuration
-														(subgids
-														 (list (subid-range (name "krisque"))))
-														(subuids
-														 (list (subid-range (name "krisque"))))))
-									(modify-services %desktop-services
-																	 (delete gdm-service-type)
-																	 (guix-service-type config => (guix-configuration
-																																 (inherit config)
-																																 (substitute-urls
-																																	(append (list "https://substitutes.nonguix.org")
-																																					%default-substitute-urls))
-																																 (authorized-keys
-																																	(append (list (local-file "./signing-key.pub"))
-																																					%default-authorized-guix-keys)))))))
+ (services
+	(cons*
+	 (service plasma-desktop-service-type)
+	 (service power-profiles-daemon-service-type)
+	 (service bluetooth-service-type)
+	 (service zram-device-service-type
+						(zram-device-configuration
+						 (priority 100)
+						 (size (ram-total))
+						 (compression-algorithm 'zstd)))
+	 (simple-service 'zram-sysctl-settings
+									 sysctl-service-type
+									 `(("vm.swappiness" . "180")
+										 ("vm.watermark_boost_factor" . "0")
+										 ("vm.watermark_scale_factor" . "125")
+										 ("vm.page-cluster" . "0")))
+	 (service sddm-service-type
+						(sddm-configuration (theme "breeze")))
+	 (service iptables-service-type)
+	 (service nftables-service-type)
+	 (service rootless-podman-service-type
+						(rootless-podman-configuration
+						 (subgids
+							(list (subid-range (name "krisque"))))
+						 (subuids
+							(list (subid-range (name "krisque"))))))
+	 (modify-services %desktop-services
+										(delete gdm-service-type)
+										(guix-service-type config => (guix-configuration
+																									(inherit config)
+																									(substitute-urls
+																									 (append (list "https://substitutes.nonguix.org")
+																													 %default-substitute-urls))
+																									(authorized-keys
+																									 (append (list (local-file "./signing-key.pub"))
+																													 %default-authorized-guix-keys)))))))
 
  (bootloader (bootloader-configuration
 							(bootloader grub-efi-bootloader)
