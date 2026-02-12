@@ -54,7 +54,7 @@
 	 appmenu-gtk-module
 	 ark
 	 btop
-	 emacs
+	 emacs-next
 	 fastfetch
 	 firefox
 	 fish
