@@ -48,51 +48,52 @@
 
 (home-environment
  (packages
-	(list aardvark-dns
-				alacritty
-				appmenu-gtk-module
-				ark
-				btop
-				emacs
-				fastfetch
-				firefox
-				fish
-				flatpak
-				font-google-noto-emoji
-				font-nerd-opendyslexic
-				font-wqy-zenhei
-				fwupd-nonfree
-				gcc-toolchain
-				git
-				(list glib "bin")
-				gnupg
-				helvum
-				inxi
-				kate
-				kcalc
-				kompare
-				libreoffice
-				lsd
-				libdbusmenu
-				okular
-				openssh
-				plasma-disks
-				podman
-				podman-compose
-				python-next
-				python-wrapper
-				qbittorrent
-				ripgrep
-				screen
-				starship
-				steam
-				steam-devices-udev-rules
-				uv
-				unzip
-				vlc
-				xsettingsd
-				zen-browser-bin
-				))
+	(list
+	 aardvark-dns
+	 alacritty
+	 appmenu-gtk-module
+	 ark
+	 btop
+	 emacs
+	 fastfetch
+	 firefox
+	 fish
+	 flatpak
+	 font-google-noto-emoji
+	 font-nerd-opendyslexic
+	 font-wqy-zenhei
+	 fwupd-nonfree
+	 gcc-toolchain
+	 git
+	 (list glib "bin")
+	 gnupg
+	 helvum
+	 inxi
+	 kate
+	 kcalc
+	 kompare
+	 libreoffice
+	 lsd
+	 libdbusmenu
+	 okular
+	 openssh
+	 plasma-disks
+	 podman
+	 podman-compose
+	 python-next
+	 python-wrapper
+	 qbittorrent
+	 ripgrep
+	 screen
+	 starship
+	 steam
+	 steam-devices-udev-rules
+	 uv
+	 unzip
+	 vlc
+	 xsettingsd
+	 zen-browser-bin
+	 ))
 
  (services
 	(list
