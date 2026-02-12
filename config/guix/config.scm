@@ -1,11 +1,5 @@
 (use-modules
  (gnu)
- (gnu packages glib) ; dbus
- (gnu packages kde-frameworks) ; bluez-qt kde-frameworkintegration
- (gnu packages kde-internet) ; kdeconnect
- (gnu packages kde-plasma) ; bluedevil kde-gtk-config
- (gnu packages kde-systemtools) ; kwalletmanager
- (gnu packages linux) ; wireplumber-minimal
  (gnu packages shells) ; fish
  (gnu system accounts)
  (nongnu packages linux)
