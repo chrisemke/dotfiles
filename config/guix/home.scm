@@ -41,7 +41,6 @@
  (guix gexp)
  (nongnu packages firmware) ; fwupd-nonfree
  (nongnu packages game-client) ; steam
- (nongnu packages mozilla) ; firefox
  (saayix packages binaries) ; zen-browser-bin
  (saayix packages fonts) ; font-nerd-opendyslexic
  )
@@ -56,7 +55,6 @@
 	 btop
 	 emacs-next
 	 fastfetch
-	 firefox
 	 fish
 	 flatpak
 	 font-google-noto-emoji
