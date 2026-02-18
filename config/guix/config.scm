@@ -14,7 +14,7 @@
  (timezone "America/Sao_Paulo")
  (keyboard-layout (keyboard-layout "us" "colemak"))
  (host-name "krisque")
- (kernel linux-6.18)
+ (kernel linux)
  (kernel-arguments '("quiet"))
  (initrd microcode-initrd)
  (firmware (list linux-firmware))
