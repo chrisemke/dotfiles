@@ -40,7 +40,7 @@
  (guix channels)
  (guix gexp)
  (nongnu packages firmware) ; fwupd-nonfree
- (nongnu packages game-client) ; steam
+ (nongnu packages game-client) ; protonup steam
  (saayix packages binaries) ; zen-browser-bin
  (saayix packages fonts) ; font-nerd-opendyslexic
  )
@@ -78,6 +78,7 @@
 	 plasma-disks
 	 podman
 	 podman-compose
+	 protonup
 	 python-next
 	 python-wrapper
 	 qbittorrent
