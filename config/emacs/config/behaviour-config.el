@@ -2,10 +2,6 @@
 										 (lambda () (save-some-buffers t))
 										 )
 
-(setq gc-cons-threshold 100000000)
-
-(setq read-process-output-max 1048576)
-
 (use-package editorconfig
 	:config (editorconfig-mode t)
 	:ensure nil

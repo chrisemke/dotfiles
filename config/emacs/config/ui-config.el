@@ -23,7 +23,6 @@
 	)
 
 (when (display-graphic-p)
-	(scroll-bar-mode 0)
 	(set-face-attribute 'default nil
 											:font "OpenDyslexicM Nerd Font Mono"
 											:height 150
