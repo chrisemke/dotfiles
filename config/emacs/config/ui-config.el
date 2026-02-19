@@ -52,6 +52,7 @@
 (use-package solaire-mode
 	:config (solaire-global-mode)
 	:ensure t
+	:hook (dashboard-mode . turn-off-solaire-mode)
 	)
 
 (use-package whitespace
