@@ -28,6 +28,7 @@
 				 ("C-M->" . mc/mark-all-like-this)
 				 ("C-{" . mc/mark-previous-like-this)
 				 ("C-}" . mc/skip-to-previous-like-this))
+	:defer t
 	:ensure t
 	)
 

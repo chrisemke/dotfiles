@@ -139,8 +139,8 @@
 	)
 
 (use-package diff-hl
-	:after magit
 	:config (diff-hl-flydiff-mode t)
+	:defer t
 	:ensure t
 	:hook ((magit-post-refresh . diff-hl-magit-post-refresh)
 				 (vc-checkin         . diff-hl-update)
@@ -168,13 +168,13 @@
 	)
 
 (use-package breadcrumb
-	:ensure t
 	:config (breadcrumb-mode t)
 	:custom
 	(breadcrumb-imenu-crumb-separator
 	 (concat " "(nerd-icons-mdicon "nf-md-chevron_right") " "))
 	(breadcrumb-project-crumb-separator
 	 (concat " "(nerd-icons-mdicon "nf-md-chevron_right") " "))
+	:ensure t
 	:preface
 	;; Add icons to breadcrumb
 	(advice-add #'breadcrumb--format-project-node :around

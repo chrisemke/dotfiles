@@ -16,6 +16,7 @@
 	)
 
 (use-package csv-mode
+	:defer t
 	:ensure t
 	)
 
@@ -35,6 +36,7 @@
 
 (use-package savehist
 	:config (savehist-mode)
+	:ensure nil
 	)
 
 (use-package corfu
@@ -138,12 +140,13 @@
 
 (use-package which-key
 	:config (which-key-mode)
+	:ensure nil
 	)
 
 ;; Auto close parentesis
 (use-package elec-pair
-	:config
-	(electric-pair-mode t)
+	:config (electric-pair-mode t)
+	:ensure nil
 	)
 
 ;; Set _ as a word for double click selection

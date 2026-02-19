@@ -1,6 +1,7 @@
 (use-package magit
 	:after (nerd-icons)
 	:custom (magit-format-file-function #'magit-format-file-nerd-icons)
+	:defer t
 	:ensure t
 	)
 
@@ -35,6 +36,7 @@
 	:custom
 	(dape-buffer-window-arrangement 'right)
 	(dape-request-timeout 60)
+	:defer t
 	:ensure t
 	)
 
@@ -54,6 +56,7 @@
 	)
 
 (use-package fish-mode
+	:defer t
 	:ensure t
 	)
 
@@ -149,6 +152,7 @@
 
 (use-package geiser-guile
 	:custom (geiser-mode-start-repl-p t)
+	:defer t
 	:ensure t
 	)
 
