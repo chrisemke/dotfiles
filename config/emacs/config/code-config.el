@@ -89,6 +89,7 @@
 
 ;; Not covered by treesit-auto
 (use-package elixir-ts
+	:ensure nil
 	:mode ("\\.exs" . elixir-ts-mode)
 	)
 
@@ -117,23 +118,21 @@
 	:custom (auto-virtualenv-reload-lsp t)
 	)
 
-(use-package python
-	:ensure nil
-	:hook
-	(python-ts-mode . (lambda ()
-											(setq-local indent-tabs-mode t)
-											(setq-local tab-width 2)
-											(setq-local python-indent-offset 2)
-											(python-indent-guess-indent-offset)
-											(setq-local tab-width python-indent-offset)
-											(dtrt-indent-mode 0)
-											(dtrt-indent-mode t)
-											))
-	)
+(add-hook 'python-ts-mode-hook #'(lambda ()
+																	 (setq-local indent-tabs-mode t
+																							 tab-width 2
+																							 python-indent-offset 2)
+																	 (python-indent-guess-indent-offset)
+																	 (setq-local tab-width python-indent-offset)
+																	 (dtrt-indent-mode 0)
+																	 (dtrt-indent-mode t)
+																	 ))
+
 
 
 ;; Colors to uv.lock
 (use-package toml-ts
+	:ensure nil
 	:mode ("uv\\.lock" . toml-ts-mode)
 	)
 
