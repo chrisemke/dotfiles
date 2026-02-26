@@ -9,7 +9,7 @@
 	:config
 	(mason-ensure
 	 (lambda ()
-		 (dolist (pkg '("rassumfrassum" "zuban" "ruff" "typos-lsp" "elixir-ls"))
+		 (dolist (pkg '("rassumfrassum" "zuban" "ruff" "typos-lsp" "rust-analyzer" "elixir-ls"))
 			 (unless (mason-installed-p pkg)
 				 (ignore-errors (mason-install pkg))))))
 	:ensure t
@@ -136,6 +136,32 @@
 (use-package toml-ts
 	:mode ("uv\\.lock" . toml-ts-mode)
 	)
+
+
+;;; ============================================================================
+;;; RUST
+;;; ============================================================================
+
+(use-package eglot
+	:config (add-to-list 'eglot-server-programs
+											 '(rust-ts-mode . ("rass" "--" "rust-analyzer" "--" "typos-lsp")))
+	:ensure nil
+	:hook (rust-ts-mode . eglot-ensure)
+	)
+
+(add-hook 'rust-ts-mode-hook #'(lambda ()
+																 (setq-local indent-tabs-mode t
+																						 rust-ts-mode-indent-offset 2)
+																 (dtrt-indent-mode 0)
+																 (dtrt-indent-mode t)
+																 ))
+
+;; Colors to Cargo.lock
+(use-package toml-ts
+	:ensure nil
+	:mode ("Cargo\\.lock" . toml-ts-mode)
+	)
+
 
 ;;; ============================================================================
 ;;; GUILE
