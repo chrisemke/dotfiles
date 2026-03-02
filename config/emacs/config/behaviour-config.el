@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (run-with-idle-timer 1 t
 										 (lambda () (save-some-buffers t))
 										 )

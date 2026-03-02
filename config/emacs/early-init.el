@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (add-to-list 'default-frame-alist '(background-color . "#1e1e2e"))
 
 (setq gc-cons-threshold 100000000

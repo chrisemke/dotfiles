@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (cua-mode t)
 
 ;; Ajust tab defaults and tab character deletion
