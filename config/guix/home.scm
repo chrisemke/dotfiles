@@ -39,11 +39,20 @@
  (gnu packages xdisorg) ; xsettingsd
  (guix channels)
  (guix gexp)
+ (guix packages) ; modify-inputs
  (nongnu packages firmware) ; fwupd-nonfree
  (nongnu packages game-client) ; protonup steam
  (saayix packages binaries) ; zen-browser-bin
  (saayix packages fonts) ; font-nerd-opendyslexic
  )
+
+;; python-wrapper using python-next instead of the default python
+(define python-wrapper-next
+  (package
+    (inherit python-wrapper)
+    (name "python-wrapper-next")
+    (inputs (modify-inputs (package-inputs python-wrapper)
+              (replace "python" python-next)))))
 
 (home-environment
  (packages
@@ -80,7 +89,7 @@
 	 podman-compose
 	 protonup
 	 python-next
-	 python-wrapper
+	 python-wrapper-next
 	 qbittorrent
 	 ripgrep
 	 screen
