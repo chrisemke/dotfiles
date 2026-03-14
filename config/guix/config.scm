@@ -13,7 +13,7 @@
 (operating-system
  (locale "pt_BR.utf8")
  (timezone "America/Sao_Paulo")
- (keyboard-layout (keyboard-layout "us" "colemak"))
+ (keyboard-layout (keyboard-layout "us" "colemak" #:options '("caps:capslock")))
  (host-name "krisque")
  (kernel linux)
  (kernel-arguments '("quiet"))
@@ -52,6 +52,10 @@
 	 (service sddm-service-type
 						(sddm-configuration (theme "breeze")))
 	 (service iptables-service-type)
+	 (set-xorg-configuration
+		(xorg-configuration
+		 (keyboard-layout keyboard-layout))
+		sddm-service-type)
 	 (service nftables-service-type)
 	 (service rootless-podman-service-type
 						(rootless-podman-configuration
