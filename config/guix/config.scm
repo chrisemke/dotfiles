@@ -51,7 +51,6 @@
 	 (udev-rules-service 'steam-devices steam-devices-udev-rules)
 	 (service sddm-service-type
 						(sddm-configuration (theme "breeze")))
-	 (service iptables-service-type)
 	 (set-xorg-configuration
 		(xorg-configuration
 		 (keyboard-layout keyboard-layout))
