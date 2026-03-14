@@ -16,9 +16,9 @@
  (keyboard-layout (keyboard-layout "us" "colemak" #:options '("caps:capslock")))
  (host-name "krisque")
  (kernel linux)
- (kernel-arguments '("quiet"))
+ (kernel-arguments (cons* "quiet" %default-kernel-arguments))
  (initrd microcode-initrd)
- (firmware (list linux-firmware))
+ (firmware (cons* linux-firmware %base-firmware))
 
  (users (cons*
 				 (user-account
