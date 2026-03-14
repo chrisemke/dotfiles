@@ -67,10 +67,10 @@
 										(guix-service-type config => (guix-configuration
 																									(inherit config)
 																									(substitute-urls
-																									 (append (list "https://substitutes.nonguix.org")
+																									 (append (list "https://cache-cdn.guix.moe" "https://substitutes.nonguix.org")
 																													 %default-substitute-urls))
 																									(authorized-keys
-																									 (append (list (local-file "./signing-key.pub"))
+																									 (append (list (local-file "./guix-moe.pub") (local-file "./nonguix.pub"))
 																													 %default-authorized-guix-keys)))))))
 
  (bootloader (bootloader-configuration
