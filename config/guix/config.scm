@@ -1,5 +1,6 @@
 (use-modules
  (gnu)
+ (gnu packages games) ; steam-devices-udev-rules
  (gnu packages shells) ; fish
  (gnu system accounts)
  (nongnu packages linux)
@@ -7,7 +8,7 @@
  (radix system monitoring) ; ram-total
  )
 
-(use-service-modules containers cups desktop linux networking pm sddm ssh sysctl xorg)
+(use-service-modules containers cups dbus desktop linux networking pm sddm ssh sysctl xorg)
 
 (operating-system
  (locale "pt_BR.utf8")
@@ -47,6 +48,7 @@
 										 ("vm.watermark_boost_factor" . "0")
 										 ("vm.watermark_scale_factor" . "125")
 										 ("vm.page-cluster" . "0")))
+	 (udev-rules-service 'steam-devices steam-devices-udev-rules)
 	 (service sddm-service-type
 						(sddm-configuration (theme "breeze")))
 	 (service iptables-service-type)
