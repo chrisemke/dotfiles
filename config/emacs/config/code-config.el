@@ -24,7 +24,7 @@
 																					 (eglot-format-buffer)))
 	:custom
 	(eglot-autoshutdown t)
-	(eglot-code-action-indications '(eldoc-hint))
+	(eglot-code-action-indications nil)
 	:ensure nil
 	)
 
