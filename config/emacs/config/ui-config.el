@@ -144,6 +144,9 @@
 
 (use-package diff-hl
 	:config (diff-hl-flydiff-mode t)
+	:custom
+	(diff-hl-update-async t)
+	(vc-git-diff-switches '("--histogram"))
 	:defer t
 	:ensure t
 	:hook ((magit-post-refresh . diff-hl-magit-post-refresh)
