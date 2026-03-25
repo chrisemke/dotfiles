@@ -3,6 +3,7 @@
 	:config
 	(load-theme 'catppuccin t)
 	:ensure t
+	:if (display-graphic-p)
 	)
 
 (use-package nerd-icons
@@ -54,6 +55,7 @@
 	:config (solaire-global-mode)
 	:ensure t
 	:hook (dashboard-mode . turn-off-solaire-mode)
+	:if (display-graphic-p)
 	)
 
 (use-package whitespace
