@@ -15,7 +15,7 @@
  (gnu packages compression) ; unzip
  (gnu packages containers) ; podman podman-compose
  (gnu packages emacs) ; emacs-next
- (gnu packages fonts)
+ (gnu packages fonts) ; font-dejavu font-google-noto-emoji font-liberation
  (gnu packages games) ; steam-devices-udev-rules
  (gnu packages glib) ; glib:bin
  (gnu packages gnupg)
@@ -27,7 +27,8 @@
  (gnu packages libreoffice) ; libreoffice
  (gnu packages linux)
  (gnu packages package-management) ; flatpak
- (gnu packages python) ; python-next python-wrapper
+ (gnu packages python) ; python-wrapper
+ (gnu packages rust) ; rust
  (gnu packages rust-apps) ; aardvark-dns helvum lsd ripgrep uv
  (gnu packages screen) ; screen
  (gnu packages shells) ; fish
@@ -57,7 +58,9 @@
 	 fastfetch
 	 fish
 	 flatpak
+	 font-dejavu
 	 font-google-noto-emoji
+	 font-liberation
 	 font-nerd-opendyslexic
 	 font-wqy-zenhei
 	 fwupd-nonfree
@@ -79,10 +82,10 @@
 	 podman
 	 podman-compose
 	 protonup
-	 python-next
 	 python-wrapper
 	 qbittorrent
 	 ripgrep
+	 rust
 	 screen
 	 starship
 	 steam
