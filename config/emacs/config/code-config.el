@@ -25,7 +25,9 @@
 	:custom
 	(eglot-autoshutdown t)
 	(eglot-code-action-indications nil)
+	(eldoc-echo-area-use-multiline-p nil)
 	:ensure nil
+	:hook (eglot-managed-mode . (lambda () (eglot-inlay-hints-mode 0)))
 	)
 
 (use-package flymake
