@@ -88,6 +88,7 @@
 	)
 
 (use-package orderless
+	:defer t
 	:ensure t
 	:init
 	(setq completion-styles '(orderless basic))
@@ -97,6 +98,7 @@
 	)
 
 (use-package marginalia
+	:defer t
 	:ensure t
 	:init (marginalia-mode)
 	)
@@ -142,6 +144,7 @@
 
 (use-package which-key
 	:config (which-key-mode)
+	:defer t
 	:ensure nil
 	)
 

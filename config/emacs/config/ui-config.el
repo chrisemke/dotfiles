@@ -112,6 +112,7 @@
 	(doom-modeline-vcs-max-length 25)
 	(doom-modeline-major-mode-icon nil)
 	(doom-modeline-buffer-file-name-style 'file-name-with-project)
+	:defer t
 	:ensure t
 	:init (doom-modeline-mode t)
 	)
@@ -138,6 +139,7 @@
 	)
 
 (use-package nerd-icons-dired
+	:defer t
 	:ensure t
 	:hook (dired-mode . nerd-icons-dired-mode)
 	)
