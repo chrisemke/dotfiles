@@ -154,6 +154,16 @@
 	:ensure nil
 	)
 
+(use-package move-text
+	:bind
+	("M-<up>" . move-text-up)
+	("M-p" . move-text-up)
+	("M-<down>" . move-text-down)
+	("M-n" . move-text-down)
+	:defer t
+	:ensure t
+	)
+
 ;; Set _ as a word for double click selection
 (add-hook 'after-change-major-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 
