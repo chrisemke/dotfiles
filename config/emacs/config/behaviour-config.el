@@ -75,7 +75,6 @@
 
 (use-package cape
 	:after corfu
-	:bind ("C-SPC" . completion-at-point)
 	:config (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
 	:custom
 	(completion-category-overrides '((eglot (styles orderless))
@@ -103,8 +102,9 @@
 	)
 
 (use-package consult
-	:bind (("C-S-f" . consult-ripgrep)
-				 ("C-f" . consult-line))
+	:bind
+	("C-c F" . consult-ripgrep)
+	("C-c f" . consult-line)
 	:ensure t
 	)
 

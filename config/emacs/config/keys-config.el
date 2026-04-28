@@ -1,5 +1,4 @@
 ;; -*- lexical-binding: t; -*-
-(cua-mode t)
 
 ;; Ajust tab defaults and tab character deletion
 (setq-default indent-tabs-mode t
@@ -18,21 +17,29 @@
 
 ;; Comment/Uncomment lines better than comment-dwim
 (use-package evil-nerd-commenter
-	:bind ("C-/" . evilnc-comment-or-uncomment-lines)
+	:bind ("C-;" . evilnc-comment-or-uncomment-lines)
 	:config (evilnc-default-hotkeys)
-	:ensure t
-	)
-
-(use-package multiple-cursors
-	:bind (("C->" . mc/mark-next-like-this)
-				 ("C-<" . mc/skip-to-next-like-this)
-				 ("C-M->" . mc/mark-all-like-this)
-				 ("C-{" . mc/mark-previous-like-this)
-				 ("C-}" . mc/skip-to-previous-like-this))
 	:defer t
 	:ensure t
 	)
 
-(global-set-key (kbd "C-a") 'mark-whole-buffer)
+(use-package multiple-cursors
+	:bind
+	("C->" . mc/mark-next-like-this)
+	("C-<" . mc/mark-previous-like-this)
+	("C-c C-<" . mc/mark-all-like-this)
+	("C-\"" . mc/skip-to-next-like-this)
+	("C-:" . mc/skip-to-previous-like-this)
+	:defer t
+	:ensure t
+	)
+
+(setq default-input-method "english-colemak")
+(setq w32-recognize-altgr t)
+(when (eq system-type 'darwin)
+	(setq mac-right-option-modifier 'none)
+	)
+
+(global-set-key (kbd "C-_") 'undo-only) ;; Instead of undo I like undo-only
 
 (provide 'keys-config)

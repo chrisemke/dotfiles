@@ -157,8 +157,10 @@
 
 (use-package centaur-tabs
 	:bind
-	("C-x <prior>" . centaur-tabs-backward)
-	("C-x <next>" . centaur-tabs-forward)
+	("C-c c <prior>" . centaur-tabs-backward)
+	("C-c c b" . centaur-tabs-backward)
+	("C-c c <next>" . centaur-tabs-forward)
+	("C-c c f" . centaur-tabs-forward)
 	:config
 	(centaur-tabs-change-fonts (face-attribute 'default :font) 160)
 	(centaur-tabs-headline-match)

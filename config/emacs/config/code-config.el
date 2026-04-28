@@ -1,6 +1,9 @@
 ;; -*- lexical-binding: t; -*-
 (use-package magit
 	:after (nerd-icons)
+	:bind
+	("C-c m s" . magit-status)
+	("C-c m l" . magit-log)
 	:custom (magit-format-file-function #'magit-format-file-nerd-icons)
 	:defer t
 	:ensure t
@@ -17,11 +20,11 @@
 	)
 
 (use-package eglot
-	:bind (("C-." . eglot-code-actions))
+	:bind ("C-." . eglot-code-actions)
 	:config
-	(define-key eglot-mode-map (kbd "M-F") (lambda ()
-																					 (interactive)
-																					 (eglot-format-buffer)))
+	(define-key eglot-mode-map (kbd "C-c e f") (lambda ()
+																							 (interactive)
+																							 (eglot-format-buffer)))
 	:custom
 	(eglot-autoshutdown t)
 	(eglot-code-action-indications nil)
@@ -70,7 +73,7 @@
 	:ensure nil
 	:hook
 	(json-ts-mode . (lambda ()
-										(local-set-key (kbd "M-F") #'json-pretty-print-buffer)))
+										(local-set-key (kbd "C-c e f") #'json-pretty-print-buffer)))
 	)
 
 ;;; ============================================================================
@@ -80,9 +83,9 @@
 (use-package elisp-mode
 	:ensure nil
 	:hook (emacs-lisp-mode-hook . (lambda ()
-																	(local-set-key (kbd "M-F") (lambda ()
-																															 (interactive)
-																															 (indent-region (point-min) (point-max))))))
+																	(local-set-key (kbd "C-c e f") (lambda ()
+																																	 (interactive)
+																																	 (indent-region (point-min) (point-max))))))
 	)
 
 
@@ -171,9 +174,9 @@
 (use-package scheme
 	:ensure nil
 	:hook (scheme-mode-hook . (lambda ()
-															(local-set-key (kbd "M-F") (lambda ()
-																													 (interactive)
-																													 (indent-region (point-min) (point-max))))))
+															(local-set-key (kbd "C-c e f") (lambda ()
+																															 (interactive)
+																															 (indent-region (point-min) (point-max))))))
 	)
 
 (use-package geiser-guile
