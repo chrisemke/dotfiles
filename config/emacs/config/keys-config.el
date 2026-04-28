@@ -35,7 +35,6 @@
 	)
 
 (setq default-input-method "english-colemak")
-(setq w32-recognize-altgr t)
 (when (eq system-type 'darwin)
 	(setq mac-right-option-modifier 'none)
 	)
