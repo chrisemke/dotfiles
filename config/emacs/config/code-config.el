@@ -155,6 +155,7 @@
 
 (add-hook 'rust-ts-mode-hook #'(lambda ()
 																 (setq-local indent-tabs-mode t
+																						 tab-width 2
 																						 rust-ts-mode-indent-offset 2)
 																 (dtrt-indent-mode 0)
 																 (dtrt-indent-mode t)
