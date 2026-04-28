@@ -1,7 +1,7 @@
 ;; -*- lexical-binding: t; -*-
-(use-package catppuccin-theme
+(use-package batppuccin
 	:config
-	(load-theme 'catppuccin t)
+	(load-theme 'batppuccin-mocha t)
 	:ensure t
 	:if (display-graphic-p)
 	)
