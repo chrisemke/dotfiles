@@ -30,7 +30,9 @@
 											:height 150
 											)
 	(toggle-frame-maximized)
-	(set-frame-parameter nil 'internal-border-width 0) ;; MACOS ONLY
+	(when (eq system-type 'darwin)
+		(set-frame-parameter nil 'internal-border-width 0)
+		)
 	)
 
 (unless (display-graphic-p)
