@@ -176,6 +176,9 @@
 ;; Always sync files to disk
 (global-auto-revert-mode t)
 
+;; Delete selection when type
+(delete-selection-mode t)
+
 ;; Truncate long lines instead of breaking lines
 (setq-default truncate-lines t)
 
