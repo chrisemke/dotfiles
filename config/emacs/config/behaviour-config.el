@@ -182,6 +182,9 @@
 ;; Truncate long lines instead of breaking lines
 (setq-default truncate-lines t)
 
+;; Shift click should select
+(setq mouse-shift-adjust-mode t)
+
 ;; Remove anoying # and ~ files
 (setq auto-save-default nil)
 (setq backup-inhibited t)
