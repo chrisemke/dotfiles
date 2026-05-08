@@ -18,6 +18,12 @@
 	:init (nerd-icons-completion-mode)
 	)
 
+(use-package nerd-icons-ibuffer
+	:defer t
+  :ensure t
+  :hook (ibuffer-mode . nerd-icons-ibuffer-mode)
+	)
+
 (use-package nerd-icons-corfu
 	:after corfu
 	:config (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)
