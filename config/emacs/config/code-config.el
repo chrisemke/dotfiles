@@ -29,6 +29,7 @@
 	(eglot-autoshutdown t)
 	(eglot-code-action-indications nil)
 	(eldoc-echo-area-use-multiline-p nil)
+	(eldoc-display-functions '(eldoc-display-in-buffer))
 	:ensure nil
 	:hook (eglot-managed-mode . (lambda () (eglot-inlay-hints-mode 0)))
 	)
