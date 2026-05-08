@@ -15,14 +15,6 @@
 	:hook (prog-mode . dtrt-indent-mode)
 	)
 
-;; Comment/Uncomment lines better than comment-dwim
-(use-package evil-nerd-commenter
-	:bind ("C-;" . evilnc-comment-or-uncomment-lines)
-	:config (evilnc-default-hotkeys)
-	:defer t
-	:ensure t
-	)
-
 (use-package multiple-cursors
 	:bind
 	("C->" . mc/mark-next-like-this)
@@ -39,6 +31,7 @@
 	(setq mac-right-option-modifier 'none)
 	)
 
+(global-set-key (kbd "C-;") 'comment-line) ;; faster keybind to comments
 (global-set-key (kbd "C-_") 'undo-only) ;; Instead of undo I like undo-only
 
 (provide 'keys-config)
