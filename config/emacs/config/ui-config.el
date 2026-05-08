@@ -20,8 +20,8 @@
 
 (use-package nerd-icons-ibuffer
 	:defer t
-  :ensure t
-  :hook (ibuffer-mode . nerd-icons-ibuffer-mode)
+	:ensure t
+	:hook (ibuffer-mode . nerd-icons-ibuffer-mode)
 	)
 
 (use-package nerd-icons-corfu
