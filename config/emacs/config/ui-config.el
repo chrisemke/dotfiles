@@ -136,7 +136,7 @@
 														 )
 	(dashboard-items '((recents   . 10)
 										 (projects  . 5)))
-	(dashboard-startup-banner (if (display-graphic-p) 'logo 2))
+	(dashboard-startup-banner (locate-user-emacs-file "banners/banner.txt"))
 	(dashboard-center-content t)
 	(dashboard-vertically-center-content t)
 	(dashboard-set-heading-icons t)
