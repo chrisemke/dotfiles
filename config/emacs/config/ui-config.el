@@ -157,7 +157,6 @@
 	:custom
 	(diff-hl-update-async t)
 	(vc-git-diff-switches '("--histogram"))
-	:defer t
 	:ensure t
 	:hook ((after-init         . global-diff-hl-mode)
 				 (magit-post-refresh . diff-hl-magit-post-refresh)
