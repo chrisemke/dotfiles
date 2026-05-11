@@ -159,10 +159,10 @@
 	(vc-git-diff-switches '("--histogram"))
 	:defer t
 	:ensure t
-	:hook ((magit-post-refresh . diff-hl-magit-post-refresh)
+	:hook ((after-init         . global-diff-hl-mode)
+				 (magit-post-refresh . diff-hl-magit-post-refresh)
 				 (vc-checkin         . diff-hl-update)
 				 (dired-mode         . diff-hl-dired-mode))
-	:init (global-diff-hl-mode)
 	)
 
 (use-package centaur-tabs
