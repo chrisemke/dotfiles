@@ -125,12 +125,6 @@
 	:hook (python-base-mode . eglot-ensure)
 	)
 
-(use-package auto-virtualenv
-	:ensure t
-	:config (auto-virtualenv-setup)
-	:custom (auto-virtualenv-reload-lsp t)
-	)
-
 (add-hook 'python-ts-mode-hook #'(lambda ()
 																	 (setq-local indent-tabs-mode t
 																							 tab-width 2
