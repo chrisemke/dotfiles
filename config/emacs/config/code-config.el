@@ -10,6 +10,7 @@
 	)
 
 (use-package mason
+	:config (mason-setup)
 	:defer t
 	:ensure t
 	)
