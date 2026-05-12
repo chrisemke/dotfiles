@@ -154,7 +154,7 @@
 
 (use-package eglot
 	:config (add-to-list 'eglot-server-programs
-											 '(rust-ts-mode . ("rass" "--" "rust-analyzer" "--" "typos-lsp")))
+											 '(rust-base-mode . ("rass" "--" "rust-analyzer" "--" "typos-lsp")))
 	:ensure nil
 	:hook (rust-ts-mode . eglot-ensure)
 	)
