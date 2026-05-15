@@ -110,11 +110,6 @@
 	:ensure t
 	)
 
-(use-package embark-consult
-	:ensure t
-	:after (consult embark)
-	)
-
 (use-package treesit-auto
 	:config
 	(global-treesit-auto-mode)
