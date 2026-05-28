@@ -24,12 +24,6 @@
 	:hook (ibuffer-mode . nerd-icons-ibuffer-mode)
 	)
 
-(use-package nerd-icons-corfu
-	:after corfu
-	:config (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)
-	:ensure t
-	)
-
 (when (display-graphic-p)
 	(set-face-attribute 'default nil
 											:font "OpenDyslexicM Nerd Font Mono"

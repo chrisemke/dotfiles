@@ -45,7 +45,7 @@
 	:custom
 	(corfu-auto t)
 	(corfu-auto-prefix 1)
-	(corfu-auto-delay 0.1)
+	(corfu-auto-delay 0.5)
 	(corfu-cycle t)
 	(corfu-separator ?\s)
 	(corfu-quit-no-match 'separator)
@@ -68,13 +68,13 @@
 							(list (cape-capf-super
 										 #'eglot-completion-at-point
 										 #'cape-dabbrev
-										 #'cape-file
 										 #'cape-keyword
 										 )))
 	)
 
 (use-package cape
 	:after corfu
+	:bind ("C-c p" . cape-prefix-map)
 	:config (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
 	:custom
 	(completion-category-overrides '((eglot (styles orderless))
@@ -82,9 +82,9 @@
 	:ensure t
 	:hook (eglot-managed-mode . my/eglot-capf)
 	:init
-	(add-to-list 'completion-at-point-functions #'cape-dabbrev)
-	(add-to-list 'completion-at-point-functions #'cape-file)
-	(add-to-list 'completion-at-point-functions #'cape-keyword)
+	(add-hook 'completion-at-point-functions #'cape-dabbrev)
+	(add-hook 'completion-at-point-functions #'cape-file)
+	(add-hook 'completion-at-point-functions #'cape-keyword)
 	)
 
 (use-package orderless
