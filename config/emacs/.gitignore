@@ -1,5 +1,7 @@
+*.elc
 .cache
 .mc-lists.el
+.user-lisp-autoloads.el
 auto-save-list
 custom.el
 dape-breakpoints

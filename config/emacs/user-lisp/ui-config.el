@@ -35,10 +35,6 @@
 		)
 	)
 
-(unless (display-graphic-p)
-	(xterm-mouse-mode t)
-	)
-
 (setq inhibit-startup-screen t
 			inhibit-startup-message t
 			initial-scratch-message nil
