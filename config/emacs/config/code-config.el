@@ -107,7 +107,7 @@
 
 (use-package eglot
 	:config (add-to-list 'eglot-server-programs
-											 '((elixir-mode elixir-ts-mode) . ("elixir-ls")))
+											 '(elixir-ts-mode . ("elixir-ls")))
 	:ensure nil
 	:hook (elixir-ts-mode . eglot-ensure)
 	)
@@ -119,10 +119,10 @@
 
 (use-package eglot
 	:config (add-to-list 'eglot-server-programs
-											 '(python-base-mode . ("rass" "--" "zuban" "server" "--" "ruff" "server" "--" "typos-lsp"))
+											 '(python-ts-mode . ("rass" "--" "zuban" "server" "--" "ruff" "server" "--" "typos-lsp"))
 											 )
 	:ensure nil
-	:hook (python-base-mode . eglot-ensure)
+	:hook (python-ts-mode . eglot-ensure)
 	)
 
 (add-hook 'python-ts-mode-hook #'(lambda ()
@@ -148,7 +148,7 @@
 
 (use-package eglot
 	:config (add-to-list 'eglot-server-programs
-											 '(rust-base-mode . ("rass" "--" "rust-analyzer" "--" "typos-lsp")))
+											 '(rust-ts-mode . ("rass" "--" "rust-analyzer" "--" "typos-lsp")))
 	:ensure nil
 	:hook (rust-ts-mode . eglot-ensure)
 	)
