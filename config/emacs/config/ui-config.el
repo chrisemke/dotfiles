@@ -183,24 +183,10 @@
 	:config (breadcrumb-mode t)
 	:custom
 	(breadcrumb-imenu-crumb-separator
-	 (concat " "(nerd-icons-mdicon "nf-md-chevron_right") " "))
+	 (concat " " (nerd-icons-mdicon "nf-md-chevron_right") " "))
 	(breadcrumb-project-crumb-separator
-	 (concat " "(nerd-icons-mdicon "nf-md-chevron_right") " "))
+	 (concat " " (nerd-icons-mdicon "nf-md-chevron_right") " "))
 	:ensure t
-	:preface
-	;; Add icons to breadcrumb
-	(advice-add #'breadcrumb--format-project-node :around
-							(lambda (og p more &rest r)
-								"Icon For File"
-								(let ((string (apply og p more r)))
-									(if (not more)
-											(concat (nerd-icons-icon-for-file string)
-															" " string)
-										(concat (nerd-icons-faicon
-														 "nf-fa-folder_open"
-														 :face 'breadcrumb-project-crumbs-face)
-														" "
-														string)))))
 	)
 
 (add-hook 'prog-mode-hook (lambda ()
