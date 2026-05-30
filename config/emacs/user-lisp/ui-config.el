@@ -109,7 +109,7 @@
 	(doom-modeline-height 15)
 	(doom-modeline-vcs-max-length 25)
 	(doom-modeline-major-mode-icon nil)
-	(doom-modeline-buffer-file-name-style 'file-name-with-project)
+	(doom-modeline-buffer-file-name-style 'project)
 	:defer t
 	:ensure t
 	:init (doom-modeline-mode t)
