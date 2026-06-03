@@ -13,7 +13,4 @@
 (set-frame-parameter nil 'ns-transparent-titlebar t)
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 
-;; Transparent buffer
-(add-to-list 'default-frame-alist '(alpha-background . 85))
-
 (provide 'early-init)
