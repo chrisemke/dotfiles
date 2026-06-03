@@ -106,7 +106,7 @@
 
 (use-package eglot
 	:config (add-to-list 'eglot-server-programs
-											 '(elixir-ts-mode . ("elixir-ls")))
+											 '(elixir-ts-mode . ("rass" "--" "elixir-ls" "--" "typos-lsp")))
 	:ensure nil
 	:hook (elixir-ts-mode . eglot-ensure)
 	)
