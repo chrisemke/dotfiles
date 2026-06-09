@@ -18,10 +18,31 @@
 	:init (nerd-icons-completion-mode)
 	)
 
+;;; Setup ibuffer
 (use-package nerd-icons-ibuffer
 	:defer t
 	:ensure t
 	:hook (ibuffer-mode . nerd-icons-ibuffer-mode)
+	)
+
+(use-package ibuffer
+	:bind
+	(:map ibuffer-name-map
+				("<mouse-1>" . ibuffer-visit-buffer))
+	:ensure nil
+	:custom
+	(ibuffer-saved-filter-groups
+	 '(("my/custom-default"
+			("prog-mode" (derived-mode . prog-mode))
+			("markup" (or (mode . org-mode)
+										(derived-mode . markdown-mode)))
+			("shell" (mode . eshell-mode))
+			("directories" (mode . dired-mode))
+			("git" (mode . magit-mode)))))
+	(ibuffer-show-empty-filter-groups nil)
+	:hook
+	(ibuffer-mode . (lambda ()
+										(ibuffer-switch-to-saved-filter-groups "my/custom-default")))
 	)
 
 (when (display-graphic-p)
@@ -152,27 +173,6 @@
 				 (magit-post-refresh . diff-hl-magit-post-refresh)
 				 (vc-checkin         . diff-hl-update)
 				 (dired-mode         . diff-hl-dired-mode))
-	)
-
-(use-package centaur-tabs
-	:bind
-	("C-c c <prior>" . centaur-tabs-backward)
-	("C-c c b" . centaur-tabs-backward)
-	("C-c c <next>" . centaur-tabs-forward)
-	("C-c c f" . centaur-tabs-forward)
-	:config
-	(centaur-tabs-change-fonts (face-attribute 'default :font) 160)
-	(centaur-tabs-headline-match)
-	(centaur-tabs-mode t)
-	:custom
-	(centaur-tabs-style "chamfer")
-	(centaur-tabs-set-icons t)
-	(centaur-tabs-height 25)
-	(centaur-tabs-icon-type 'nerd-icons)
-	(centaur-tabs-show-new-tab-button nil)
-	:demand
-	:ensure t
-	:hook (dashboard-mode . centaur-tabs-local-mode)
 	)
 
 (use-package breadcrumb

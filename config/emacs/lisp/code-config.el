@@ -24,11 +24,9 @@
 	)
 
 (use-package eglot
-	:bind ("C-." . eglot-code-actions)
-	:config
-	(define-key eglot-mode-map (kbd "C-c e f") (lambda ()
-																							 (interactive)
-																							 (eglot-format-buffer)))
+	:bind (:map eglot-mode-map
+							("C-." . eglot-code-actions)
+							("C-c e f" . eglot-format-buffer))
 	:custom
 	(eglot-autoshutdown t)
 	(eglot-code-action-indications nil)
@@ -78,7 +76,7 @@
 	:ensure nil
 	:hook
 	(json-ts-mode . (lambda ()
-										(local-set-key (kbd "C-c e f") #'json-pretty-print-buffer)))
+										(keymap-local-set "C-c e f" #'json-pretty-print-buffer)))
 	)
 
 ;;; ============================================================================
@@ -88,7 +86,7 @@
 (use-package elisp-mode
 	:ensure nil
 	:hook (emacs-lisp-mode-hook . (lambda ()
-																	(local-set-key (kbd "C-c e f") (lambda ()
+																	(keymap-local-set "C-c e f" (lambda ()
 																																	 (interactive)
 																																	 (indent-region (point-min) (point-max))))))
 	)
@@ -174,7 +172,7 @@
 (use-package scheme
 	:ensure nil
 	:hook (scheme-mode-hook . (lambda ()
-															(local-set-key (kbd "C-c e f") (lambda ()
+															(keymap-local-set "C-c e f" (lambda ()
 																															 (interactive)
 																															 (indent-region (point-min) (point-max))))))
 	)

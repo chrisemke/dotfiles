@@ -31,7 +31,10 @@
 	(setq mac-right-option-modifier 'none)
 	)
 
-(global-set-key (kbd "C-;") 'comment-line) ;; faster keybind to comments
-(global-set-key (kbd "C-_") 'undo-only) ;; Instead of undo I like undo-only
+(keymap-global-unset "C-x C-b") ;; unset list-buffers
+(keymap-global-set "C-x C-b" 'ibuffer) ;; set ibuffer
+
+(keymap-global-set "C-;" 'comment-line) ;; faster keybind to comments
+(keymap-global-set "C-_" 'undo-only) ;; Instead of undo I like undo-only
 
 (provide 'keys-config)
