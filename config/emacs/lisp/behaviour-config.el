@@ -162,8 +162,16 @@
 	:ensure t
 	)
 
-;; Set dired default args do be more organized.
-(setq dired-listing-switches "-Ag --human-readable --group-directories-first --no-group --dired")
+(use-package dired
+	:bind
+	(:map dired-mode-map
+				("<mouse-2>" . dired-mouse-find-file)
+				("<mouse-3>" . dired-mouse-find-file-other-window))
+	:custom
+	;; Set dired default args do be more organized.
+	(dired-listing-switches "-Ag --human-readable --group-directories-first --no-group --dired")
+	:ensure nil
+	)
 
 ;; Set _ as a word for double click selection.
 (add-hook 'after-change-major-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
