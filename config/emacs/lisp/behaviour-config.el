@@ -162,28 +162,31 @@
 	:ensure t
 	)
 
-;; Set _ as a word for double click selection
+;; Set dired default args do be more organized.
+(setq dired-listing-switches "-Ag --human-readable --group-directories-first --no-group --dired")
+
+;; Set _ as a word for double click selection.
 (add-hook 'after-change-major-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 
 ;; Hide the cursor in inactive windows.
 (setq-default cursor-in-non-selected-windows nil)
 
-;; Type y/n to accept instead of yes/no
+;; Type y/n to accept instead of yes/no.
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; Always sync files to disk
+;; Always sync files to disk.
 (global-auto-revert-mode t)
 
-;; Delete selection when type
+;; Delete selection when type.
 (delete-selection-mode t)
 
-;; Truncate long lines instead of breaking lines
+;; Truncate long lines instead of breaking lines.
 (setq-default truncate-lines t)
 
-;; Shift click should select
+;; Shift click should select.
 (setq mouse-shift-adjust-mode t)
 
-;; Remove anoying # and ~ files
+;; Remove anoying # and ~ files.
 (setq auto-save-default nil)
 (setq backup-inhibited t)
 (setq create-lockfiles nil)
