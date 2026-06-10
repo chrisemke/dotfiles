@@ -38,7 +38,8 @@
 										(derived-mode . markdown-mode)))
 			("shell" (mode . eshell-mode))
 			("directories" (mode . dired-mode))
-			("git" (mode . magit-mode)))))
+			("git" (or (derived-mode . magit-mode)
+								 (mode . vc-compilation-mode))))))
 	(ibuffer-show-empty-filter-groups nil)
 	:hook
 	(ibuffer-mode . (lambda ()
