@@ -32,12 +32,12 @@
 	:custom
 	(ibuffer-saved-filter-groups
 	 '(("my/custom-default"
-			("prog-mode" (derived-mode . prog-mode))
-			("markup" (or (mode . org-mode)
+			("Code" (derived-mode . prog-mode))
+			("Markup" (or (mode . org-mode)
 										(derived-mode . markdown-mode)))
-			("shell" (mode . eshell-mode))
-			("directories" (mode . dired-mode))
-			("git" (or (derived-mode . magit-mode)
+			("Shell" (mode . eshell-mode))
+			("Directories" (mode . dired-mode))
+			("Git" (or (derived-mode . magit-mode)
 								 (mode . vc-compilation-mode))))))
 	(ibuffer-show-empty-filter-groups nil)
 	:defer t
