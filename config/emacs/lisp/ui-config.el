@@ -29,7 +29,6 @@
 	:bind
 	(:map ibuffer-name-map
 				("<mouse-1>" . ibuffer-visit-buffer))
-	:ensure nil
 	:custom
 	(ibuffer-saved-filter-groups
 	 '(("my/custom-default"
@@ -41,6 +40,8 @@
 			("git" (or (derived-mode . magit-mode)
 								 (mode . vc-compilation-mode))))))
 	(ibuffer-show-empty-filter-groups nil)
+	:defer t
+	:ensure nil
 	:hook
 	(ibuffer-mode . (lambda ()
 										(ibuffer-switch-to-saved-filter-groups "my/custom-default")))
