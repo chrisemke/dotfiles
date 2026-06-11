@@ -33,6 +33,7 @@
 	(ibuffer-saved-filter-groups
 	 '(("my/custom-default"
 			("Code" (derived-mode . prog-mode))
+			("Conf" (derived-mode . conf-mode))
 			("Markup" (or (mode . org-mode)
 										(derived-mode . markdown-mode)))
 			("Shell" (mode . eshell-mode))
