@@ -170,6 +170,7 @@
 	:custom
 	;; Set dired default args do be more organized.
 	(dired-listing-switches "-Ag --human-readable --group-directories-first --no-group --dired")
+	(dired-kill-when-opening-new-dired-buffer t)
 	:ensure nil
 	)
 
