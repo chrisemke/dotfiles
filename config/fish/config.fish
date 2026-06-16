@@ -12,10 +12,5 @@ function emacs
 end
 
 alias git-tree='git log --oneline --graph --decorate --all'
-alias ls=lsd
+alias ls='ls --human-readable --group-directories-first --color=auto'
 alias venv='source .venv/bin/activate.fish'
-
-alias update-system='sudo pacman --noconfirm -Syu; yay --noconfirm -Syu; sudo pacman -Qtdq | sudo pacman --noconfirm -Rns -; sudo pacman --noconfirm -Sc; sudo fwupdmgr refresh && sudo fwupdmgr update; flatpak update -y'
-
-# uv
-fish_add_path "/home/krisque/.local/bin"
