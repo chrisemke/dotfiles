@@ -41,6 +41,7 @@
 			("Git" (or (derived-mode . magit-mode)
 								 (mode . vc-compilation-mode))))))
 	(ibuffer-show-empty-filter-groups nil)
+	(ibuffer-human-readable-size t)
 	:defer t
 	:ensure nil
 	:hook
