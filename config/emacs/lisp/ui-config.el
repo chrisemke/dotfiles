@@ -59,15 +59,13 @@
 		)
 	)
 
-(setq inhibit-startup-screen t
-			inhibit-startup-message t
-			initial-scratch-message nil
-			frame-resize-pixelwise t
-			)
+(setopt inhibit-startup-screen t
+				inhibit-startup-message t
+				initial-scratch-message nil
+				frame-resize-pixelwise t
+				cursor-type 'bar
+				)
 
-(setq-default cursor-type 'bar
-							tab-width 2
-							)
 
 (global-display-line-numbers-mode t)
 (column-number-mode t)

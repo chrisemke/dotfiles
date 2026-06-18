@@ -1,6 +1,6 @@
 ;; -*- lexical-binding: t; -*-
 (add-to-list 'load-path (locate-user-emacs-file "lisp/"))
-(setq custom-file (locate-user-emacs-file "custom.el"))
+(setopt custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file 'noerror)
 
 (require 'additional-repositories-config)

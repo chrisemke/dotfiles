@@ -1,11 +1,11 @@
 ;; -*- lexical-binding: t; -*-
 
 ;; Ajust tab defaults and tab character deletion
-(setq-default indent-tabs-mode t
-							standard-indent 2
-							tab-width 2
-							backward-delete-char-untabify-method nil
-							)
+(setopt indent-tabs-mode t
+				standard-indent 2
+				tab-width 2
+				backward-delete-char-untabify-method nil
+				)
 
 (use-package dtrt-indent
 	:custom
@@ -26,9 +26,9 @@
 	:ensure t
 	)
 
-(setq default-input-method "english-colemak")
+(setopt default-input-method "english-colemak")
 (when (eq system-type 'darwin)
-	(setq mac-right-option-modifier 'none)
+	(setopt mac-right-option-modifier 'none)
 	)
 
 (keymap-global-unset "C-x C-b") ;; unset list-buffers

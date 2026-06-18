@@ -91,10 +91,9 @@
 	:defer t
 	:ensure t
 	:init
-	(setq completion-styles '(orderless basic))
-	(setq completion-category-defaults nil)
-	(setq completion-category-overrides
-				'((file (styles partial-completion))))
+	(setopt completion-styles '(orderless basic)
+					completion-category-defaults nil
+					completion-category-overrides '((file (styles partial-completion))))
 	)
 
 (use-package marginalia
@@ -177,9 +176,6 @@
 ;; Set _ as a word for double click selection.
 (add-hook 'after-change-major-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 
-;; Hide the cursor in inactive windows.
-(setq-default cursor-in-non-selected-windows nil)
-
 ;; Type y/n to accept instead of yes/no.
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -189,17 +185,21 @@
 ;; Delete selection when type.
 (delete-selection-mode t)
 
-;; Truncate long lines instead of breaking lines.
-(setq-default truncate-lines t)
 
-;; Shift click should select.
-(setq mouse-shift-adjust-mode t)
+(setopt
+ cursor-in-non-selected-windows nil  ;; Hide the cursor in inactive windows.
+ truncate-lines t  ;; Truncate long lines instead of breaking lines.
+ mouse-shift-adjust-mode t  ;; Shift click should select.
+ ;; Remove anoying # and ~ files.
+ auto-save-default nil
+ create-lockfiles nil
+ make-backup-files nil
+ ;; Configure auto-save-visited-mode (the modern replacement)
+ auto-save-visited-interval 1   ;; seconds of idle before saving
+ save-silently t ;; no "Wrote /path/to/file"
+ )
+(auto-save-visited-mode 1)
 
-;; Remove anoying # and ~ files.
-(setq auto-save-default nil)
-(setq backup-inhibited t)
-(setq create-lockfiles nil)
-(setq make-backup-files nil)
-(auto-save-mode nil)
+
 
 (provide 'behaviour-config)
