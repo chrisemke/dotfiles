@@ -109,34 +109,34 @@
 	:ensure t
 	)
 
-(use-package treesit-auto
+(use-package treesit
 	:config
-	(global-treesit-auto-mode)
-	(dolist (lang '(bash c cpp css dockerfile elixir heex html json lua markdown markdown-inline python rust yaml))
-		(unless (treesit-language-available-p lang)
-			(treesit-install-language-grammar lang)))
+	(let ((lang->file '((bash            . sh-script)
+											(c               . c-ts-mode)
+											(cpp             . c++-ts-mode)
+											(css             . css-mode)
+											(dockerfile      . dockerfile-ts-mode)
+											(elixir          . elixir-ts-mode)
+											(heex            . heex-ts-mode)
+											(html            . html-ts-mode)
+											(json            . json-ts-mode)
+											(lua             . lua-ts-mode)
+											(markdown        . markdown-ts-mode)
+											(markdown-inline . markdown-ts-mode)
+											(python          . python)
+											(rust            . rust-ts-mode)
+											(yaml            . yaml-ts-mode))))
+		(mapc (lambda (lang)
+						(unless (treesit-language-available-p lang)
+							(when-let* ((file (alist-get lang lang->file)))
+								(require file nil t))
+							(treesit-install-language-grammar lang)))
+					(mapcar #'car lang->file)))
 	:custom
-	(treesit-auto-install t)
+	(treesit-auto-install-grammar 'always)
+	(treesit-enabled-modes t)
 	(treesit-font-lock-level 4)
-	:init
-	(setq treesit-language-source-alist
-				'((bash            . ("https://github.com/tree-sitter/tree-sitter-bash"))
-					(c               . ("https://github.com/tree-sitter/tree-sitter-c"))
-					(cpp             . ("https://github.com/tree-sitter/tree-sitter-cpp"))
-					(css             . ("https://github.com/tree-sitter/tree-sitter-css"))
-					(dockerfile      . ("https://github.com/camdencheek/tree-sitter-dockerfile"))
-					(elixir          . ("https://github.com/elixir-lang/tree-sitter-elixir"))
-					(heex            . ("https://github.com/phoenixframework/tree-sitter-heex"))
-					(html            . ("https://github.com/tree-sitter/tree-sitter-html"))
-					(json            . ("https://github.com/tree-sitter/tree-sitter-json"))
-					(lua				     . ("https://github.com/tree-sitter-grammars/tree-sitter-lua"))
-					(markdown        . ("https://github.com/tree-sitter-grammars/tree-sitter-markdown" "split_parser" "tree-sitter-markdown/src"))
-					(markdown-inline . ("https://github.com/tree-sitter-grammars/tree-sitter-markdown" "split_parser" "tree-sitter-markdown-inline/src"))
-					(python          . ("https://github.com/tree-sitter/tree-sitter-python"))
-					(rust            . ("https://github.com/tree-sitter/tree-sitter-rust"))
-					(yaml            . ("https://github.com/tree-sitter-grammars/tree-sitter-yaml"))
-					))
-	:ensure t
+	:ensure nil
 	)
 
 (use-package which-key
