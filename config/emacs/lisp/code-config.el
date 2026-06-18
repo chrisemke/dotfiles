@@ -9,6 +9,11 @@
 	:ensure t
 	)
 
+(use-package vc
+	:ensure nil
+	:custom (vc-auto-revert-mode t)
+	)
+
 (use-package mason
 	:config (mason-setup)
 	:ensure t
@@ -32,6 +37,7 @@
 	(eglot-code-action-indications nil)
 	(eldoc-echo-area-use-multiline-p nil)
 	(eldoc-display-functions '(eldoc-display-in-buffer))
+	(eglot-documentation-renderer 'markdown-ts-view-mode)
 	:ensure nil
 	:hook (eglot-managed-mode . (lambda () (eglot-inlay-hints-mode 0)))
 	)
