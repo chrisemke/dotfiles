@@ -128,8 +128,7 @@
 											(yaml            . yaml-ts-mode))))
 		(mapc (lambda (lang)
 						(unless (treesit-language-available-p lang)
-							(when-let* ((file (alist-get lang lang->file)))
-								(require file nil t))
+							(require (alist-get lang lang->file) nil t)
 							(treesit-install-language-grammar lang)))
 					(mapcar #'car lang->file)))
 	:custom
