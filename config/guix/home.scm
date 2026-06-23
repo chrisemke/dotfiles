@@ -29,12 +29,13 @@
  (gnu packages package-management) ; flatpak
  (gnu packages python) ; python-wrapper
  (gnu packages rust) ; rust
- (gnu packages rust-apps) ; aardvark-dns helvum lsd ripgrep uv
+ (gnu packages rust-apps) ; aardvark-dns helvum mise ripgrep
  (gnu packages screen) ; screen
  (gnu packages shells) ; fish
  (gnu packages shellutils) ; starship
  (gnu packages ssh) ; openssh
  (gnu packages terminals) ; alacritty
+ (gnu packages tor-browsers) ; torbrowser
  (gnu packages version-control) ; git
  (gnu packages video) ; vlc
  (gnu packages xdisorg) ; xsettingsd
@@ -74,8 +75,8 @@
 	 kcalc
 	 kompare
 	 libreoffice
-	 lsd
 	 libdbusmenu
+	 mise
 	 okular
 	 openssh
 	 plasma-disks
@@ -90,7 +91,7 @@
 	 starship
 	 steam
 	 steam-devices-udev-rules
-	 uv
+	 torbrowser
 	 unzip
 	 vlc
 	 xsettingsd
@@ -165,5 +166,4 @@
 	 (simple-service 'home-shell-environment-variables
 									 home-environment-variables-service-type
 									 `(("PATH" . "$HOME/.local/bin:$PATH")
-										 ("XDG_DATA_DIRS" . "/var/lib/flatpak/exports/share:$XDG_DATA_DIRS")
-										 ("XDG_DATA_DIRS" . "$XDG_DATA_HOME/flatpak/exports/share:$XDG_DATA_DIRS"))))))
+										 ("XDG_DATA_DIRS" . "/var/lib/flatpak/exports/share:$XDG_DATA_HOME/flatpak/exports/share:$XDG_DATA_DIRS"))))))
