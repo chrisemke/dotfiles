@@ -3,6 +3,7 @@
 	(name 'guix)
 	(url "https://git.guix.gnu.org/guix.git")
 	(branch "master")
+	(commit "c3a4982ca9a161b39af76fad1b5bdaf6050635e7")
 	(introduction
 	 (make-channel-introduction
 		"9edb3f66fd807b096b48283debdcddccfea34bad"
@@ -12,6 +13,7 @@
 	(name 'nonguix)
 	(url "https://gitlab.com/nonguix/nonguix")
 	(branch "master")
+	(commit "bf39542ca537fde8839b209ac21d6f3254469b15")
 	(introduction
 	 (make-channel-introduction
 		"897c1a470da759236cc11798f4e0a5f7d4d59fbc"
@@ -21,6 +23,7 @@
 	(name 'saayix)
 	(url "https://codeberg.org/look/saayix")
 	(branch "main")
+	(commit "c72163c06fef42607f7be6782bb4e627c542bce0")
 	(introduction
 	 (make-channel-introduction
 		"12540f593092e9a177eb8a974a57bb4892327752"
@@ -30,6 +33,7 @@
 	(name 'radix)
 	(url "https://codeberg.org/anemofilia/radix.git")
 	(branch "main")
+	(commit "0669b69d8cdfd7cc3ceda31fee1de603adf2d30d")
 	(introduction
 	 (make-channel-introduction
 		"f9130e11e35d2c147c6764ef85542dc58dc09c4f"
