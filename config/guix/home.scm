@@ -27,6 +27,7 @@
  (gnu packages libreoffice) ; libreoffice
  (gnu packages linux)
  (gnu packages package-management) ; flatpak
+ (gnu packages pretty-print) ; source-highlight
  (gnu packages python) ; python-wrapper
  (gnu packages rust) ; rust
  (gnu packages rust-apps) ; aardvark-dns helvum mise ripgrep
@@ -88,6 +89,7 @@
 	 ripgrep
 	 rust
 	 screen
+	 source-highlight
 	 starship
 	 steam
 	 steam-devices-udev-rules
@@ -166,4 +168,7 @@
 	 (simple-service 'home-shell-environment-variables
 									 home-environment-variables-service-type
 									 `(("PATH" . "$HOME/.local/bin:$PATH")
-										 ("XDG_DATA_DIRS" . "/var/lib/flatpak/exports/share:$XDG_DATA_HOME/flatpak/exports/share:$XDG_DATA_DIRS"))))))
+										 ("XDG_DATA_DIRS" . "/var/lib/flatpak/exports/share:$XDG_DATA_HOME/flatpak/exports/share:$XDG_DATA_DIRS")
+										 ("LESSOPEN" . "| src-hilite-lesspipe.sh %s")
+										 ("LESS" . " --raw-control-chars --tabs=2 --LINE-NUMBERS ")))
+	 )))
