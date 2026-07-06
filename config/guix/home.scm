@@ -40,6 +40,7 @@
  (gnu packages version-control) ; git
  (gnu packages video) ; vlc
  (gnu packages xdisorg) ; xsettingsd
+ (gnu packages xorg) ; xrdb
  (guix channels)
  (guix gexp)
  (nongnu packages firmware) ; fwupd-nonfree
@@ -96,6 +97,7 @@
 	 torbrowser
 	 unzip
 	 vlc
+	 xrdb
 	 xsettingsd
 	 zen-browser-bin
 	 ))
