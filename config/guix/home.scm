@@ -1,176 +1,191 @@
-(use-modules
- (gnu home)
- (gnu home services)
- (gnu home services desktop)
- (gnu home services gnupg)
- (gnu home services guix)
- (gnu home services shells)
- (gnu home services shepherd)
- (gnu home services sound)
- (gnu home services ssh)
- (gnu packages)
- (gnu packages admin) ; btop fastfetch inxi
- (gnu packages bittorrent) ; qbittorrent
- (gnu packages commencement) ; gcc-toolchain
- (gnu packages compression) ; unzip
- (gnu packages containers) ; podman podman-compose
- (gnu packages emacs) ; emacs-next
- (gnu packages fonts) ; font-dejavu font-google-noto-emoji font-liberation
- (gnu packages games) ; steam-devices-udev-rules
- (gnu packages glib) ; glib:bin
- (gnu packages gnupg)
- (gnu packages gtk) ; appmenu-gtk-module libdbusmenu
- (gnu packages kde-graphics) ; okular
- (gnu packages kde-plasma) ; plasma-disks
- (gnu packages kde-sdk) ; kompare
- (gnu packages kde-utils) ; ark kate kcalc
- (gnu packages libreoffice) ; libreoffice
- (gnu packages linux)
- (gnu packages package-management) ; flatpak
- (gnu packages pretty-print) ; source-highlight
- (gnu packages python) ; python-wrapper
- (gnu packages rust) ; rust
- (gnu packages rust-apps) ; aardvark-dns helvum mise ripgrep
- (gnu packages screen) ; screen
- (gnu packages shells) ; fish
- (gnu packages shellutils) ; starship
- (gnu packages ssh) ; openssh
- (gnu packages terminals) ; alacritty
- (gnu packages tor-browsers) ; torbrowser
- (gnu packages version-control) ; git
- (gnu packages video) ; vlc
- (gnu packages xdisorg) ; xsettingsd
- (gnu packages xorg) ; xrdb
- (guix channels)
- (guix gexp)
- (nongnu packages firmware) ; fwupd-nonfree
- (nongnu packages game-client) ; protonup steam
- (saayix packages binaries) ; zen-browser-bin
- (saayix packages fonts) ; font-nerd-opendyslexic
- )
+(define-module (home)
+	#:use-module (gnu home)
+	#:use-module (gnu home services)
+	#:use-module (gnu home services desktop)
+	#:use-module (gnu home services gnupg)
+	#:use-module (gnu home services guix)
+	#:use-module (gnu home services shells)
+	#:use-module (gnu home services shepherd)
+	#:use-module (gnu home services sound)
+	#:use-module (gnu home services ssh)
+	#:use-module (gnu home services xdg)
+	;; #:use-module (gnu services)
+	#:use-module (gnu packages admin) ; btop fastfetch inxi
+	#:use-module (gnu packages bittorrent) ; qbittorrent
+	#:use-module (gnu packages commencement) ; gcc-toolchain
+	#:use-module (gnu packages compression) ; unzip
+	#:use-module (gnu packages containers) ; podman podman-compose
+	#:use-module (gnu packages emacs) ; emacs-next-pgtk
+	#:use-module (gnu packages fonts) ; font-dejavu font-google-noto-emoji font-liberation
+	#:use-module (gnu packages games) ; steam-devices-udev-rules
+	#:use-module (gnu packages glib) ; glib:bin
+	#:use-module (gnu packages gnupg)
+	#:use-module (gnu packages gtk) ; appmenu-gtk-module libdbusmenu
+	#:use-module (gnu packages kde-graphics) ; okular
+	#:use-module (gnu packages kde-plasma) ; plasma-disks
+	#:use-module (gnu packages kde-sdk) ; kompare
+	#:use-module (gnu packages kde-utils) ; ark kate kcalc
+	#:use-module (gnu packages kde-xyz) ; kde-material-you-colors
+	#:use-module (gnu packages libreoffice) ; libreoffice
+	#:use-module (gnu packages linux)
+	#:use-module (gnu packages package-management) ; flatpak
+	#:use-module (gnu packages pretty-print) ; source-highlight
+	#:use-module (gnu packages python) ; python-wrapper
+	#:use-module (gnu packages rust) ; rust
+	#:use-module (gnu packages rust-apps) ; aardvark-dns helvum mise ripgrep
+	#:use-module (gnu packages screen) ; screen
+	#:use-module (gnu packages shells) ; fish
+	#:use-module (gnu packages shellutils) ; starship
+	#:use-module (gnu packages ssh) ; openssh
+	#:use-module (gnu packages terminals) ; alacritty
+	#:use-module (gnu packages tor-browsers) ; torbrowser
+	#:use-module (gnu packages version-control) ; git
+	#:use-module (gnu packages video) ; vlc
+	#:use-module (gnu packages xdisorg) ; xsettingsd
+	#:use-module (gnu packages xorg) ; xrdb
+	#:use-module (guix channels)
+	#:use-module (guix gexp)
+	#:use-module (nongnu packages firmware) ; fwupd-nonfree
+	#:use-module (nongnu packages game-client) ; protonup steam
+	#:use-module (saayix packages binaries) ; zen-browser-bin
+	#:use-module (saayix packages fonts) ; font-nerd-opendyslexic
+	)
 
-(home-environment
- (packages
-	(list
-	 aardvark-dns
-	 alacritty
-	 appmenu-gtk-module
-	 ark
-	 btop
-	 emacs-next
-	 fastfetch
-	 fish
-	 flatpak
-	 font-dejavu
-	 font-google-noto-emoji
-	 font-liberation
-	 font-nerd-opendyslexic
-	 font-wqy-zenhei
-	 fwupd-nonfree
-	 gcc-toolchain
-	 git
-	 (list glib "bin")
-	 gnupg
-	 helvum
-	 inxi
-	 kate
-	 kcalc
-	 kompare
-	 libreoffice
-	 libdbusmenu
-	 mise
-	 okular
-	 openssh
-	 plasma-disks
-	 podman
-	 podman-compose
-	 protonup
-	 python-wrapper
-	 qbittorrent
-	 ripgrep
-	 rust
-	 screen
-	 source-highlight
-	 starship
-	 steam
-	 steam-devices-udev-rules
-	 torbrowser
-	 unzip
-	 vlc
-	 xrdb
-	 xsettingsd
-	 zen-browser-bin
-	 ))
+(define krisque-home
+	(home-environment
+	 (packages
+		(list
+		 aardvark-dns
+		 alacritty
+		 appmenu-gtk-module
+		 ark
+		 btop
+		 emacs-next-pgtk
+		 fastfetch
+		 fish
+		 flatpak
+		 font-dejavu
+		 font-google-noto-emoji
+		 font-liberation
+		 font-nerd-opendyslexic
+		 font-wqy-zenhei
+		 fwupd-nonfree
+		 gcc-toolchain
+		 git
+		 (list glib "bin")
+		 gnupg
+		 helvum
+		 inxi
+		 kate
+		 kcalc
+		 kompare
+		 libreoffice
+		 libdbusmenu
+		 mise
+		 okular
+		 openssh
+		 plasma-disks
+		 podman
+		 podman-compose
+		 protonup
+		 kde-material-you-colors
+		 python-wrapper
+		 qbittorrent
+		 ripgrep
+		 rust
+		 screen
+		 source-highlight
+		 starship
+		 steam
+		 steam-devices-udev-rules
+		 torbrowser
+		 unzip
+		 vlc
+		 xrdb
+		 xsettingsd
+		 zen-browser-bin
+		 ))
 
- (services
-	(list
-	 (service home-bash-service-type
-						(home-bash-configuration
-						 (aliases '())
-						 (bashrc (list (local-file "/home/krisque/.bashrc" "bashrc")))
-						 (bash-profile
-							(list (plain-file "profile"
-																(string-append
-																 "\n"
-																 "gsettings set org.gnome.desktop.interface gtk-theme 'Breeze'\n"
-																 "gsettings set org.gnome.desktop.interface icon-theme 'breeze-dark'\n"
-																 "gsettings set org.gnome.desktop.interface cursor-theme 'breeze_cursors'\n"
-																 "gsettings set org.gnome.desktop.interface font-name 'OpenDyslexic Nerd Font'\n"))))))
-	 (service home-dbus-service-type)
-	 (service home-gpg-agent-service-type
-						(home-gpg-agent-configuration
-						 (pinentry-program
-							(file-append pinentry "/bin/pinentry"))))
-	 (service home-pipewire-service-type
-						(home-pipewire-configuration
-						 (wireplumber wireplumber-minimal)))
-	 (service home-ssh-agent-service-type)
-	 (let* ((socket-dir (string-append (getenv "XDG_RUNTIME_DIR") "/podman"))
-					(socket (string-append "unix://" socket-dir "/podman.sock"))
-					(start-gexp #~(begin
-													(mkdir-p #$socket-dir)
-													(make-forkexec-constructor
-													 (list #$(file-append podman "/bin/podman")
-																 "system" "service" "--time=0" #$socket)))))
-		 (simple-service 'podman-socket
-										 home-shepherd-service-type
-										 (list (shepherd-service
-														(provision '(podman-socket))
-														(modules '((guix build utils)))
-														(start start-gexp)
-														(stop #~(make-kill-destructor))))))
-	 (simple-service 'home-extra-channels
-									 home-channels-service-type
-									 (list (channel
-													(name 'nonguix)
-													(url "https://gitlab.com/nonguix/nonguix")
-													(introduction
-													 (make-channel-introduction
-														"897c1a470da759236cc11798f4e0a5f7d4d59fbc"
-														(openpgp-fingerprint
-														 "2A39 3FFF 68F4 EF7A 3D29 12AF 6F51 20A0 22FB B2D5"))))
-												 (channel
-													(name 'saayix)
-													(branch "main")
-													(url "https://codeberg.org/look/saayix")
-													(introduction
-													 (make-channel-introduction
-														"12540f593092e9a177eb8a974a57bb4892327752"
-														(openpgp-fingerprint
-														 "3FFA 7335 973E 0A49 47FC 0A8C 38D5 96BE 07D3 34AB"))))
-												 (channel
-													(name 'radix)
-													(url "https://codeberg.org/anemofilia/radix.git")
-													(branch "main")
-													(introduction
-													 (make-channel-introduction
-														"f9130e11e35d2c147c6764ef85542dc58dc09c4f"
-														(openpgp-fingerprint
-														 "F164 709E 5FC7 B32B AEC7 9F37 1F2E 76AC E3F5 31C8"))))))
-	 (simple-service 'home-shell-environment-variables
-									 home-environment-variables-service-type
-									 `(("PATH" . "$HOME/.local/bin:$PATH")
-										 ("XDG_DATA_DIRS" . "/var/lib/flatpak/exports/share:$XDG_DATA_HOME/flatpak/exports/share:$XDG_DATA_DIRS")
-										 ("LESSOPEN" . "| src-hilite-lesspipe.sh %s")
-										 ("LESS" . " --raw-control-chars --tabs=2 --LINE-NUMBERS ")))
-	 )))
+	 (services
+		(list
+		 (service home-bash-service-type
+							(home-bash-configuration
+							 (aliases '())
+							 (bashrc (list (local-file "/home/krisque/.bashrc" "bashrc")))
+							 (bash-profile
+								(list (plain-file "profile"
+																	(string-append
+																	 "\n"
+																	 "gsettings set org.gnome.desktop.interface gtk-theme 'Breeze'\n"
+																	 "gsettings set org.gnome.desktop.interface icon-theme 'breeze-dark'\n"
+																	 "gsettings set org.gnome.desktop.interface cursor-theme 'breeze_cursors'\n"
+																	 "gsettings set org.gnome.desktop.interface font-name 'OpenDyslexic Nerd Font'\n"))))))
+		 (service home-dbus-service-type)
+		 (service home-gpg-agent-service-type
+							(home-gpg-agent-configuration
+							 (pinentry-program (file-append pinentry "/bin/pinentry"))))
+		 (service home-pipewire-service-type
+							(home-pipewire-configuration
+							 (wireplumber wireplumber-minimal)))
+		 (service home-ssh-agent-service-type)
+		 (service home-xdg-user-directories-service-type
+          (home-xdg-user-directories-configuration
+            (desktop     "$HOME/Desktop/")
+            (documents   "$HOME/Documents/")
+            (download    "$HOME/Downloads/")
+            (music       "$HOME/Media/Music/")
+            (pictures    "$HOME/Media/Pictures/")
+            (videos      "$HOME/Media/Videos/")
+						(projects    "$HOME/Projects/")
+						(templates   "")
+            (publicshare "")))
+		 (let* ((socket-dir (string-append (getenv "XDG_RUNTIME_DIR") "/podman"))
+						(socket (string-append "unix://" socket-dir "/podman.sock"))
+						(start-gexp #~(begin
+														(mkdir-p #$socket-dir)
+														(make-forkexec-constructor
+														 (list #$(file-append podman "/bin/podman")
+																	 "system" "service" "--time=0" #$socket)))))
+			 (simple-service 'podman-socket
+											 home-shepherd-service-type
+											 (list (shepherd-service
+															(provision '(podman-socket))
+															(modules '((guix build utils)))
+															(start start-gexp)
+															(stop #~(make-kill-destructor))))))
+		 (simple-service 'home-extra-channels
+										 home-channels-service-type
+										 (list (channel
+														(name 'nonguix)
+														(url "https://gitlab.com/nonguix/nonguix")
+														(introduction
+														 (make-channel-introduction
+															"897c1a470da759236cc11798f4e0a5f7d4d59fbc"
+															(openpgp-fingerprint
+															 "2A39 3FFF 68F4 EF7A 3D29 12AF 6F51 20A0 22FB B2D5"))))
+													 (channel
+														(name 'saayix)
+														(branch "main")
+														(url "https://codeberg.org/look/saayix.git")
+														(introduction
+														 (make-channel-introduction
+															"12540f593092e9a177eb8a974a57bb4892327752"
+															(openpgp-fingerprint
+															 "3FFA 7335 973E 0A49 47FC 0A8C 38D5 96BE 07D3 34AB"))))
+													 (channel
+														(name 'radix)
+														(url "https://codeberg.org/anemofilia/radix.git")
+														(branch "main")
+														(introduction
+														 (make-channel-introduction
+															"f9130e11e35d2c147c6764ef85542dc58dc09c4f"
+															(openpgp-fingerprint
+															 "F164 709E 5FC7 B32B AEC7 9F37 1F2E 76AC E3F5 31C8"))))))
+		 (simple-service 'home-shell-environment-variables
+										 home-environment-variables-service-type
+										 `(("PATH" . "$HOME/.local/bin:$PATH")
+											 ("XDG_DATA_DIRS" . "/var/lib/flatpak/exports/share:$XDG_DATA_HOME/flatpak/exports/share:$XDG_DATA_DIRS")
+											 ("LESSOPEN" . "| src-hilite-lesspipe.sh %s")
+											 ("LESS" . " --raw-control-chars --tabs=2 --LINE-NUMBERS ")))))))
+
+krisque-home
