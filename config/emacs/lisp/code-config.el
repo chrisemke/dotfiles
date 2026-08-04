@@ -89,12 +89,13 @@
 ;;; ELISP
 ;;; ============================================================================
 
-(use-package elisp-mode
+;; Used for elisp-mode and lisp-data-mode
+(use-package lisp-mode
 	:ensure nil
-	:hook (emacs-lisp-mode-hook . (lambda ()
-																	(keymap-local-set "C-c e f" (lambda ()
-																																	 (interactive)
-																																	 (indent-region (point-min) (point-max))))))
+	:hook (lisp-data-mode-hook . (lambda ()
+																 (keymap-local-set "C-c e f" (lambda ()
+																															 (interactive)
+																															 (indent-region (point-min) (point-max))))))
 	)
 
 
@@ -179,8 +180,8 @@
 	:ensure nil
 	:hook (scheme-mode-hook . (lambda ()
 															(keymap-local-set "C-c e f" (lambda ()
-																															 (interactive)
-																															 (indent-region (point-min) (point-max))))))
+																														(interactive)
+																														(indent-region (point-min) (point-max))))))
 	)
 
 (use-package geiser-guile
