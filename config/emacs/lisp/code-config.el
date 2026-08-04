@@ -89,7 +89,7 @@
 ;;; ELISP
 ;;; ============================================================================
 
-;; Used for elisp-mode and lisp-data-mode
+;; Used for emacs-lisp-mode and lisp-data-mode
 (use-package lisp-mode
 	:ensure nil
 	:hook (lisp-data-mode-hook . (lambda ()
