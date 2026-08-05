@@ -4,7 +4,7 @@
 	:ensure nil
 	)
 
-(use-package outline-mode
+(use-package outline
 	:custom
 	(outline-minor-mode-use-buttons 'in-margins)
 	(outline-overlay-button-map nil)
