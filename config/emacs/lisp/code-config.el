@@ -133,7 +133,7 @@
 																	 ))
 
 ;; Colors to uv.lock
-(use-package toml-ts
+(use-package toml-ts-mode
 	:ensure nil
 	:mode ("uv\\.lock" . toml-ts-mode)
 	)
@@ -159,7 +159,7 @@
 																 ))
 
 ;; Colors to Cargo.lock
-(use-package toml-ts
+(use-package toml-ts-mode
 	:ensure nil
 	:mode ("Cargo\\.lock" . toml-ts-mode)
 	)
