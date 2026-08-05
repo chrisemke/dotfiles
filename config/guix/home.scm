@@ -139,20 +139,24 @@
 						(projects    "$HOME/Projects/")
 						(templates   "")
             (publicshare "")))
-		 (let* ((socket-dir (string-append (getenv "XDG_RUNTIME_DIR") "/podman"))
-						(socket (string-append "unix://" socket-dir "/podman.sock"))
-						(start-gexp #~(begin
-														(mkdir-p #$socket-dir)
-														(make-forkexec-constructor
-														 (list #$(file-append podman "/bin/podman")
-																	 "system" "service" "--time=0" #$socket)))))
-			 (simple-service 'podman-socket
-											 home-shepherd-service-type
-											 (list (shepherd-service
-															(provision '(podman-socket))
-															(modules '((guix build utils)))
-															(start start-gexp)
-															(stop #~(make-kill-destructor))))))
+		 (simple-service 'podman-socket
+										 home-shepherd-service-type
+										 (list (shepherd-service
+														(provision '(podman-socket))
+														(modules '((guix build utils)))
+														(start
+														 #~(let* ((runtime-dir (or (getenv "XDG_RUNTIME_DIR")
+																															 (string-append
+																																"/run/user/"
+																																(number->string (getuid)))))
+																			(socket-dir (string-append runtime-dir "/podman")))
+																 (mkdir-p socket-dir)
+																 (make-forkexec-constructor
+																	(list #$(file-append podman "/bin/podman")
+																				"system" "service" "--time=0"
+																				(string-append "unix://" socket-dir
+																											 "/podman.sock")))))
+														(stop #~(make-kill-destructor)))))
 		 (simple-service 'home-extra-channels
 										 home-channels-service-type
 										 (list (channel
