@@ -22,10 +22,9 @@
 (defun my/mason-install-all ()
 	"Intall all LSPs/linters based on a list preset"
 	(interactive)
-	(mason-setup
-		(dolist (pkg '("rassumfrassum" "zuban" "ruff" "typos-lsp" "rust-analyzer" "elixir-ls"))
-			(unless (mason-installed-p pkg)
-				(ignore-errors (mason-install pkg)))))
+	(dolist (pkg '("rassumfrassum" "zuban" "ruff" "typos-lsp" "rust-analyzer" "elixir-ls"))
+		(unless (mason-installed-p pkg)
+			(ignore-errors (mason-install pkg))))
 	)
 
 (use-package eglot
