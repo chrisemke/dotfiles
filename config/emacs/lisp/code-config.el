@@ -102,12 +102,6 @@
 ;;; ELIXIR
 ;;; ============================================================================
 
-;; Not covered by treesit-auto
-(use-package elixir-ts
-	:ensure nil
-	:mode ("\\.exs" . elixir-ts-mode)
-	)
-
 (use-package eglot
 	:config (add-to-list 'eglot-server-programs
 											 '(elixir-ts-mode . ("rass" "--" "elixir-ls" "--" "typos-lsp")))
