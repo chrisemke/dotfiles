@@ -9,7 +9,6 @@
 	#:use-module (gnu home services sound)
 	#:use-module (gnu home services ssh)
 	#:use-module (gnu home services xdg)
-	;; #:use-module (gnu services)
 	#:use-module (gnu packages admin) ; btop fastfetch inxi
 	#:use-module (gnu packages bittorrent) ; qbittorrent
 	#:use-module (gnu packages commencement) ; gcc-toolchain
@@ -18,7 +17,7 @@
 	#:use-module (gnu packages emacs) ; emacs-next-pgtk
 	#:use-module (gnu packages fonts) ; font-dejavu font-google-noto-emoji font-liberation
 	#:use-module (gnu packages glib) ; glib:bin
-	#:use-module (gnu packages gnupg)
+	#:use-module (gnu packages gnupg) ; gnupg pinentry
 	#:use-module (gnu packages gtk) ; appmenu-gtk-module libdbusmenu
 	#:use-module (gnu packages kde-graphics) ; okular
 	#:use-module (gnu packages kde-plasma) ; plasma-disks
@@ -26,7 +25,7 @@
 	#:use-module (gnu packages kde-utils) ; ark kate kcalc
 	#:use-module (gnu packages kde-xyz) ; kde-material-you-colors
 	#:use-module (gnu packages libreoffice) ; libreoffice
-	#:use-module (gnu packages linux)
+	#:use-module (gnu packages linux) ; wireplumber-minimal
 	#:use-module (gnu packages package-management) ; flatpak
 	#:use-module (gnu packages pretty-print) ; source-highlight
 	#:use-module (gnu packages python) ; python-wrapper
