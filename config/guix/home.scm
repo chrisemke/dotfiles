@@ -17,7 +17,6 @@
 	#:use-module (gnu packages containers) ; podman podman-compose
 	#:use-module (gnu packages emacs) ; emacs-next-pgtk
 	#:use-module (gnu packages fonts) ; font-dejavu font-google-noto-emoji font-liberation
-	#:use-module (gnu packages games) ; steam-devices-udev-rules
 	#:use-module (gnu packages glib) ; glib:bin
 	#:use-module (gnu packages gnupg)
 	#:use-module (gnu packages gtk) ; appmenu-gtk-module libdbusmenu
@@ -97,7 +96,6 @@
 		 source-highlight
 		 starship
 		 steam
-		 steam-devices-udev-rules
 		 torbrowser
 		 unzip
 		 vlc
