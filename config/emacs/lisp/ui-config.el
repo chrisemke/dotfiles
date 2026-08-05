@@ -91,7 +91,6 @@
 	)
 
 (use-package indent-bars
-	:config (add-hook 'prog-mode-hook #'indent-bars-mode 1)
 	:custom
 	(indent-bars-treesit-support t)
 	(indent-bars-treesit-wrap '((python argument_list parameters
@@ -123,6 +122,7 @@
 	(indent-bars-display-on-blank-lines t)
 	(indent-bars-starting-column 0)
 	:ensure t
+	:hook (prog-mode . indent-bars-mode)
 	)
 
 (use-package doom-modeline
@@ -187,10 +187,8 @@
 	:ensure t
 	)
 
-(add-hook 'prog-mode-hook (lambda ()
-														(display-fill-column-indicator-mode t)
-														(setopt display-fill-column-indicator-column 80))
-					)
+(setopt display-fill-column-indicator-column 80)
+(add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)
 
 
 (provide 'ui-config)
