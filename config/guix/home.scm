@@ -9,44 +9,44 @@
 	#:use-module (gnu home services sound)
 	#:use-module (gnu home services ssh)
 	#:use-module (gnu home services xdg)
-	#:use-module (gnu packages admin) ; btop fastfetch inxi
-	#:use-module (gnu packages bittorrent) ; qbittorrent
-	#:use-module (gnu packages commencement) ; gcc-toolchain
-	#:use-module (gnu packages compression) ; unzip
-	#:use-module (gnu packages containers) ; podman podman-compose
-	#:use-module (gnu packages emacs) ; emacs-next-pgtk
-	#:use-module (gnu packages fonts) ; font-dejavu font-google-noto-emoji font-liberation
-	#:use-module (gnu packages glib) ; glib:bin
-	#:use-module (gnu packages gnupg) ; gnupg pinentry
-	#:use-module (gnu packages gtk) ; appmenu-gtk-module libdbusmenu
-	#:use-module (gnu packages kde-graphics) ; okular
-	#:use-module (gnu packages kde-plasma) ; plasma-disks
-	#:use-module (gnu packages kde-sdk) ; kompare
-	#:use-module (gnu packages kde-utils) ; ark kate kcalc
-	#:use-module (gnu packages kde-xyz) ; kde-material-you-colors
-	#:use-module (gnu packages libreoffice) ; libreoffice
-	#:use-module (gnu packages linux) ; wireplumber-minimal
-	#:use-module (gnu packages package-management) ; flatpak
-	#:use-module (gnu packages pretty-print) ; source-highlight
-	#:use-module (gnu packages python) ; python-wrapper
-	#:use-module (gnu packages rust) ; rust
-	#:use-module (gnu packages rust-apps) ; aardvark-dns helvum mise ripgrep
-	#:use-module (gnu packages screen) ; screen
-	#:use-module (gnu packages shells) ; fish
-	#:use-module (gnu packages shellutils) ; starship
-	#:use-module (gnu packages ssh) ; openssh
-	#:use-module (gnu packages terminals) ; alacritty
-	#:use-module (gnu packages tor-browsers) ; torbrowser
-	#:use-module (gnu packages version-control) ; git
-	#:use-module (gnu packages video) ; vlc
-	#:use-module (gnu packages xdisorg) ; xsettingsd
-	#:use-module (gnu packages xorg) ; xrdb
+	#:use-module (gnu packages admin)								; btop fastfetch inxi
+	#:use-module (gnu packages bittorrent)					; qbittorrent
+	#:use-module (gnu packages commencement)				; gcc-toolchain
+	#:use-module (gnu packages compression)					; unzip
+	#:use-module (gnu packages containers)					; podman podman-compose
+	#:use-module (gnu packages emacs)								; emacs-next-pgtk
+	#:use-module (gnu packages fonts)								; font-dejavu font-google-noto-emoji font-liberation
+	#:use-module (gnu packages glib)								; glib:bin
+	#:use-module (gnu packages gnupg)								; gnupg pinentry
+	#:use-module (gnu packages gtk)									; appmenu-gtk-module libdbusmenu
+	#:use-module (gnu packages kde-graphics)				; okular
+	#:use-module (gnu packages kde-plasma)					; plasma-disks
+	#:use-module (gnu packages kde-sdk)							; kompare
+	#:use-module (gnu packages kde-utils)						; ark kate kcalc
+	#:use-module (gnu packages kde-xyz)							; kde-material-you-colors
+	#:use-module (gnu packages libreoffice)					; libreoffice
+	#:use-module (gnu packages linux)								; wireplumber-minimal
+	#:use-module (gnu packages package-management)	; flatpak
+	#:use-module (gnu packages pretty-print)				; source-highlight
+	#:use-module (gnu packages python)							; python-wrapper
+	#:use-module (gnu packages rust)								; rust
+	#:use-module (gnu packages rust-apps)						; aardvark-dns helvum mise ripgrep
+	#:use-module (gnu packages screen)							; screen
+	#:use-module (gnu packages shells)							; fish
+	#:use-module (gnu packages shellutils)					; starship
+	#:use-module (gnu packages ssh)									; openssh
+	#:use-module (gnu packages terminals)						; alacritty
+	#:use-module (gnu packages tor-browsers)				; torbrowser
+	#:use-module (gnu packages version-control)			; git
+	#:use-module (gnu packages video)								; vlc
+	#:use-module (gnu packages xdisorg)							; xsettingsd
+	#:use-module (gnu packages xorg)								; xrdb
 	#:use-module (guix channels)
 	#:use-module (guix gexp)
-	#:use-module (nongnu packages firmware) ; fwupd-nonfree
-	#:use-module (nongnu packages game-client) ; protonup steam
-	#:use-module (saayix packages binaries) ; zen-browser-bin
-	#:use-module (saayix packages fonts) ; font-nerd-opendyslexic
+	#:use-module (nongnu packages firmware)					; fwupd-nonfree
+	#:use-module (nongnu packages game-client)			; protonup steam
+	#:use-module (saayix packages binaries)					; zen-browser-bin
+	#:use-module (saayix packages fonts)						; font-nerd-opendyslexic
 	)
 
 (define krisque-home
