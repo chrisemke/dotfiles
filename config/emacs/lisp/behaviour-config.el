@@ -182,17 +182,17 @@
 
 
 (setopt
- cursor-in-non-selected-windows nil  ;; Hide the cursor in inactive windows.
- truncate-lines t  ;; Truncate long lines instead of breaking lines.
- mouse-shift-adjust-mode t  ;; Shift click should select.
  ediff-window-setup-function 'ediff-setup-windows-plain	;; no ediff popup window.
+ cursor-in-non-selected-windows nil											;; Hide the cursor in inactive windows.
+ truncate-lines t																				;; Truncate long lines instead of breaking lines.
+ mouse-shift-adjust-mode t															;; Shift click should select.
  ;; Remove anoying # and ~ files.
  auto-save-default nil
  create-lockfiles nil
  make-backup-files nil
  ;; Configure auto-save-visited-mode (the modern replacement)
- auto-save-visited-interval 1   ;; seconds of idle before saving
- save-silently t ;; no "Wrote /path/to/file"
+ auto-save-visited-interval 1 ;; seconds of idle before saving
+ save-silently t              ;; no "Wrote /path/to/file"
  )
 (auto-save-visited-mode 1)
 
