@@ -18,7 +18,7 @@
 	:init (nerd-icons-completion-mode)
 	)
 
-;;; Setup ibuffer
+;; Setup ibuffer
 (use-package nerd-icons-ibuffer
 	:defer t
 	:ensure t
