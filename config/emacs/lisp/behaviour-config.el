@@ -185,6 +185,7 @@
  cursor-in-non-selected-windows nil  ;; Hide the cursor in inactive windows.
  truncate-lines t  ;; Truncate long lines instead of breaking lines.
  mouse-shift-adjust-mode t  ;; Shift click should select.
+ ediff-window-setup-function 'ediff-setup-windows-plain	;; no ediff popup window.
  ;; Remove anoying # and ~ files.
  auto-save-default nil
  create-lockfiles nil
