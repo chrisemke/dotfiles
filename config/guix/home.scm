@@ -172,16 +172,7 @@
 														 (make-channel-introduction
 															"12540f593092e9a177eb8a974a57bb4892327752"
 															(openpgp-fingerprint
-															 "3FFA 7335 973E 0A49 47FC 0A8C 38D5 96BE 07D3 34AB"))))
-													 (channel
-														(name 'radix)
-														(url "https://codeberg.org/anemofilia/radix.git")
-														(branch "main")
-														(introduction
-														 (make-channel-introduction
-															"f9130e11e35d2c147c6764ef85542dc58dc09c4f"
-															(openpgp-fingerprint
-															 "F164 709E 5FC7 B32B AEC7 9F37 1F2E 76AC E3F5 31C8"))))))
+															 "3FFA 7335 973E 0A49 47FC 0A8C 38D5 96BE 07D3 34AB"))))))
 		 (simple-service 'home-shell-environment-variables
 										 home-environment-variables-service-type
 										 `(("PATH" . "$HOME/.local/bin:$PATH")
