@@ -11,7 +11,6 @@
 	#:use-module (gnu services desktop)            ; %desktop-services, plasma-desktop-service-type, bluetooth-service-type
 	#:use-module (gnu services linux)              ; zram-device-service-type, zram-device-configuration
 	#:use-module (gnu services networking)         ; nftables-service-type
-	#:use-module (gnu services nix)                ; nix-service-type, nix-configuration
 	#:use-module (gnu services pm)                 ; power-profiles-daemon-service-type
 	#:use-module (gnu services sddm)               ; sddm-service-type, sddm-configuration
 	#:use-module (gnu services sysctl)             ; sysctl-service-type
