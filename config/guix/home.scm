@@ -29,8 +29,7 @@
 	#:use-module (gnu packages package-management)	; flatpak
 	#:use-module (gnu packages pretty-print)				; source-highlight
 	#:use-module (gnu packages python)							; python-wrapper
-	#:use-module (gnu packages rust)								; rust
-	#:use-module (gnu packages rust-apps)						; aardvark-dns helvum mise ripgrep
+	#:use-module (gnu packages rust-apps)						; aardvark-dns helvum ripgrep
 	#:use-module (gnu packages screen)							; screen
 	#:use-module (gnu packages shells)							; fish
 	#:use-module (gnu packages shellutils)					; starship
@@ -77,9 +76,8 @@
 		 kate
 		 kcalc
 		 kompare
-		 libreoffice
 		 libdbusmenu
-		 mise
+		 libreoffice
 		 okular
 		 openssh
 		 plasma-disks
@@ -90,7 +88,6 @@
 		 python-wrapper
 		 qbittorrent
 		 ripgrep
-		 rust
 		 screen
 		 source-highlight
 		 starship
@@ -126,16 +123,9 @@
 							 (wireplumber wireplumber-minimal)))
 		 (service home-ssh-agent-service-type)
 		 (service home-xdg-user-directories-service-type
-          (home-xdg-user-directories-configuration
-            (desktop     "$HOME/Desktop/")
-            (documents   "$HOME/Documents/")
-            (download    "$HOME/Downloads/")
-            (music       "$HOME/Media/Music/")
-            (pictures    "$HOME/Media/Pictures/")
-            (videos      "$HOME/Media/Videos/")
-						(projects    "$HOME/Projects/")
-						(templates   "")
-            (publicshare "")))
+							(home-xdg-user-directories-configuration
+							 (templates   "$HOME")
+							 (publicshare "$HOME")))
 		 (simple-service 'podman-socket
 										 home-shepherd-service-type
 										 (list (shepherd-service
@@ -143,9 +133,9 @@
 														(modules '((guix build utils)))
 														(start
 														 #~(let* ((runtime-dir (or (getenv "XDG_RUNTIME_DIR")
-																															 (string-append
-																																"/run/user/"
-																																(number->string (getuid)))))
+																											 (string-append
+																												"/run/user/"
+																												(number->string (getuid)))))
 																			(socket-dir (string-append runtime-dir "/podman")))
 																 (mkdir-p socket-dir)
 																 (make-forkexec-constructor
