@@ -55,7 +55,7 @@
 						(supplementary-groups '("audio" "netdev" "video" "wheel")))
 					 %base-user-accounts))
 
-	 (packages (cons* nix %base-packages))
+	 (packages (cons* %base-packages))
 
 	 (services
 		(cons*
