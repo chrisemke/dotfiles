@@ -1,29 +1,30 @@
 (define-module (config)
-	#:use-module (gnu bootloader)                  ; bootloader-configuration
-	#:use-module (gnu bootloader grub)             ; grub-efi-bootloader
-	#:use-module (gnu packages display-managers)   ; sddm
-	#:use-module (gnu packages games)              ; steam-devices-udev-rules
-	#:use-module (gnu packages shells)             ; fish
-	#:use-module (gnu system accounts)             ; user-account, %base-user-accounts
-	#:use-module (gnu services)                    ; service, simple-service, modify-services, udev-rules-service, %default-substitute-urls, %default-authorized-guix-keys
-	#:use-module (gnu services base)               ; guix-service-type, guix-configuration
-	#:use-module (gnu services containers)         ; rootless-podman-service-type, rootless-podman-configuration, subid-range
-	#:use-module (gnu services desktop)            ; %desktop-services, plasma-desktop-service-type, bluetooth-service-type
-	#:use-module (gnu services linux)              ; zram-device-service-type, zram-device-configuration
-	#:use-module (gnu services networking)         ; nftables-service-type
-	#:use-module (gnu services pm)                 ; power-profiles-daemon-service-type
-	#:use-module (gnu services sddm)               ; sddm-service-type, sddm-configuration
-	#:use-module (gnu services sysctl)             ; sysctl-service-type
-	#:use-module (gnu services xorg)               ; gdm-service-type
-	#:use-module (gnu system)                      ; operating-system, %default-kernel-arguments
-	#:use-module (gnu system file-systems)         ; file-system, %base-file-systems
-	#:use-module (gnu system keyboard)             ; keyboard-layout
-	#:use-module (gnu system mapped-devices)       ; mapped-device, luks-device-mapping
-	#:use-module (gnu system shadow)               ; %base-packages (re-exports from (gnu packages base) in some Guix versions — safe to keep)
-	#:use-module (gnu system uuid)                 ; uuid
-	#:use-module (guix gexp)                       ; file-append, local-file
-	#:use-module (nongnu packages linux)           ; linux, linux-firmware, %base-firmware
-	#:use-module (nongnu system linux-initrd)      ; microcode-initrd
+	#:use-module ((gnu bootloader)								#:select (bootloader-configuration))
+	#:use-module ((gnu bootloader grub)						#:select (grub-efi-bootloader))
+	#:use-module ((gnu packages display-managers) #:select (sddm))
+	#:use-module ((gnu packages games)						#:select (steam-devices-udev-rules))
+	#:use-module ((gnu packages shells)						#:select (fish))
+	#:use-module ((gnu services)									#:select (service simple-service modify-services))
+	#:use-module ((gnu services base)							#:select (guix-configuration guix-extension guix-service-type udev-rules-service))
+	#:use-module ((gnu services containers)				#:select (rootless-podman-service-type rootless-podman-configuration))
+	#:use-module ((gnu services desktop)					#:select (%desktop-services plasma-desktop-service-type bluetooth-service-type))
+	#:use-module ((gnu services linux)						#:select (zram-device-service-type zram-device-configuration))
+	#:use-module ((gnu services networking)				#:select (nftables-service-type))
+	#:use-module ((gnu services pm)								#:select (power-profiles-daemon-service-type))
+	#:use-module ((gnu services sddm)							#:select (sddm-service-type sddm-configuration))
+	#:use-module ((gnu services sysctl)						#:select (sysctl-service-type))
+	#:use-module ((gnu services xorg)             #:select (gdm-service-type))
+	#:use-module ((gnu system)										#:select (%base-packages %default-kernel-arguments operating-system))
+	#:use-module ((gnu system accounts)						#:select (subid-range user-account))
+	#:use-module ((gnu system file-systems)				#:select (file-system %base-file-systems))
+	#:use-module ((gnu system keyboard)						#:select (keyboard-layout))
+	#:use-module ((gnu system mapped-devices)			#:select (mapped-device luks-device-mapping))
+	#:use-module ((gnu system shadow)							#:select (%base-user-accounts))
+	#:use-module ((gnu system uuid)								#:select (uuid))
+	#:use-module ((guix gexp)											#:select (file-append local-file plain-file))
+	#:use-module ((nongnu packages linux)					#:select (linux linux-firmware))
+	#:use-module ((nongnu system linux-initrd)		#:select (microcode-initrd))
+	#:use-module ((srfi srfi-1)										#:select (delete)) ;; Used for delete gdm
 	)
 
 (define (ram-total)
@@ -42,7 +43,7 @@
 	 (kernel linux)
 	 (kernel-arguments (cons* "quiet" %default-kernel-arguments))
 	 (initrd microcode-initrd)
-	 (firmware (cons* linux-firmware %base-firmware))
+	 (firmware (list linux-firmware))
 
 	 (users (cons*
 					 (user-account

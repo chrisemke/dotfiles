@@ -1,51 +1,50 @@
 (define-module (home)
-	#:use-module (gnu home)
-	#:use-module (gnu home services)
-	#:use-module (gnu home services desktop)
-	#:use-module (gnu home services gnupg)
-	#:use-module (gnu home services guix)
-	#:use-module (gnu home services shells)
-	#:use-module (gnu home services shepherd)
-	#:use-module (gnu home services sound)
-	#:use-module (gnu home services ssh)
-	#:use-module (gnu home services xdg)
-	#:use-module (gnu packages admin)								; btop fastfetch inxi
-	#:use-module (gnu packages bittorrent)					; qbittorrent
-	#:use-module (gnu packages commencement)				; gcc-toolchain
-	#:use-module (gnu packages compression)					; unzip
-	#:use-module (gnu packages containers)					; podman podman-compose
-	#:use-module (gnu packages emacs)								; emacs-next-pgtk
-	#:use-module (gnu packages fonts)								; font-dejavu font-google-noto-emoji font-liberation
-	#:use-module (gnu packages glib)								; glib:bin
-	#:use-module (gnu packages gnupg)								; gnupg pinentry
-	#:use-module (gnu packages gtk)									; appmenu-gtk-module libdbusmenu
-	#:use-module (gnu packages kde-graphics)				; okular
-	#:use-module (gnu packages kde-plasma)					; plasma-disks
-	#:use-module (gnu packages kde-sdk)							; kompare
-	#:use-module (gnu packages kde-utils)						; ark kate kcalc
-	#:use-module (gnu packages kde-xyz)							; kde-material-you-colors
-	#:use-module (gnu packages libreoffice)					; libreoffice
-	#:use-module (gnu packages linux)								; wireplumber-minimal
-	#:use-module (gnu packages package-management)	; flatpak
-	#:use-module (gnu packages pretty-print)				; source-highlight
-	#:use-module (gnu packages python)							; python-wrapper
-	#:use-module (gnu packages rust-apps)						; aardvark-dns helvum ripgrep
-	#:use-module (gnu packages screen)							; screen
-	#:use-module (gnu packages shells)							; fish
-	#:use-module (gnu packages shellutils)					; starship
-	#:use-module (gnu packages ssh)									; openssh
-	#:use-module (gnu packages terminals)						; alacritty
-	#:use-module (gnu packages tor-browsers)				; torbrowser
-	#:use-module (gnu packages version-control)			; git
-	#:use-module (gnu packages video)								; vlc
-	#:use-module (gnu packages xdisorg)							; xsettingsd
-	#:use-module (gnu packages xorg)								; xrdb
+	#:use-module ((gnu home)												#:select (home-environment))
+	#:use-module ((gnu home services)								#:select (home-environment-variables-service-type service simple-service))
+	#:use-module ((gnu home services desktop)				#:select (home-dbus-service-type))
+	#:use-module ((gnu home services gnupg)					#:select (home-gpg-agent-configuration home-gpg-agent-service-type))
+	#:use-module ((gnu home services guix)					#:select (home-channels-service-type))
+	#:use-module ((gnu home services shells)				#:select (home-bash-configuration home-bash-service-type))
+	#:use-module ((gnu home services shepherd)			#:select (home-shepherd-service-type shepherd-service))
+	#:use-module ((gnu home services sound)					#:select (home-pipewire-configuration home-pipewire-service-type))
+	#:use-module ((gnu home services ssh)						#:select (home-ssh-agent-service-type))
+	#:use-module ((gnu home services xdg)						#:select (home-xdg-user-directories-configuration home-xdg-user-directories-service-type))
+	#:use-module ((gnu packages admin)							#:select (btop fastfetch inxi))
+	#:use-module ((gnu packages bittorrent)					#:select (qbittorrent))
+	#:use-module ((gnu packages commencement)				#:select (gcc-toolchain))
+	#:use-module ((gnu packages compression)				#:select (unzip))
+	#:use-module ((gnu packages containers)					#:select (podman podman-compose))
+	#:use-module ((gnu packages emacs)							#:select (emacs-next-pgtk))
+	#:use-module ((gnu packages fonts)							#:select (font-dejavu font-google-noto-emoji font-liberation font-wqy-zenhei))
+	#:use-module ((gnu packages glib)								#:select (glib))
+	#:use-module ((gnu packages gnupg)							#:select (gnupg pinentry))
+	#:use-module ((gnu packages gtk)								#:select (appmenu-gtk-module libdbusmenu))
+	#:use-module ((gnu packages kde-graphics)				#:select (okular))
+	#:use-module ((gnu packages kde-plasma)					#:select (plasma-disks))
+	#:use-module ((gnu packages kde-utils)					#:select (ark kate kcalc))
+	#:use-module ((gnu packages kde-xyz)						#:select (kde-material-you-colors))
+	#:use-module ((gnu packages libreoffice)				#:select (libreoffice))
+	#:use-module ((gnu packages linux)							#:select (wireplumber-minimal))
+	#:use-module ((gnu packages package-management) #:select (flatpak))
+	#:use-module ((gnu packages pretty-print)				#:select (source-highlight))
+	#:use-module ((gnu packages python)							#:select (python-wrapper))
+	#:use-module ((gnu packages rust-apps)					#:select (aardvark-dns helvum ripgrep))
+	#:use-module ((gnu packages screen)							#:select (screen))
+	#:use-module ((gnu packages shells)							#:select (fish))
+	#:use-module ((gnu packages shellutils)					#:select (starship))
+	#:use-module ((gnu packages ssh)								#:select (openssh))
+	#:use-module ((gnu packages terminals)					#:select (alacritty))
+	#:use-module ((gnu packages tor-browsers)				#:select (torbrowser))
+	#:use-module ((gnu packages version-control)		#:select (git))
+	#:use-module ((gnu packages video)							#:select (vlc))
+	#:use-module ((gnu packages xdisorg)						#:select (xsettingsd))
+	#:use-module ((gnu packages xorg)								#:select (xrdb))
 	#:use-module (guix channels)
 	#:use-module (guix gexp)
-	#:use-module (nongnu packages firmware)					; fwupd-nonfree
-	#:use-module (nongnu packages game-client)			; protonup steam
-	#:use-module (saayix packages binaries)					; zen-browser-bin
-	#:use-module (saayix packages fonts)						; font-nerd-opendyslexic
+	#:use-module ((nongnu packages firmware)				#:select (fwupd-nonfree))
+	#:use-module ((nongnu packages game-client)			#:select (protonup steam))
+	#:use-module ((saayix packages binaries)				#:select (zen-browser-bin))
+	#:use-module ((saayix packages fonts)						#:select (font-nerd-opendyslexic))
 	)
 
 (define krisque-home
@@ -75,7 +74,6 @@
 		 inxi
 		 kate
 		 kcalc
-		 kompare
 		 libdbusmenu
 		 libreoffice
 		 okular
