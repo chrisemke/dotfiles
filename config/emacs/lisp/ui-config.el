@@ -52,7 +52,7 @@
 (when (display-graphic-p)
 	(set-face-attribute 'default nil
 											:font "OpenDyslexicM Nerd Font Mono"
-											:height 150
+											:height 130
 											)
 	(toggle-frame-maximized)
 	(when (eq system-type 'darwin)
