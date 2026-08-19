@@ -17,6 +17,7 @@
 (use-package mason
 	:config (mason-setup)
 	:ensure t
+	:unless (getenv "GUIX_LOCPATH")
 	)
 
 (defun my/mason-install-all ()
