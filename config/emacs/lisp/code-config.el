@@ -14,18 +14,22 @@
 	:custom (vc-auto-revert-mode t)
 	)
 
-(use-package mason
-	:config (mason-setup)
-	:ensure t
-	:unless (getenv "GUIX_LOCPATH")
-	)
-
-(defun my/mason-install-all ()
-	"Intall all LSPs/linters based on a list preset"
-	(interactive)
-	(dolist (pkg '("rassumfrassum" "zuban" "ruff" "typos-lsp" "rust-analyzer" "elixir-ls"))
-		(unless (mason-installed-p pkg)
-			(ignore-errors (mason-install pkg))))
+(unless (with-temp-buffer ; Do not install mason when using Guix.
+					(when (file-exists-p "/etc/os-release")
+						(insert-file-contents "/etc/os-release")
+						(re-search-forward "^ID=guix$" nil t)))
+	(use-package mason
+		:config
+		(mason-setup)
+		(defun my/mason-install-all ()
+			"Intall all LSPs/linters based on a list preset"
+			(interactive)
+			(dolist (pkg '("rassumfrassum" "zuban" "ruff" "typos-lsp" "rust-analyzer" "elixir-ls"))
+				(unless (mason-installed-p pkg)
+					(ignore-errors (mason-install pkg))))
+			)
+		:ensure t
+		)
 	)
 
 (use-package eglot
