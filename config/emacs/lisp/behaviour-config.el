@@ -33,6 +33,7 @@
 
 (use-package savehist
 	:config (savehist-mode)
+	:custom (savehist-additional-variables '(corfu-history))
 	:ensure nil
 	)
 
@@ -54,9 +55,7 @@
 	(corfu-history-mode t)
 	:ensure t
 	:init
-	(completion-preview-mode nil)
 	(global-corfu-mode)
-	(corfu-popupinfo-mode)
 	)
 
 (defun my/eglot-capf ()
@@ -72,9 +71,6 @@
 	:after corfu
 	:bind ("C-c p" . cape-prefix-map)
 	:config (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
-	:custom
-	(completion-category-overrides '((eglot (styles orderless))
-																	 (eglot-capf (styles orderless))))
 	:ensure t
 	:hook (eglot-managed-mode . my/eglot-capf)
 	:init
@@ -89,7 +85,9 @@
 	:init
 	(setopt completion-styles '(orderless basic)
 					completion-category-defaults nil
-					completion-category-overrides '((file (styles partial-completion))))
+					completion-category-overrides '((file (styles partial-completion))
+																					(eglot (styles orderless))
+																					(eglot-capf (styles orderless))))
 	)
 
 (use-package marginalia

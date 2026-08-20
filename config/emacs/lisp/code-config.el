@@ -149,8 +149,12 @@
 ;;; ============================================================================
 
 (use-package eglot
-	:config (add-to-list 'eglot-server-programs
-											 '(rust-ts-mode . ("rass" "--" "rust-analyzer" "--" "typos-lsp")))
+	:config
+	(add-to-list 'eglot-server-programs
+							 '(rust-ts-mode . ("rass" "--" "rust-analyzer" "--" "typos-lsp")))
+	(setq-default eglot-workspace-configuration
+								'(:rust-analyzer (:check (:command "clippy")
+																				 :cargo (:targetDir t))))
 	:ensure nil
 	:hook (rust-ts-mode . eglot-ensure)
 	)
