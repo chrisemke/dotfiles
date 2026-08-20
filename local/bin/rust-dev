@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+set -ex
+
+manifest="$HOME/Projects/dotfiles/dev/rust/manifest.scm"
+rust_dev="$HOME/.local/share/rust-dev"
+
+GUIX_CMD=(
+  guix shell --network
+       --container
+       --emulate-fhs
+       --manifest="$manifest"
+       --share="$rust_dev/rustup=$HOME/.rustup"
+       --share="$rust_dev/cargo=$HOME/.cargo"
+       --share="$rust_dev/.profile=$HOME/.profile"
+       --preserve='^RUSTUP.+'
+       --preserve=TERM
+)
+
+function _startup_checker() {
+    fallback="\n\n \e[31mRun \"rust-dev start\" first!!!\e[0m"
+    [ -f "$manifest" ] || { echo -e "rust-dev: no manifest at $manifest$fallback" >&2; exit 1; }
+    [ -d "$rust_dev/rustup" ] || { echo -e "rust-dev: no rustup at $rust_dev/rustup$fallback" >&2; exit 1; }
+    [ -d "$rust_dev/cargo" ] || { echo -e "rust-dev: no cargo at $manifest/cargo$fallback" >&2; exit 1; }
+}
+if [ "$#" == 0 ];
+then
+    _startup_checker
+    exec "${GUIX_CMD[@]}" -- bash -l
+elif [ "$1" == "start" ];
+then
+    mkdir -p "$rust_dev/rustup" "$rust_dev/cargo"
+    touch "$rust_dev/.profile"
+    cargo_cfg="$rust_dev/cargo/config.toml"
+    if [ ! -e "$cargo_cfg" ]; then
+        printf '[target.x86_64-unknown-linux-gnu]\nrustflags = ["-Clinker-features=-lld"]\n' \
+               > "$cargo_cfg"
+    fi
+    exec "${GUIX_CMD[@]}" -- bash -l
+else
+  _startup_checker
+  exec "${GUIX_CMD[@]}" -- bash -l -c "$*"
+fi
