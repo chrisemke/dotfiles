@@ -11,25 +11,32 @@ GUIX_CMD=(
        --manifest="$manifest"
        --share="$rust_dev/rustup=$HOME/.rustup"
        --share="$rust_dev/cargo=$HOME/.cargo"
-       --share="$rust_dev/.profile=$HOME/.profile"
-       --preserve='^RUSTUP.+'
-       --preserve=TERM
+       --share="$rust_dev/cache=$HOME/.cache"
+       --share="$rust_dev/profile=$HOME/.profile"
 )
 
 function _startup_checker() {
-    fallback="\n\n \e[31mRun \"rust-dev start\" first!!!\e[0m"
+    # Function to check all needed files/directories.
+    start="\n\e[31m rust-dev: no"
+    end="\n\n Run \"rust-dev start\" first!!!\e[0m\n"
     [ -f "$manifest" ] || { echo -e "rust-dev: no manifest at $manifest$fallback" >&2; exit 1; }
-    [ -d "$rust_dev/rustup" ] || { echo -e "rust-dev: no rustup at $rust_dev/rustup$fallback" >&2; exit 1; }
-    [ -d "$rust_dev/cargo" ] || { echo -e "rust-dev: no cargo at $manifest/cargo$fallback" >&2; exit 1; }
+    [ -d "$rust_dev/rustup" ] || { echo -e "$start rustup at $rust_dev/rustup$end" >&2; exit 1; }
+    [ -d "$rust_dev/cargo" ] || { echo -e "$start cargo at $rust_dev/cargo$end" >&2; exit 1; }
+    [ -d "$rust_dev/cache" ] || { echo -e "$start cache at $rust_dev/cache$end" >&2; exit 1; }
+    [ -f "$rust_dev/profile" ] || { echo -e "$start profile at $rust_dev/profile$end" >&2; exit 1; }
 }
+
+# No arguments shell will run attached;
+# Argument "start" will create all needed files/directories and configs before;
+# N arguments will run detached running arguments inside shell.
 if [ "$#" == 0 ];
 then
     _startup_checker
     exec "${GUIX_CMD[@]}" -- bash -l
 elif [ "$1" == "start" ];
 then
-    mkdir -p "$rust_dev/rustup" "$rust_dev/cargo"
-    touch "$rust_dev/.profile"
+    mkdir -p "$rust_dev/rustup" "$rust_dev/cargo" "$rust_dev/cache"
+    touch "$rust_dev/profile"
     cargo_cfg="$rust_dev/cargo/config.toml"
     if [ ! -e "$cargo_cfg" ]; then
         printf '[target.x86_64-unknown-linux-gnu]\nrustflags = ["-Clinker-features=-lld"]\n' \
