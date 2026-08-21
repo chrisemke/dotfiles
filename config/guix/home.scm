@@ -122,6 +122,9 @@
 		 (service home-ssh-agent-service-type)
 		 (service home-xdg-user-directories-service-type
 							(home-xdg-user-directories-configuration
+							 (music       "$HOME/Media/Music/")
+							 (pictures    "$HOME/Media/Pictures/")
+							 (videos      "$HOME/Media/Videos/")
 							 (templates   "$HOME")
 							 (publicshare "$HOME")))
 		 (simple-service 'podman-socket
