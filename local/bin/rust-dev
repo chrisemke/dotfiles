@@ -19,7 +19,7 @@ function _startup_checker() {
     # Function to check all needed files/directories.
     start="\n\e[31m rust-dev: no"
     end="\n\n Run \"rust-dev start\" first!!!\e[0m\n"
-    [ -f "$manifest" ] || { echo -e "rust-dev: no manifest at $manifest$fallback" >&2; exit 1; }
+    [ -f "$manifest" ] || { echo -e "$start manifest at $manifest$end" >&2; exit 1; }
     [ -d "$rust_dev/rustup" ] || { echo -e "$start rustup at $rust_dev/rustup$end" >&2; exit 1; }
     [ -d "$rust_dev/cargo" ] || { echo -e "$start cargo at $rust_dev/cargo$end" >&2; exit 1; }
     [ -d "$rust_dev/cache" ] || { echo -e "$start cache at $rust_dev/cache$end" >&2; exit 1; }
