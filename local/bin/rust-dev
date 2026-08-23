@@ -13,11 +13,11 @@ GUIX_CMD=(
 	--manifest="$manifest"
 	--share="$rust_dev/profile=$HOME/.profile"
 	--share="$rust_dev/cache=$HOME/.cache"
-	--share="$python_dev/config=$HOME/.config"
-	--share="$python_dev/local=$HOME/.local"
+	--share="$rust_dev/config=$HOME/.config"
+	--share="$rust_dev/local=$HOME/.local"
 	--share="$XDG_RUNTIME_DIR/podman/podman.sock"
-	--share="$rust_dev/rustup=$HOME/.rustup"
-	--share="$rust_dev/cargo=$HOME/.cargo"
+	--preserve=RUSTUP_HOME="$HOME/.local/share/rustup"
+	--preserve=CARGO_HOME="$HOME/.local/share/cargo"
 	# --preserve=CONTAINER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock # In case podman is needed inside container
 )
 
@@ -28,10 +28,8 @@ function _startup_checker() {
 	[ -f "$manifest" ] || { echo -e "$start manifest at $manifest$end" >&2; exit 1; }
 	[ -f "$rust_dev/profile" ] || { echo -e "$start profile at $rust_dev/profile$end" >&2; exit 1; }
 	[ -d "$rust_dev/cache" ] || { echo -e "$start cache at $rust_dev/cache$end" >&2; exit 1; }
-	[ -d "$python_dev/config" ] || { echo -e "$start config at $python_dev/config$end" >&2; exit 1; }
-	[ -d "$python_dev/local" ] || { echo -e "$start local at $python_dev/local$end" >&2; exit 1; }
-	[ -d "$rust_dev/rustup" ] || { echo -e "$start rustup at $rust_dev/rustup$end" >&2; exit 1; }
-	[ -d "$rust_dev/cargo" ] || { echo -e "$start cargo at $rust_dev/cargo$end" >&2; exit 1; }
+	[ -d "$rust_dev/config" ] || { echo -e "$start config at $rust_dev/config$end" >&2; exit 1; }
+	[ -d "$rust_dev/local" ] || { echo -e "$start local at $rust_dev/local$end" >&2; exit 1; }
 }
 
 # No arguments shell will run attached;
@@ -43,9 +41,10 @@ then
 	exec "${GUIX_CMD[@]}" -- bash -l
 elif [ "$1" == "start" ];
 then
-	mkdir -p $rust_dev/{cache,config,local,rustup,cargo}
+	mkdir -p $rust_dev/{cache,config,local}
+	mkdir -p $rust_dev/local/share/cargo
 	touch "$rust_dev/profile"
-	cargo_cfg="$rust_dev/cargo/config.toml"
+	cargo_cfg="$rust_dev/local/share/cargo/config.toml"
 	if [ ! -e "$cargo_cfg" ]; then
 		printf '[target.x86_64-unknown-linux-gnu]\nrustflags = ["-Clinker-features=-lld"]\n' \
 					 > "$cargo_cfg"
