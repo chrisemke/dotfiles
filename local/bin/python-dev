@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+set -ex
+
+manifest="$XDG_PROJECTS_DIR/dotfiles/dev/python/manifest.scm"
+python_dev="$XDG_DATA_HOME/python-dev"
+
+GUIX_CMD=(
+	guix shell
+	--network
+	--container
+	--emulate-fhs
+	--manifest="$manifest"
+	--expose="$python_dev/profile=$HOME/.profile"
+	--share="$python_dev/cache=$HOME/.cache"
+	--share="$python_dev/config=$HOME/.config"
+	--share="$python_dev/local=$HOME/.local"
+	--share="$XDG_RUNTIME_DIR/podman/podman.sock"
+	--preserve=PIPX_BIN_DIR="$HOME/.local/pipx/bin"
+	# --preserve=CONTAINER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock # In case podman is needed inside container
+)
+
+function _startup_checker() {
+	# Function to check all needed files/directories.
+	start="\n\e[31m python-dev: no"
+	end="\n\n Run \"python-dev start\" first!!!\e[0m\n"
+	[ -f "$manifest" ] || { echo -e "$start manifest at $manifest$end" >&2; exit 1; }
+	[ -f "$python_dev/profile" ] || { echo -e "$start profile at $python_dev/profile$end" >&2; exit 1; }
+	[ -d "$python_dev/cache" ] || { echo -e "$start cache at $python_dev/cache$end" >&2; exit 1; }
+	[ -d "$python_dev/config" ] || { echo -e "$start config at $python_dev/config$end" >&2; exit 1; }
+	[ -d "$python_dev/local" ] || { echo -e "$start local at $python_dev/local$end" >&2; exit 1; }
+}
+
+# No arguments shell will run attached;
+# Argument "start" will create all needed files/directories and configs before;
+# N arguments will run detached running arguments inside shell.
+if [ "$#" == 0 ];
+then
+	_startup_checker
+	exec "${GUIX_CMD[@]}" -- bash -l
+elif [ "$1" == "start" ];
+then
+	mkdir -p $python_dev/{cache,config,local}
+	echo "PATH=\"\$HOME/.local/pipx/bin:\$PATH\"" > "$python_dev/profile"
+	exec "${GUIX_CMD[@]}" -- bash -l
+else
+	_startup_checker
+	exec "${GUIX_CMD[@]}" -- bash -l -c "$*"
+fi
