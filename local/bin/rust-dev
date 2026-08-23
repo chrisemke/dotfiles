@@ -1,18 +1,22 @@
 #!/usr/bin/env bash
+
 set -ex
 
-manifest="$HOME/Projects/dotfiles/dev/rust/manifest.scm"
-rust_dev="$HOME/.local/share/rust-dev"
+manifest="$XDG_PROJECTS_DIR/dotfiles/dev/rust/manifest.scm"
+rust_dev="$XDG_DATA_HOME/rust-dev"
 
 GUIX_CMD=(
-  guix shell --network
-       --container
-       --emulate-fhs
-       --manifest="$manifest"
-       --share="$rust_dev/rustup=$HOME/.rustup"
-       --share="$rust_dev/cargo=$HOME/.cargo"
-       --share="$rust_dev/cache=$HOME/.cache"
-       --share="$rust_dev/profile=$HOME/.profile"
+  guix shell
+  --network
+  --container
+  --emulate-fhs
+  --manifest="$manifest"
+  --share="$rust_dev/profile=$HOME/.profile"
+  --share="$rust_dev/cache=$HOME/.cache"
+  --share="$XDG_RUNTIME_DIR/podman/podman.sock"
+  --share="$rust_dev/rustup=$HOME/.rustup"
+  --share="$rust_dev/cargo=$HOME/.cargo"
+  # --preserve=CONTAINER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock # In case podman is needed inside container
 )
 
 function _startup_checker() {

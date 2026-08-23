@@ -164,6 +164,7 @@
 										 home-environment-variables-service-type
 										 `(("PATH" . "$HOME/.local/bin:$PATH")
 											 ("XDG_DATA_DIRS" . "/var/lib/flatpak/exports/share:$XDG_DATA_HOME/flatpak/exports/share:$XDG_DATA_DIRS")
+											 ("XDG_PROJECTS_DIR" . "$HOME/Projects")
 											 ("LESSOPEN" . "| src-hilite-lesspipe.sh %s")
 											 ("LESS" . " --raw-control-chars --tabs=2 --LINE-NUMBERS ")))))))
 
