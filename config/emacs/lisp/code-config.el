@@ -101,7 +101,7 @@
 
 (use-package eglot
 	:config (add-to-list 'eglot-server-programs
-											 '(python-ts-mode . ("python-dev" "rass" "--" "zuban" "server" "--" "ruff" "server")) ; "--" "typos-lsp"
+											 '(python-ts-mode . ("rass" "--" "zuban" "server" "--" "ruff" "server")) ; "--" "typos-lsp"
 											 )
 	:ensure nil
 	:hook (python-ts-mode . eglot-ensure))
@@ -128,7 +128,7 @@
 (use-package eglot
 	:config
 	(add-to-list 'eglot-server-programs
-							 '(rust-ts-mode . ("rust-dev" "rass" "--" "rust-analyzer" "--" "typos-lsp")))
+							 '(rust-ts-mode . ("rass" "--" "rust-analyzer" "--" "typos-lsp")))
 	(setq-default eglot-workspace-configuration
 								'(:rust-analyzer (:check (:command "clippy")
 																				 :cargo (:targetDir t))))
