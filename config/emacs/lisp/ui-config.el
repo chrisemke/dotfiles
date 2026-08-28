@@ -3,27 +3,23 @@
 	:config
 	(load-theme 'batppuccin-mocha t)
 	:ensure t
-	:if (display-graphic-p)
-	)
+	:if (display-graphic-p))
 
 (use-package nerd-icons
 	:custom (nerd-icons-font-family "OpenDyslexicM Nerd Font Mono")
-	:ensure t
-	)
+	:ensure t)
 
 (use-package nerd-icons-completion
 	:after marginalia
 	:ensure t
 	:hook (marginalia-mode . nerd-icons-completion-marginalia-setup)
-	:init (nerd-icons-completion-mode)
-	)
+	:init (nerd-icons-completion-mode))
 
 ;; Setup ibuffer
 (use-package nerd-icons-ibuffer
 	:defer t
 	:ensure t
-	:hook (ibuffer-mode . nerd-icons-ibuffer-mode)
-	)
+	:hook (ibuffer-mode . nerd-icons-ibuffer-mode))
 
 (use-package ibuffer
 	:bind
@@ -46,8 +42,7 @@
 	:ensure nil
 	:hook
 	(ibuffer-mode . (lambda ()
-										(ibuffer-switch-to-saved-filter-groups "my/custom-default")))
-	)
+										(ibuffer-switch-to-saved-filter-groups "my/custom-default"))))
 
 (when (display-graphic-p)
 	(set-face-attribute 'default nil
@@ -56,17 +51,13 @@
 											)
 	(toggle-frame-maximized)
 	(when (eq system-type 'darwin)
-		(set-frame-parameter nil 'internal-border-width 0)
-		)
-	)
+		(set-frame-parameter nil 'internal-border-width 0)))
 
 (setopt inhibit-startup-screen t
 				inhibit-startup-message t
 				initial-scratch-message nil
 				frame-resize-pixelwise t
-				cursor-type 'bar
-				)
-
+				cursor-type 'bar)
 
 (global-display-line-numbers-mode t)
 (column-number-mode t)
@@ -76,8 +67,7 @@
 	:config (solaire-global-mode)
 	:ensure t
 	:hook (dashboard-mode . turn-off-solaire-mode)
-	:if (display-graphic-p)
-	)
+	:if (display-graphic-p))
 
 (use-package whitespace
 	:custom
@@ -86,44 +76,7 @@
 																 (tab-mark ?\t [?→ ?\t])
 																 )
 															 )
-	:ensure nil
-	;; :hook (prog-mode . whitespace-mode)
-	)
-
-(use-package indent-bars
-	:custom
-	(indent-bars-treesit-support t)
-	(indent-bars-treesit-wrap '((python argument_list parameters
-																			list list_comprehension
-																			dictionary dictionary_comprehension
-																			parenthesized_expression subscript)
-															(toml table array comment)
-															(yaml block_mapping_pair comment)
-															(rust arguments parameters)
-															(c argument_list parameter_list init_declarator parenthesized_expression)))
-	(indent-bars-treesit-scope '((rust trait_item impl_item
-																		 macro_definition macro_invocation
-																		 struct_item enum_item mod_item
-																		 const_item let_declaration
-																		 function_item for_expression
-																		 if_expression loop_expression
-																		 while_expression match_expression
-																		 match_arm call_expression
-																		 token_tree token_tree_pattern
-																		 token_repetition)))
-	(indent-bars-treesit-ignore-blank-lines-types '("module"))
-	(indent-bars-color '(highlight :face-bg t :blend 0.15))
-	(indent-bars-pattern ".")
-	(indent-bars-width-frac 0.1)
-	(indent-bars-pad-frac 0.1)
-	(indent-bars-zigzag nil)
-	(indent-bars-color-by-depth '(:regexp "outline-\\([0-9]+\\)" :blend 1)) ; blend=1: blend with BG only
-	(indent-bars-highlight-current-depth '(:blend 0.5)) ; pump up the BG blend on current
-	(indent-bars-display-on-blank-lines t)
-	(indent-bars-starting-column 0)
-	:ensure t
-	:hook (prog-mode . indent-bars-mode)
-	)
+	:ensure nil)
 
 (use-package doom-modeline
 	:custom
@@ -135,8 +88,7 @@
 	(doom-modeline-buffer-file-name-style 'project)
 	:defer t
 	:ensure t
-	:init (doom-modeline-mode t)
-	)
+	:init (doom-modeline-mode t))
 
 (use-package dashboard
 	:config (dashboard-setup-startup-hook)
@@ -156,14 +108,12 @@
 	(dashboard-set-file-icons t)
 	(dashboard-display-icons-p t)
 	(dashboard-icon-type 'nerd-icons)
-	:ensure t
-	)
+	:ensure t)
 
 (use-package nerd-icons-dired
 	:defer t
 	:ensure t
-	:hook (dired-mode . nerd-icons-dired-mode)
-	)
+	:hook (dired-mode . nerd-icons-dired-mode))
 
 (use-package diff-hl
 	:config (diff-hl-flydiff-mode t)
@@ -174,8 +124,7 @@
 	:hook ((after-init         . global-diff-hl-mode)
 				 (magit-post-refresh . diff-hl-magit-post-refresh)
 				 (vc-checkin         . diff-hl-update)
-				 (dired-mode         . diff-hl-dired-mode))
-	)
+				 (dired-mode         . diff-hl-dired-mode)))
 
 (use-package breadcrumb
 	:config (breadcrumb-mode t)
@@ -184,11 +133,9 @@
 	 (concat " " (nerd-icons-mdicon "nf-md-chevron_right") " "))
 	(breadcrumb-project-crumb-separator
 	 (concat " " (nerd-icons-mdicon "nf-md-chevron_right") " "))
-	:ensure t
-	)
+	:ensure t)
 
 (setopt display-fill-column-indicator-column 80)
 (add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)
-
 
 (provide 'ui-config)
