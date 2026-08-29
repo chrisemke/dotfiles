@@ -156,6 +156,9 @@
 ;; Delete selection when type.
 (delete-selection-mode t)
 
+;; Ghost completion real time.
+(global-completion-preview-mode 1)
+
 ;; no ediff popup window.
 (setopt ediff-window-setup-function 'ediff-setup-windows-plain
 				;; Hide the cursor in inactive windows.
