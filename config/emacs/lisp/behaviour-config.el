@@ -1,42 +1,33 @@
 ;; -*- lexical-binding: t; -*-
 (use-package editorconfig
 	:config (editorconfig-mode t)
-	:ensure nil
-	)
+	:ensure nil)
 
 (use-package outline
-	:custom
-	(outline-minor-mode-use-buttons 'in-margins)
-	:config
-	(setopt outline-overlay-button-map nil)
+	:custom (outline-minor-mode-use-buttons 'in-margins)
+	:config (setopt outline-overlay-button-map nil)
 	:ensure nil
-	:hook (prog-mode . outline-minor-mode)
-	)
+	:hook (prog-mode . outline-minor-mode))
 
 (use-package csv-mode
 	:defer t
-	:ensure t
-	)
+	:ensure t)
 
 (use-package vertico
 	:config
 	(vertico-mode)
 	(vertico-mouse-mode)
 	:custom (vertico-cycle t)
-	:ensure t
-	)
+	:ensure t)
 
 ;; Left and right side windows occupy full frame height
 (use-package emacs
-	:custom
-	(window-sides-vertical t)
-	)
+	:custom (window-sides-vertical t))
 
 (use-package savehist
 	:config (savehist-mode)
 	:custom (savehist-additional-variables '(corfu-history))
-	:ensure nil
-	)
+	:ensure nil)
 
 (use-package corfu
 	:config (corfu-popupinfo-mode t)
@@ -55,18 +46,13 @@
 	(corfu-popupinfo-direction '(right vertical left))
 	(corfu-history-mode t)
 	:ensure t
-	:init
-	(global-corfu-mode)
-	)
+	:init (global-corfu-mode))
 
 (defun my/eglot-capf ()
-	(setq-local completion-at-point-functions
-							(list (cape-capf-super
-										 #'eglot-completion-at-point
-										 #'cape-dabbrev
-										 #'cape-keyword
-										 )))
-	)
+	(setq-local completion-at-point-functions (list (cape-capf-super
+																									 #'eglot-completion-at-point
+																									 #'cape-dabbrev
+																									 #'cape-keyword))))
 
 (use-package cape
 	:after corfu
@@ -77,8 +63,7 @@
 	:init
 	(add-hook 'completion-at-point-functions #'cape-dabbrev)
 	(add-hook 'completion-at-point-functions #'cape-file)
-	(add-hook 'completion-at-point-functions #'cape-keyword)
-	)
+	(add-hook 'completion-at-point-functions #'cape-keyword))
 
 (use-package orderless
 	:defer t
@@ -88,21 +73,18 @@
 					completion-category-defaults nil
 					completion-category-overrides '((file (styles partial-completion))
 																					(eglot (styles orderless))
-																					(eglot-capf (styles orderless))))
-	)
+																					(eglot-capf (styles orderless)))))
 
 (use-package marginalia
 	:defer t
 	:ensure t
-	:init (marginalia-mode)
-	)
+	:init (marginalia-mode))
 
 (use-package consult
 	:bind
 	("C-c F" . consult-ripgrep)
 	("C-c f" . consult-line)
-	:ensure t
-	)
+	:ensure t)
 
 (use-package treesit
 	:config
@@ -130,20 +112,17 @@
 	(treesit-auto-install-grammar 'always)
 	(treesit-enabled-modes t)
 	(treesit-font-lock-level 4)
-	:ensure nil
-	)
+	:ensure nil)
 
 (use-package which-key
 	:config (which-key-mode)
 	:defer t
-	:ensure nil
-	)
+	:ensure nil)
 
 ;; Auto close parentesis
 (use-package elec-pair
 	:config (electric-pair-mode t)
-	:ensure nil
-	)
+	:ensure nil)
 
 (use-package move-text
 	:bind
@@ -152,8 +131,7 @@
 	("M-<down>" . move-text-down)
 	("M-n" . move-text-down)
 	:defer t
-	:ensure t
-	)
+	:ensure t)
 
 (use-package dired
 	:bind
@@ -164,8 +142,7 @@
 	;; Set dired default args do be more organized.
 	(dired-listing-switches "-Ag --human-readable --group-directories-first --no-group --dired")
 	(dired-kill-when-opening-new-dired-buffer t)
-	:ensure nil
-	)
+	:ensure nil)
 
 ;; Set _ as a word for double click selection.
 (add-hook 'after-change-major-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
@@ -179,20 +156,22 @@
 ;; Delete selection when type.
 (delete-selection-mode t)
 
-
-(setopt
- ediff-window-setup-function 'ediff-setup-windows-plain	; no ediff popup window.
- cursor-in-non-selected-windows nil											; Hide the cursor in inactive windows.
- truncate-lines t																				; Truncate long lines instead of breaking lines.
- mouse-shift-adjust-mode t															; Shift click should select.
- ;; Remove anoying # and ~ files.
- auto-save-default nil
- create-lockfiles nil
- make-backup-files nil
- ;; Configure auto-save-visited-mode (the modern replacement)
- auto-save-visited-interval 1 ; seconds of idle before saving
- save-silently t              ; no "Wrote /path/to/file"
- )
+;; no ediff popup window.
+(setopt ediff-window-setup-function 'ediff-setup-windows-plain
+				;; Hide the cursor in inactive windows.
+				cursor-in-non-selected-windows nil
+				;; Truncate long lines instead of breaking lines.
+				truncate-lines t
+				;; Shift click should select.
+				mouse-shift-adjust-mode t
+				;; Remove anoying # and ~ files.
+				auto-save-default nil
+				create-lockfiles nil
+				make-backup-files nil
+				;; Seconds of idle before saving.
+				auto-save-visited-interval 1
+				;; No "Wrote /path/to/file".
+				save-silently t)
 (auto-save-visited-mode 1)
 
 

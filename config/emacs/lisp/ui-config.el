@@ -1,7 +1,6 @@
 ;; -*- lexical-binding: t; -*-
 (use-package batppuccin
-	:config
-	(load-theme 'batppuccin-mocha t)
+	:config (load-theme 'batppuccin-mocha t)
 	:ensure t
 	:if (display-graphic-p))
 
@@ -47,8 +46,7 @@
 (when (display-graphic-p)
 	(set-face-attribute 'default nil
 											:font "OpenDyslexicM Nerd Font Mono"
-											:height 130
-											)
+											:height 130)
 	(toggle-frame-maximized)
 	(when (eq system-type 'darwin)
 		(set-frame-parameter nil 'internal-border-width 0)))
@@ -73,9 +71,7 @@
 	:custom
 	(whitespace-style '(face tabs spaces trailing space-mark tab-mark))
 	(whitespace-display-mappings '((space-mark ?\  [?·])
-																 (tab-mark ?\t [?→ ?\t])
-																 )
-															 )
+																 (tab-mark ?\t [?→ ?\t])))
 	:ensure nil)
 
 (use-package doom-modeline
@@ -96,9 +92,7 @@
 	(dashboard-startupify-list '(dashboard-insert-banner
 															 dashboard-insert-newline
 															 dashboard-insert-init-info
-															 dashboard-insert-items
-															 )
-														 )
+															 dashboard-insert-items))
 	(dashboard-items '((recents   . 10)
 										 (projects  . 5)))
 	(dashboard-startup-banner (locate-user-emacs-file "banners/banner.txt"))

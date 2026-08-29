@@ -25,20 +25,22 @@
 			(interactive)
 			(dolist (pkg '("rassumfrassum" "zuban" "ruff" "typos-lsp" "rust-analyzer" "elixir-ls"))
 				(unless (mason-installed-p pkg)
-					(ignore-errors (mason-install pkg))))
-			)
+					(ignore-errors (mason-install pkg)))))
 		:ensure t))
 
 (use-package prog-mode
 	:ensure nil
-	:bind (:map prog-mode-map ("C-c e f" . (lambda ()
-																					 (interactive)
-																					 (indent-region (point-min) (point-max))))))
+	:bind
+	(:map prog-mode-map
+				("C-c e f" . (lambda ()
+											 (interactive)
+											 (indent-region (point-min) (point-max))))))
 
 (use-package eglot
-	:bind (:map eglot-mode-map
-							("C-." . eglot-code-actions)
-							("C-c e f" . eglot-format-buffer))
+	:bind
+	(:map eglot-mode-map
+				("C-." . eglot-code-actions)
+				("C-c e f" . eglot-format-buffer))
 	:custom
 	(eglot-autoshutdown t)
 	(eglot-code-action-indications nil)
@@ -60,15 +62,15 @@
 
 (use-package dockerfile-mode
 	:defer t
-	:ensure t
-	)
+	:ensure t)
 
 (use-package yaml-mode
 	:defer t
 	:ensure t
-	:hook (yaml-ts-mode . (lambda ()
-													(setq-local indent-tabs-mode nil)
-													(setq-local yaml-indent-offset 2))))
+	:hook
+	(yaml-ts-mode . (lambda ()
+										(setq-local indent-tabs-mode nil)
+										(setq-local yaml-indent-offset 2))))
 
 (use-package fish-mode
 	:defer t
@@ -89,8 +91,9 @@
 ;;; ============================================================================
 
 (use-package eglot
-	:config (add-to-list 'eglot-server-programs
-											 '(elixir-ts-mode . ("rass" "--" "elixir-ls" "--" "typos-lsp")))
+	:config
+	(add-to-list 'eglot-server-programs
+							 '(elixir-ts-mode . ("rass" "--" "elixir-ls" "--" "typos-lsp")))
 	:ensure nil
 	:hook (elixir-ts-mode . eglot-ensure))
 
@@ -100,9 +103,17 @@
 ;;; ============================================================================
 
 (use-package eglot
-	:config (add-to-list 'eglot-server-programs
-											 '(python-ts-mode . ("rass" "--" "zuban" "server" "--" "ruff" "server")) ; "--" "typos-lsp"
-											 )
+	:config
+	(add-to-list 'eglot-server-programs
+							 '(python-ts-mode . ("rass"
+																	 "--"
+																	 "zuban"
+																	 "server"
+																	 "--"
+																	 "ruff"
+																	 "server"
+																	 "--"
+																	 "typos-lsp")))
 	:ensure nil
 	:hook (python-ts-mode . eglot-ensure))
 
