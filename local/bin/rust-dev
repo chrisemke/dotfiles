@@ -18,7 +18,8 @@ GUIX_CMD=(
 	--share="$XDG_RUNTIME_DIR/podman/podman.sock"
 	--preserve=RUSTUP_HOME="$HOME/.local/share/rustup"
 	--preserve=CARGO_HOME="$HOME/.local/share/cargo"
-	# --preserve=CONTAINER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock # In case podman is needed inside container
+	# In case podman is needed inside container
+	# --preserve=CONTAINER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock
 )
 
 function _startup_checker() {
