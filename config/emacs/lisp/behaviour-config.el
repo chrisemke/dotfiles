@@ -48,18 +48,39 @@
 	:ensure t
 	:init (global-corfu-mode))
 
-(defun my/eglot-capf ()
-	(setq-local completion-at-point-functions (list (cape-capf-super
-																									 #'eglot-completion-at-point
-																									 #'cape-dabbrev
-																									 #'cape-keyword))))
+(use-package tempel
+	:bind
+	("M-+" . tempel-complete)
+	("M-*" . tempel-insert)
+	:ensure t
+	:hook
+	((conf-mode prog-mode text-mode)
+	 . (lambda () (setq-local completion-at-point-functions
+														(mapcar (lambda (capf)
+																			(if (eq capf t)
+																					t
+																				(cape-capf-super capf #'tempel-complete)))
+																		completion-at-point-functions)))))
+
+(use-package tempel-collection
+	:after tempel
+	:ensure t)
 
 (use-package cape
 	:after corfu
 	:bind ("C-c p" . cape-prefix-map)
-	:config (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
+	:config
+	(advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
+	(advice-add 'eglot-completion-at-point :before-while #'eglot-managed-p)
 	:ensure t
-	:hook (eglot-managed-mode . my/eglot-capf)
+	:hook
+	(eglot-managed-mode
+	 . (lambda ()
+			 (setq-local completion-at-point-functions (list (cape-capf-super
+																												#'tempel-complete
+																												#'eglot-completion-at-point
+																												#'cape-dabbrev
+																												#'cape-keyword)))))
 	:init
 	(add-hook 'completion-at-point-functions #'cape-dabbrev)
 	(add-hook 'completion-at-point-functions #'cape-file)
