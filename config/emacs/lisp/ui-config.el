@@ -68,6 +68,7 @@
 	:if (display-graphic-p))
 
 (use-package whitespace
+	:bind ("C-c w" . whitespace-mode)
 	:custom
 	(whitespace-style '(face tabs spaces trailing space-mark tab-mark))
 	(whitespace-display-mappings '((space-mark ?\  [?·])
