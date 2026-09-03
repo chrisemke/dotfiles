@@ -117,14 +117,17 @@
 	:ensure nil
 	:hook (python-ts-mode . eglot-ensure))
 
-(add-hook 'python-ts-mode-hook #'(lambda ()
-																	 (setq-local indent-tabs-mode t
-																							 tab-width 2
-																							 python-indent-offset 2)
-																	 (python-indent-guess-indent-offset)
-																	 (setq-local tab-width python-indent-offset)
-																	 (dtrt-indent-mode 0)
-																	 (dtrt-indent-mode t)))
+(use-package python
+	:ensure nil
+	:hook
+	(python-ts-mode . (lambda ()
+											(setq-local indent-tabs-mode t
+																	tab-width 2
+																	python-indent-offset 2)
+											(python-indent-guess-indent-offset)
+											(setq-local tab-width python-indent-offset)
+											(dtrt-indent-mode 0)
+											(dtrt-indent-mode t))))
 
 ;; Colors to uv.lock
 (use-package toml-ts-mode
@@ -141,17 +144,23 @@
 	(add-to-list 'eglot-server-programs
 							 '(rust-ts-mode . ("rass" "--" "rust-analyzer" "--" "typos-lsp")))
 	(setq-default eglot-workspace-configuration
-								'(:rust-analyzer (:check (:command "clippy")
-																				 :cargo (:targetDir t))))
+								(plist-put (copy-sequence
+														(default-value 'eglot-workspace-configuration))
+													 :rust-analyzer
+													 '(:check (:command "clippy")
+																		:cargo (:targetDir t))))
 	:ensure nil
 	:hook (rust-ts-mode . eglot-ensure))
 
-(add-hook 'rust-ts-mode-hook #'(lambda ()
-																 (setq-local indent-tabs-mode t
-																						 tab-width 2
-																						 rust-ts-mode-indent-offset 2)
-																 (dtrt-indent-mode 0)
-																 (dtrt-indent-mode t)))
+(use-package rust-ts-mode
+	:ensure nil
+	:hook
+	(rust-ts-mode . (lambda ()
+										(setq-local indent-tabs-mode t
+																tab-width 2
+																rust-ts-mode-indent-offset 2)
+										(dtrt-indent-mode 0)
+										(dtrt-indent-mode t))))
 
 ;; Colors to Cargo.lock
 (use-package toml-ts-mode
