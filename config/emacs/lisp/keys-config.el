@@ -33,4 +33,18 @@
 (keymap-global-set "C-;" 'comment-line) ; faster keybind to comments
 (keymap-global-set "C-_" 'undo-only)		; Instead of undo I like undo-only
 
+;; Safer upper case region shortcut
+(keymap-global-set "C-x C-u"
+									 (lambda()
+										 (interactive)
+										 (when (use-region-p)
+											 (upcase-region (region-beginning) (region-end)))))
+
+;; Safer lower case region shortcut
+(keymap-global-set "C-x C-l"
+									 (lambda ()
+										 (interactive)
+										 (when (use-region-p)
+											 (downcase-region (region-beginning) (region-end)))))
+
 (provide 'keys-config)
