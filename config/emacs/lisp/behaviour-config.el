@@ -39,7 +39,7 @@
 	(corfu-separator ?\s)
 	(corfu-quit-no-match 'separator)
 	(corfu-preview-current 'insert)
-	(corfu-preselect-first t)
+	(corfu-preselect 'first)
 	(corfu-popupinfo-max-width 80)
 	(corfu-popupinfo-max-height 14)
 	(corfu-popupinfo-resize t)
@@ -169,7 +169,7 @@
 (add-hook 'after-change-major-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 
 ;; Type y/n to accept instead of yes/no.
-(fset 'yes-or-no-p 'y-or-n-p)
+(setopt use-short-answers t)
 
 ;; Always sync files to disk.
 (global-auto-revert-mode t)

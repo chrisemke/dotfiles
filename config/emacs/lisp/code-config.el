@@ -44,20 +44,22 @@
 	:custom
 	(eglot-autoshutdown t)
 	(eglot-code-action-indications nil)
-	(eldoc-echo-area-use-multiline-p nil)
 	(eldoc-display-functions '(eldoc-display-in-buffer))
 	(eglot-documentation-renderer 'markdown-ts-view-mode)
-	:ensure nil
-	:hook (eglot-managed-mode . (lambda () (eglot-inlay-hints-mode 0))))
+	(eldoc-echo-area-use-multiline-p nil)
+	(eglot-ignored-server-capabilities '(:inlayHintProvider))
+	:ensure nil)
 
 (use-package flymake
 	:custom (flymake-fringe-indicator-position nil)
 	:ensure nil)
 
 (use-package dape
+	:commands (dape dape-breakpoint-toggle)
 	:custom
 	(dape-buffer-window-arrangement 'right)
 	(dape-request-timeout 60)
+	:defer t
 	:ensure t)
 
 (use-package dockerfile-mode
@@ -80,11 +82,9 @@
 ;;; JSON
 ;;; ============================================================================
 
-(use-package json
-	:ensure nil
-	:hook
-	(json-ts-mode . (lambda ()
-										(keymap-local-set "C-c e f" #'json-pretty-print-buffer))))
+(use-package json-ts-mode
+	:bind (:map json-ts-mode-map ("C-c e f" . json-pretty-print-buffer))
+	:ensure nil)
 
 ;;; ============================================================================
 ;;; ELIXIR

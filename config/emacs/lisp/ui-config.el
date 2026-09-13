@@ -51,13 +51,15 @@
 	(when (eq system-type 'darwin)
 		(set-frame-parameter nil 'internal-border-width 0)))
 
-(setopt inhibit-startup-screen t
-				inhibit-startup-message t
+(setopt inhibit-startup-message t
 				initial-scratch-message nil
 				frame-resize-pixelwise t
 				cursor-type 'bar)
 
-(global-display-line-numbers-mode t)
+(use-package display-line-numbers
+	:ensure nil
+	:hook ((prog-mode text-mode conf-mode) . display-line-numbers-mode))
+
 (column-number-mode t)
 (blink-cursor-mode 0)
 
