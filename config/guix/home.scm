@@ -40,7 +40,7 @@
 	#:autoload (gnu packages python) (python-wrapper)
 	#:autoload (gnu packages rust-apps) (aardvark-dns helvum ripgrep)
 	#:autoload (gnu packages screen) (screen)
-	#:autoload (gnu packages shells) (fish)
+	#:autoload (gnu packages shells) (fish fish-foreign-env)
 	#:autoload (gnu packages shellutils) (starship)
 	#:autoload (gnu packages ssh) (openssh)
 	#:autoload (gnu packages terminals) (alacritty)
@@ -69,6 +69,7 @@
 		 emacs-next-pgtk
 		 fastfetch
 		 fish
+		 fish-foreign-env
 		 flatpak
 		 font-dejavu
 		 font-google-noto-emoji
