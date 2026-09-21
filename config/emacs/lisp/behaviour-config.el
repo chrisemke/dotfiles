@@ -180,6 +180,18 @@
 ;; Ghost completion real time.
 (global-completion-preview-mode 1)
 
+(use-package markdown-mode
+	:config
+	(add-to-list 'major-mode-remap-alist '(markdown-mode . markdown-ts-mode))
+	(derived-mode-add-parents 'markdown-ts-mode '(markdown-mode))
+	:custom (markdown-command "pandoc -s")
+	:ensure t
+	:hook (after-save . markdown-live-preview-if-markdown))
+
+(use-package org-preview-html
+	:ensure t
+	:commands org-preview-html-mode)
+
 ;; no ediff popup window.
 (setopt ediff-window-setup-function 'ediff-setup-windows-plain
 				;; Hide the cursor in inactive windows.
