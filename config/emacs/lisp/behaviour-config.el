@@ -137,7 +137,6 @@
 
 (use-package which-key
 	:config (which-key-mode)
-	:defer t
 	:ensure nil)
 
 ;; Auto close parentesis
