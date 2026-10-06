@@ -191,6 +191,10 @@
 	:ensure t
 	:commands org-preview-html-mode)
 
+(use-package envrc
+	:ensure t
+	:hook (after-init . envrc-global-mode))
+
 ;; no ediff popup window.
 (setopt ediff-window-setup-function 'ediff-setup-windows-plain
 				;; Hide the cursor in inactive windows.
