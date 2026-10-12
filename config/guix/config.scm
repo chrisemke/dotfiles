@@ -13,7 +13,8 @@
 																				rootless-podman-configuration)
 	#:autoload (gnu services desktop) (%desktop-services
 																		 plasma-desktop-service-type
-																		 bluetooth-service-type)
+																		 bluetooth-service-type
+																		 kwallet-service-type)
 	#:autoload (gnu services linux) (zram-device-service-type
 																	 zram-device-configuration)
 	#:autoload (gnu services networking) (nftables-configuration
@@ -78,6 +79,7 @@
 	 (services
 		(cons*
 		 (service plasma-desktop-service-type)
+		 (service kwallet-service-type)
 		 (service power-profiles-daemon-service-type)
 		 (service bluetooth-service-type)
 		 (service zram-device-service-type (zram-device-configuration
