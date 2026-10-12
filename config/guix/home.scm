@@ -9,12 +9,12 @@
 	#:autoload (gnu home services guix) (home-channels-service-type)
 	#:autoload (gnu home services shepherd) (home-shepherd-service-type
 																					 shepherd-service)
-	#:autoload (gnu home services sound) (home-pipewire-configuration
-																				home-pipewire-service-type)
+	#:autoload (gnu home services sound) (home-pipewire-service-type)
 	#:autoload (gnu home services ssh) (home-ssh-agent-service-type)
 	#:autoload (gnu home services xdg) (home-xdg-user-directories-configuration
 																			home-xdg-user-directories-service-type)
 	#:autoload (gnu packages admin) (btop fastfetch inxi)
+	#:autoload (gnu packages audio) (qpwgraph)
 	#:autoload (gnu packages bittorrent) (qbittorrent)
 	#:autoload (gnu packages commencement) (gcc-toolchain)
 	#:autoload (gnu packages compression) (unzip)
@@ -28,20 +28,20 @@
 	#:autoload (gnu packages glib) (glib)
 	#:autoload (gnu packages gnupg) (gnupg pinentry)
 	#:autoload (gnu packages gtk) (appmenu-gtk-module libdbusmenu)
+	#:autoload (gnu packages haskell-xyz) (pandoc)
 	#:autoload (gnu packages kde-graphics) (okular)
 	#:autoload (gnu packages kde-plasma) (plasma-disks)
 	#:autoload (gnu packages kde-internet) (kdeconnect)
 	#:autoload (gnu packages kde-utils) (ark kate kcalc)
 	#:autoload (gnu packages kde-xyz) (kde-material-you-colors)
 	#:autoload (gnu packages libreoffice) (libreoffice)
-	#:autoload (gnu packages linux) (wireplumber-minimal)
 	#:autoload (gnu packages package-management) (flatpak)
 	#:autoload (gnu packages pretty-print) (source-highlight)
 	#:autoload (gnu packages python) (python-wrapper)
 	#:autoload (gnu packages rust-apps) (aardvark-dns helvum ripgrep)
 	#:autoload (gnu packages screen) (screen)
 	#:autoload (gnu packages shells) (fish fish-foreign-env)
-	#:autoload (gnu packages shellutils) (starship)
+	#:autoload (gnu packages shellutils) (direnv starship)
 	#:autoload (gnu packages ssh) (openssh)
 	#:autoload (gnu packages terminals) (alacritty)
 	#:autoload (gnu packages tor-browsers) (torbrowser)
@@ -66,6 +66,7 @@
 		 appmenu-gtk-module
 		 ark
 		 btop
+		 direnv
 		 emacs-next-pgtk
 		 fastfetch
 		 firefox
@@ -86,18 +87,20 @@
 		 inxi
 		 kate
 		 kcalc
+		 kde-material-you-colors
 		 kdeconnect
 		 libdbusmenu
 		 libreoffice
 		 okular
 		 openssh
+		 pandoc
 		 plasma-disks
 		 podman
 		 podman-compose
 		 protonup
-		 kde-material-you-colors
 		 python-wrapper
 		 qbittorrent
+		 qpwgraph
 		 ripgrep
 		 screen
 		 source-highlight
@@ -115,9 +118,7 @@
 		 (service home-gpg-agent-service-type
 							(home-gpg-agent-configuration
 							 (pinentry-program (file-append pinentry "/bin/pinentry"))))
-		 (service home-pipewire-service-type
-							(home-pipewire-configuration
-							 (wireplumber wireplumber-minimal)))
+		 (service home-pipewire-service-type)
 		 (service home-ssh-agent-service-type)
 		 (service home-xdg-user-directories-service-type
 							(home-xdg-user-directories-configuration
@@ -148,7 +149,7 @@
 			 (channel
 				(name 'nonguix)
 				(url
-				 "https://gitlab.com/nonguix/nonguix.git")
+				 "https://gitlab.com/nonguix/nonguix")
 				(introduction
 				 (make-channel-introduction
 					"897c1a470da759236cc11798f4e0a5f7d4d59fbc"
@@ -157,9 +158,10 @@
 		 (simple-service
 			'home-shell-environment-variables
 			home-environment-variables-service-type
-			`(("XDG_DATA_DIRS" . "/var/lib/flatpak/exports/share:\
-														$XDG_DATA_HOME/flatpak/exports/share:\
-														$XDG_DATA_DIRS")
+			`(("XDG_DATA_DIRS" . ,(string-append
+														 "/var/lib/flatpak/exports/share:"
+														 "$XDG_DATA_HOME/flatpak/exports/share:"
+														 "$XDG_DATA_DIRS"))
 				("XDG_BIN_HOME" . "$HOME/.local/bin")
 				("PATH" . "$XDG_BIN_HOME:$PATH")
 				("XDG_PROJECTS_DIR" . "$HOME/Projects")
