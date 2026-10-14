@@ -48,24 +48,6 @@
 	:ensure t
 	:init (global-corfu-mode))
 
-(use-package tempel
-	:bind
-	("M-+" . tempel-complete)
-	("M-*" . tempel-insert)
-	:ensure t
-	:hook
-	((conf-mode prog-mode text-mode)
-	 . (lambda () (setq-local completion-at-point-functions
-														(mapcar (lambda (capf)
-																			(if (eq capf t)
-																					t
-																				(cape-capf-super capf #'tempel-complete)))
-																		completion-at-point-functions)))))
-
-(use-package tempel-collection
-	:after tempel
-	:ensure t)
-
 (use-package cape
 	:after corfu
 	:bind ("C-c p" . cape-prefix-map)
@@ -85,6 +67,24 @@
 	(add-hook 'completion-at-point-functions #'cape-dabbrev)
 	(add-hook 'completion-at-point-functions #'cape-file)
 	(add-hook 'completion-at-point-functions #'cape-keyword))
+
+(use-package tempel
+	:bind
+	(("M-+" . tempel-complete)
+	("M-*" . tempel-insert))
+	:ensure t
+	:hook
+	((conf-mode prog-mode text-mode)
+	 . (lambda () (setq-local completion-at-point-functions
+														(mapcar (lambda (capf)
+																			(if (eq capf t)
+																					t
+																				(cape-capf-super capf #'tempel-complete)))
+																		completion-at-point-functions)))))
+
+(use-package tempel-collection
+	:after tempel
+	:ensure t)
 
 (use-package orderless
 	:defer t
