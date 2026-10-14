@@ -1,12 +1,14 @@
 (define-module (home)
 	#:autoload (gnu home) (home-environment)
 	#:autoload (gnu home services) (home-environment-variables-service-type
+																	home-xdg-configuration-files-service-type
 																	service
 																	simple-service)
 	#:autoload (gnu home services desktop) (home-dbus-service-type)
 	#:autoload (gnu home services gnupg) (home-gpg-agent-configuration
 																				home-gpg-agent-service-type)
 	#:autoload (gnu home services guix) (home-channels-service-type)
+	#:autoload (gnu home services shells) (home-fish-configuration home-fish-service-type)
 	#:autoload (gnu home services shepherd) (home-shepherd-service-type
 																					 shepherd-service)
 	#:autoload (gnu home services sound) (home-pipewire-service-type)
@@ -52,10 +54,19 @@
 	#:autoload (guix channels) (channel
 															make-channel-introduction
 															openpgp-fingerprint)
-	#:autoload (guix gexp) (file-append gexp)
+	#:autoload (guix gexp) (file-append gexp local-file)
+	#:autoload (guix utils) (current-source-directory)
 	#:autoload (nongnu packages firmware) (fwupd-nonfree)
 	#:autoload (nongnu packages game-client) (protonup steam)
 	#:autoload (nongnu packages mozilla) (firefox))
+
+(define (xdg-dotfiles . files)
+	"Link each of FILES from dotfiles/config to the same path under ~/.config."
+	(map (lambda (file)
+				 (list file
+							 (local-file (string-append (current-source-directory)
+																					"/../" file))))
+			 files))
 
 (define krisque-home
 	(home-environment
@@ -143,6 +154,29 @@
 															 (string-append (getenv "XDG_RUNTIME_DIR")
 																							"/podman/podman.sock"))))))
 						 (stop #~(make-systemd-destructor)))))
+		 (service home-fish-service-type
+				 (home-fish-configuration
+					(config (list (local-file "../fish/config.fish")))))
+		 (simple-service
+			'xdg-dotfiles home-xdg-configuration-files-service-type
+			(xdg-dotfiles
+			 ;; alacritty
+			 "alacritty/alacritty.toml"
+			 "alacritty/catppuccin-mocha.toml"
+			 ;; btop
+			 "btop/themes/catppuccin_mocha.theme"
+			 ;; emacs
+			 "emacs/early-init.el"
+			 "emacs/init.el"
+			 "emacs/banners/banner.txt"
+			 "emacs/lisp/additional-repositories-config.el"
+			 "emacs/lisp/behaviour-config.el"
+			 "emacs/lisp/code-config.el"
+			 "emacs/lisp/keys-config.el"
+			 "emacs/lisp/ui-config.el"
+			 ;; fish
+			 "fish/conf.d/direnv.fish"
+			 "fish/functions/emacs.fish"))
 		 (simple-service
 			'home-extra-channels home-channels-service-type
 			(list
