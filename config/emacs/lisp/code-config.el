@@ -134,11 +134,6 @@
 											(dtrt-indent-mode 0)
 											(dtrt-indent-mode t))))
 
-;; Colors to uv.lock
-(use-package toml-ts-mode
-	:ensure nil
-	:mode ("uv\\.lock" . toml-ts-mode))
-
 
 ;;; ============================================================================
 ;;; RUST
@@ -166,11 +161,6 @@
 																rust-ts-mode-indent-offset 2)
 										(dtrt-indent-mode 0)
 										(dtrt-indent-mode t))))
-
-;; Colors to Cargo.lock
-(use-package toml-ts-mode
-	:ensure nil
-	:mode ("Cargo\\.lock" . toml-ts-mode))
 
 
 ;;; ============================================================================
