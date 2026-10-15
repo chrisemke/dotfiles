@@ -78,6 +78,11 @@
 	:defer t
 	:ensure t)
 
+(use-package toml-ts-mode
+	:config
+	(derived-mode-add-parents 'toml-ts-mode '(conf-toml-mode conf-mode))
+	:ensure nil)
+
 ;;; ============================================================================
 ;;; JSON
 ;;; ============================================================================
