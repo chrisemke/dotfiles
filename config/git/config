@@ -1,11 +1,13 @@
+[core]
+	editor = emacs
 [user]
+	email = chrisemke@protonmail.com
 	name = Krisque
 	signingkey = 8D71DF7D340615FF
 [merge]
-	tool = meld
+	conflictStyle = zdiff3
 [mergetool]
 	keepBackup = false
-	conflictStyle = zdiff3
 [push]
 	autoSetupRemote = true
 [commit]

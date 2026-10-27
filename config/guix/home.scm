@@ -176,7 +176,9 @@
 			 "emacs/lisp/ui-config.el"
 			 ;; fish
 			 "fish/conf.d/direnv.fish"
-			 "fish/functions/emacs.fish"))
+			 "fish/functions/emacs.fish"
+			 ;;git
+			 "git/config"))
 		 (simple-service
 			'home-extra-channels home-channels-service-type
 			(list
@@ -192,7 +194,8 @@
 		 (simple-service
 			'home-shell-environment-variables
 			home-environment-variables-service-type
-			`(("XDG_DATA_DIRS" . ,(string-append
+			`(("EDITOR" . "emacs")
+				("XDG_DATA_DIRS" . ,(string-append
 														 "/var/lib/flatpak/exports/share:"
 														 "$XDG_DATA_HOME/flatpak/exports/share:"
 														 "$XDG_DATA_DIRS"))
