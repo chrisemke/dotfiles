@@ -47,7 +47,7 @@
 	#:autoload (gnu packages ssh) (openssh)
 	#:autoload (gnu packages terminals) (alacritty)
 	#:autoload (gnu packages tor-browsers) (torbrowser)
-	#:autoload (gnu packages version-control) (git)
+	#:autoload (gnu packages version-control) (git hut)
 	#:autoload (gnu packages video) (vlc)
 	#:autoload (gnu packages xdisorg) (xsettingsd)
 	#:autoload (gnu packages xorg) (xrdb)
@@ -92,9 +92,11 @@
 		 fwupd-nonfree
 		 gcc-toolchain
 		 git
+		 (list git "send-email")
 		 (list glib "bin")
 		 gnupg
 		 helvum
+		 hut
 		 inxi
 		 kate
 		 kcalc
