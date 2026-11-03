@@ -1,14 +1,18 @@
 (define-module (config)
 	#:autoload (gnu bootloader) (bootloader-configuration)
 	#:autoload (gnu bootloader grub) (grub-efi-bootloader)
+	#:autoload (gnu packages base) (glibc-for-fhs)
+	#:autoload (gnu packages compression) (zlib)
 	#:autoload (gnu packages display-managers) (sddm)
+	#:autoload (gnu packages gcc) (gcc)
 	#:autoload (gnu packages games) (steam-devices-udev-rules)
 	#:autoload (gnu packages shells) (fish)
-	#:autoload (gnu services) (service simple-service modify-services)
+	#:autoload (gnu services) (service simple-service modify-services
+																		 etc-service-type extra-special-file)
 	#:autoload (gnu services base) (guix-configuration
-																	 guix-extension
-																	 guix-service-type
-																	 udev-rule udev-rules-service)
+																	guix-extension
+																	guix-service-type
+																	udev-rule udev-rules-service)
 	#:autoload (gnu services containers) (rootless-podman-service-type
 																				rootless-podman-configuration)
 	#:autoload (gnu services desktop) (%desktop-services
@@ -18,7 +22,7 @@
 	#:autoload (gnu services linux) (zram-device-service-type
 																	 zram-device-configuration)
 	#:autoload (gnu services networking) (nftables-configuration
-																				 nftables-service-type)
+																				nftables-service-type)
 	#:autoload (gnu services pm) (power-profiles-daemon-service-type)
 	#:autoload (gnu services sddm) (sddm-service-type sddm-configuration)
 	#:autoload (gnu services sysctl) (sysctl-service-type)
@@ -32,7 +36,7 @@
 	#:autoload (gnu system mapped-devices) (mapped-device luks-device-mapping)
 	#:autoload (gnu system shadow) (%base-user-accounts)
 	#:autoload (gnu system uuid) (uuid)
-	#:autoload (guix gexp) (file-append local-file plain-file)
+	#:autoload (guix gexp) (computed-file file-append gexp local-file plain-file)
 	#:autoload (nongnu packages linux) (linux linux-firmware)
 	#:autoload (nongnu system linux-initrd) (microcode-initrd)
 	#:autoload (srfi srfi-1) (delete)) ;; Used for delete gdm
@@ -52,6 +56,13 @@
 		 (curve Ed25519) \
 		 (q #C1FD53E5D4CE971933EC50C9F307AE2171A2D3B52C804642A7A35F84F3A4EA98#)))"))
 
+(define fhs-ld.so.cache
+	(computed-file
+	 "ld.so.cache"
+	 #~(system* #$(file-append glibc-for-fhs "/sbin/ldconfig")
+							"-X" "-C" #$output
+							(string-append #$gcc:lib "/lib")		; libgcc_s, libstdc++
+							(string-append #$zlib "/lib"))))
 
 (define krisque-system
 	(operating-system
@@ -78,6 +89,10 @@
 
 	 (services
 		(cons*
+		 (extra-special-file "/lib64/ld-linux-x86-64.so.2"
+												 (file-append glibc-for-fhs "/lib/ld-linux-x86-64.so.2"))
+		 (simple-service 'fhs-ld.so.cache etc-service-type
+										 `(("ld.so.cache" ,fhs-ld.so.cache)))
 		 (service plasma-desktop-service-type)
 		 (service kwallet-service-type)
 		 (service power-profiles-daemon-service-type)
@@ -96,7 +111,7 @@
 																 (sddm sddm)
 																 (theme "breeze")))
 		 (service nftables-service-type
-				 (nftables-configuration (ruleset (local-file "nftables.conf"))))
+							(nftables-configuration (ruleset (local-file "nftables.conf"))))
 		 (service rootless-podman-service-type
 							(rootless-podman-configuration
 							 (subgids (list (subid-range (name "krisque"))))

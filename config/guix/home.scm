@@ -47,6 +47,7 @@
 	#:autoload (gnu packages ssh) (openssh)
 	#:autoload (gnu packages stenography) (plover)
 	#:autoload (gnu packages terminals) (alacritty)
+	#:autoload (gnu packages text-editors) (rassumfrassum)
 	#:autoload (gnu packages tor-browsers) (torbrowser)
 	#:autoload (gnu packages version-control) (git hut)
 	#:autoload (gnu packages video) (vlc)
@@ -116,6 +117,7 @@
 		 python-wrapper
 		 qbittorrent
 		 qpwgraph
+		 rassumfrassum
 		 ripgrep
 		 screen
 		 source-highlight
@@ -202,12 +204,19 @@
 			`(("EDITOR" . "emacs")
 				("XDG_DATA_DIRS" . ,(string-append
 														 "/var/lib/flatpak/exports/share:"
-														 "$XDG_DATA_HOME/flatpak/exports/share:"
-														 "$XDG_DATA_DIRS"))
+														 "$XDG_DATA_HOME/flatpak/exports/share"
+														 "${XDG_DATA_DIRS:+:$XDG_DATA_DIRS}"))
 				("XDG_BIN_HOME" . "$HOME/.local/bin")
-				("PATH" . "$XDG_BIN_HOME:$PATH")
-				("XDG_PROJECTS_DIR" . "$HOME/Projects")
-				("LESSOPEN" . "| src-hilite-lesspipe.sh %s")
-				("LESS" . " --raw-control-chars --tabs=2 --LINE-NUMBERS ")))))))
+				("CARGO_HOME" . "$XDG_DATA_HOME/cargo")
+				("RUSTUP_HOME" . "$XDG_DATA_HOME/rustup")
+				("PATH" . ,(string-append "$CARGO_HOME/bin:"
+																	"$XDG_BIN_HOME"
+																	"${PATH:+:$PATH}"))
+				("LESSOPEN" . ,#~(string-append
+													"| "
+													#$(file-append source-highlight
+																				 "/bin/src-hilite-lesspipe.sh")
+													" %s"))
+				("LESS" . "--raw-control-chars --tabs=2 --LINE-NUMBERS")))))))
 
 krisque-home
