@@ -132,6 +132,7 @@
 		 (service home-dbus-service-type)
 		 (service home-gpg-agent-service-type
 							(home-gpg-agent-configuration
+							 (home ".local/share/gnupg")
 							 (pinentry-program (file-append pinentry "/bin/pinentry"))))
 		 (service home-pipewire-service-type)
 		 (service home-ssh-agent-service-type)
