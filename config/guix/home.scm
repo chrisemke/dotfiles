@@ -45,6 +45,7 @@
 	#:autoload (gnu packages shells) (fish fish-foreign-env)
 	#:autoload (gnu packages shellutils) (direnv starship)
 	#:autoload (gnu packages ssh) (openssh)
+	#:autoload (gnu packages stenography) (plover)
 	#:autoload (gnu packages terminals) (alacritty)
 	#:autoload (gnu packages tor-browsers) (torbrowser)
 	#:autoload (gnu packages version-control) (git hut)
@@ -108,6 +109,7 @@
 		 openssh
 		 pandoc
 		 plasma-disks
+		 plover
 		 podman
 		 podman-compose
 		 protonup
