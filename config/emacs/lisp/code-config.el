@@ -43,6 +43,7 @@
 				("C-c e f" . eglot-format-buffer))
 	:custom
 	(eglot-autoshutdown t)
+	(eglot-sync-connect nil)
 	(eglot-code-action-indications nil)
 	(eldoc-display-functions '(eldoc-display-in-buffer))
 	(eglot-documentation-renderer 'markdown-ts-view-mode)
