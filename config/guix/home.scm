@@ -31,7 +31,7 @@
 	#:autoload (gnu packages gnupg) (gnupg pinentry)
 	#:autoload (gnu packages gtk) (appmenu-gtk-module libdbusmenu)
 	#:autoload (gnu packages haskell-xyz) (pandoc)
-	#:autoload (gnu packages kde-graphics) (okular)
+	#:autoload (gnu packages kde-graphics) (gwenview okular)
 	#:autoload (gnu packages kde-plasma) (plasma-disks)
 	#:autoload (gnu packages kde-internet) (kdeconnect)
 	#:autoload (gnu packages kde-utils) (ark kate kcalc)
@@ -42,7 +42,6 @@
 	#:autoload (gnu packages python) (python-wrapper)
 	#:autoload (gnu packages rust-apps) (aardvark-dns helvum ripgrep)
 	#:autoload (gnu packages screen) (screen)
-	#:autoload (gnu packages shells) (fish fish-foreign-env)
 	#:autoload (gnu packages shellutils) (direnv starship)
 	#:autoload (gnu packages ssh) (openssh)
 	#:autoload (gnu packages stenography) (plover)
@@ -83,8 +82,6 @@
 		 emacs-next-pgtk
 		 fastfetch
 		 firefox
-		 fish
-		 fish-foreign-env
 		 flatpak
 		 font-dejavu
 		 font-google-noto-emoji
@@ -97,6 +94,7 @@
 		 (list git "send-email")
 		 (list glib "bin")
 		 gnupg
+		 gwenview
 		 helvum
 		 hut
 		 inxi
@@ -140,9 +138,9 @@
 		 (service home-ssh-agent-service-type)
 		 (service home-xdg-user-directories-service-type
 							(home-xdg-user-directories-configuration
-							 (music				"$HOME/Media/Music/")
-							 (pictures		"$HOME/Media/Pictures/")
-							 (videos			"$HOME/Media/Videos/")
+							 (music				"$HOME/Media/Music")
+							 (pictures		"$HOME/Media/Pictures")
+							 (videos			"$HOME/Media/Videos")
 							 (templates		"$HOME")
 							 (publicshare "$HOME")))
 		 (simple-service
@@ -162,8 +160,8 @@
 																							"/podman/podman.sock"))))))
 						 (stop #~(make-systemd-destructor)))))
 		 (service home-fish-service-type
-				 (home-fish-configuration
-					(config (list (local-file "../fish/config.fish")))))
+							(home-fish-configuration
+							 (config (list (local-file "../fish/config.fish")))))
 		 (simple-service
 			'xdg-dotfiles home-xdg-configuration-files-service-type
 			(xdg-dotfiles
